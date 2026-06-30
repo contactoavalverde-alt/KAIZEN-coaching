@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /portal
+Disallow: /portal.html
+
+Sitemap: https://kaizencoaching.com/

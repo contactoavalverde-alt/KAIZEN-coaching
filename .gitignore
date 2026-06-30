@@ -1,0 +1,9 @@
+.vercel
+.env.local
+.env
+.env*.local
+node_modules/
+.gstack/
+
+.DS_Store
+supabase/.temp/

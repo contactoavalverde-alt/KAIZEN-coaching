@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>KAIZEN Coaching — Backoffice</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#2f6bff;--red2:#3b76ff;--black:#081c36;--card:#0e2a4d;--border:rgba(255,255,255,.08);--gray:#8a8a8f}
+body{font-family:'Inter',sans-serif;background:var(--black);color:#fff;min-height:100vh}
+::selection{background:var(--red);color:#fff}
+::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-track{background:#081c36}::-webkit-scrollbar-thumb{background:#1c4470;border-radius:4px}
+
+/* LOGIN */
+#login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-box{width:100%;max-width:380px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px 32px}
+.login-logo{font-family:'Oswald',sans-serif;font-size:1.8rem;font-weight:700;margin-bottom:6px}
+.login-logo .r{color:var(--red)}
+.login-sub{color:var(--gray);font-size:.85rem;margin-bottom:28px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.78rem;color:var(--gray);margin-bottom:7px;font-weight:500}
+.field input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:13px 15px;color:#fff;font-size:.9rem;outline:none;transition:border-color .2s}
+.field input:focus{border-color:var(--red)}
+.btn{width:100%;background:var(--red);color:#fff;border:none;border-radius:10px;padding:14px;font-size:.85rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.btn:hover{background:#1d4fd6}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.login-err{color:#7aa5ff;font-size:.8rem;margin-top:12px;min-height:18px}
+
+/* APP */
+#app{display:none;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(10,10,11,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between}
+.topbar .logo{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700}
+.topbar .logo .r{color:var(--red)}
+.topbar .logo span.bo{color:var(--gray);font-size:.7rem;font-weight:500;letter-spacing:.2em;margin-left:8px;text-transform:uppercase}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.topbar-email{font-size:.8rem;color:var(--gray)}
+.logout{background:transparent;border:1px solid var(--border);color:#fff;padding:8px 16px;border-radius:8px;font-size:.78rem;cursor:pointer;transition:all .2s}
+.logout:hover{border-color:var(--red);color:var(--red)}
+/* LAYOUT — sidebar + main */
+.wrap{max-width:1500px;margin:0 auto;padding:24px;display:flex;align-items:flex-start;gap:22px}
+.sidebar{width:228px;flex-shrink:0;position:sticky;top:80px}
+.side-nav{display:flex;flex-direction:column;gap:3px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:10px}
+.side-title{font-size:.66rem;color:var(--gray);text-transform:uppercase;letter-spacing:.14em;padding:8px 12px 6px;font-weight:600}
+.main{flex:1;min-width:0}
+@media(max-width:880px){
+  .wrap{flex-direction:column}
+  .sidebar{width:100%;position:static}
+  .side-nav{flex-direction:row;flex-wrap:wrap}
+}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px}
+.stat-label{font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.stat-num{font-family:'Oswald',sans-serif;font-size:2.2rem;font-weight:700;line-height:1}
+.stat-num.r{color:var(--red)}
+.stat-num.g{color:#4ade80}
+
+/* TABS (sidebar items) */
+.tabs{display:contents}
+.tab{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;
+  background:none;border:none;color:var(--gray);padding:11px 14px;
+  font-size:.86rem;font-weight:600;cursor:pointer;border-radius:10px;text-align:left;
+  border-left:3px solid transparent;transition:all .18s;
+}
+.tab:hover{background:rgba(255,255,255,.04);color:#fff}
+.tab.active{color:#fff;background:rgba(47, 107, 255,.14);border-left-color:var(--red)}
+.tab .cnt{display:inline-block;background:rgba(255,255,255,.08);border-radius:20px;padding:1px 8px;font-size:.7rem}
+@media(max-width:880px){
+  .tab{width:auto;border-left:none;border-bottom:2px solid transparent;border-radius:8px}
+  .tab.active{border-left:none;border-bottom-color:var(--red)}
+}
+
+.toolbar{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:200px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:11px 15px;color:#fff;font-size:.85rem;outline:none}
+.search:focus{border-color:var(--red)}
+.filter-sel{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:#fff;font-size:.83rem;cursor:pointer;outline:none}
+.filter-sel option{background:#102e54}
+.refresh{background:rgba(255,255,255,.04);border:1px solid var(--border);color:#fff;padding:11px 16px;border-radius:10px;font-size:.8rem;cursor:pointer}
+.refresh:hover{border-color:var(--red)}
+
+/* TABLE */
+.tablewrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:.83rem;min-width:760px}
+thead th{text-align:left;padding:14px 16px;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);border-bottom:1px solid var(--border);white-space:nowrap;font-weight:600}
+tbody td{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+tbody tr:hover{background:rgba(255,255,255,.02)}
+tbody tr:last-child td{border-bottom:none}
+.cell-name{font-weight:600}
+.cell-sub{color:var(--gray);font-size:.76rem;margin-top:2px}
+.pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:600;white-space:nowrap}
+.pill-prog{background:rgba(47, 107, 255,.15);color:#9bbcff}
+.pill-cap{background:rgba(124,58,237,.15);color:#c4a5ff}
+.temp-hot{background:rgba(239,68,68,.18);color:#9bbcff;border:1px solid rgba(239,68,68,.4)}
+.temp-warm{background:rgba(250,204,21,.15);color:#facc15;border:1px solid rgba(250,204,21,.3)}
+.temp-low{background:rgba(96,165,250,.15);color:#93c5fd;border:1px solid rgba(96,165,250,.3)}
+.temp-cold{background:rgba(148,163,184,.12);color:#94a3b8}
+.acc-btn{background:#16a34a;border:none;color:#fff;padding:7px 13px;border-radius:8px;font-size:.74rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.acc-btn:hover{background:#15803d}
+.acc-btn:disabled{opacity:.5;cursor:default}
+.acc-done{color:#4ade80;font-size:.74rem;font-weight:600}
+/* Template manager */
+.tpl-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.tpl-tab{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:rgba(255,255,255,.7);font-size:.82rem;font-weight:600;cursor:pointer;text-align:left}
+.tpl-tab.active{border-color:var(--red);color:#fff;background:rgba(47, 107, 255,.12)}
+.tpl-tab .tpl-tab-sub{font-size:.68rem;color:var(--gray);font-weight:400;margin-top:2px}
+.tpl-editor{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.tpl-col{display:flex;flex-direction:column}
+.tpl-l{font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px;font-weight:600}
+.tpl-l:first-child{margin-top:0}
+.tpl-name{font-weight:600;color:#fff;font-size:.95rem}
+.tpl-input{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:#fff;font-size:.85rem;outline:none}
+.tpl-input:focus{border-color:var(--red)}
+.tpl-textarea{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px;color:#fff;font-size:.82rem;font-family:ui-monospace,Menlo,monospace;line-height:1.6;min-height:280px;resize:vertical;outline:none}
+.tpl-textarea:focus{border-color:var(--red)}
+.tpl-atts{display:flex;flex-direction:column;gap:6px}
+.tpl-att{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:7px 11px;font-size:.78rem}
+.tpl-att a{color:#93c5fd;text-decoration:none}
+.tpl-att button{background:none;border:none;color:#9bbcff;cursor:pointer;font-size:.9rem}
+.tpl-preview-subj{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px 8px 0 0;padding:9px 12px;font-size:.82rem;font-weight:600;color:#fff;border-bottom:none}
+.tpl-preview{width:100%;min-height:420px;background:#fff;border:1px solid var(--border);border-radius:0 0 8px 8px}
+@media(max-width:860px){.tpl-editor{grid-template-columns:1fr}}
+/* Client profile summary */
+.m-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.m-stat{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:11px 13px}
+.m-stat .ml{font-size:.66rem;color:var(--gray);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.m-stat .mv{font-size:.92rem;font-weight:600;color:#fff}
+.m-stat .mv small{display:block;font-size:.7rem;font-weight:400;color:var(--gray);margin-top:2px}
+.m-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.m-tag-btn{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:.76rem;font-weight:600;color:rgba(255,255,255,.6);cursor:pointer}
+.m-tag-btn.on.intro{background:rgba(96,165,250,.18);border-color:rgba(96,165,250,.5);color:#93c5fd}
+.m-tag-btn.on.medium{background:rgba(250,204,21,.18);border-color:rgba(250,204,21,.5);color:#facc15}
+.m-tag-btn.on.high_end{background:rgba(47, 107, 255,.2);border-color:rgba(47, 107, 255,.6);color:#9bbcff}
+.tag-chip{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.tag-chip.intro{background:rgba(96,165,250,.16);color:#93c5fd}
+.tag-chip.medium{background:rgba(250,204,21,.16);color:#facc15}
+.tag-chip.high_end{background:rgba(47, 107, 255,.18);color:#9bbcff}
+.status-sel{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:6px 10px;color:#fff;font-size:.78rem;cursor:pointer;outline:none}
+.status-sel option{background:#102e54}
+.status-new{border-color:rgba(74,222,128,.4)}
+.status-contacted{border-color:rgba(250,204,21,.4)}
+.status-client{border-color:rgba(96,165,250,.4)}
+.status-discard{border-color:rgba(120,120,120,.4);opacity:.6}
+.wa-btn{display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;text-decoration:none;padding:7px 12px;border-radius:8px;font-size:.75rem;font-weight:600;white-space:nowrap}
+.wa-btn:hover{background:#1eb955}
+.empty{text-align:center;padding:60px 20px;color:var(--gray)}
+.loading{text-align:center;padding:60px;color:var(--gray)}
+.hidden{display:none}
+.manage-btn{background:var(--red);border:none;color:#fff;padding:7px 14px;border-radius:8px;font-size:.76rem;font-weight:600;cursor:pointer}
+.manage-btn:hover{background:#1d4fd6}
+.pill-active{background:rgba(74,222,128,.15);color:#4ade80}
+.pill-paused{background:rgba(250,204,21,.15);color:#facc15}
+.pill-cancelled{background:rgba(239,68,68,.15);color:#3b76ff}
+.pill-pending{background:rgba(251,146,60,.18);color:#fb923c}
+.pill-accepted{background:rgba(74,222,128,.15);color:#4ade80}
+.inv-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.inv-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px}
+.inv-card h4{font-family:'Oswald',sans-serif;font-size:.9rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#fff;margin:0 0 14px}
+.inv-form{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
+.inv-form input,.inv-form select{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:8px 11px;color:#fff;font-size:.83rem;outline:none}
+.inv-form input:focus,.inv-form select:focus{border-color:var(--red)}
+.inv-form select option{background:#102e54}
+.inv-btn{background:var(--red);border:none;color:#fff;padding:10px 20px;border-radius:9px;font-size:.8rem;font-weight:700;cursor:pointer;width:100%}
+.inv-btn:hover{background:#1d4fd6}
+.inv-btn:disabled{opacity:.5;cursor:default}
+.csv-hint{font-size:.72rem;color:var(--gray);margin-bottom:10px}
+.csv-preview{max-height:150px;overflow:auto;margin:10px 0;font-size:.73rem;color:rgba(255,255,255,.75)}
+.csv-preview table{width:100%;border-collapse:collapse}
+.csv-preview td,.csv-preview th{padding:4px 8px;border-bottom:1px solid rgba(255,255,255,.07);text-align:left}
+@media(max-width:760px){.inv-cards{grid-template-columns:1fr}}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto}
+.modal-overlay.show{display:flex}
+.modal{width:100%;max-width:620px;background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.modal-head{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--border)}
+.modal-title{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700}
+.modal-sub{color:var(--gray);font-size:.82rem;margin-top:2px}
+.modal-x{background:none;border:none;color:var(--gray);font-size:1.2rem;cursor:pointer}
+.modal-body{padding:8px 24px 24px}
+.msec{padding:20px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.msec:last-child{border-bottom:none}
+.msec-h{font-family:'Oswald',sans-serif;font-size:.95rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#fff;margin-bottom:14px}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.mgrid label{display:flex;flex-direction:column;gap:5px;font-size:.72rem;color:var(--gray)}
+.mgrid input,.mgrid select{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:9px 11px;color:#fff;font-size:.85rem;outline:none}
+.mgrid input:focus,.mgrid select:focus{border-color:var(--red)}
+.mgrid select option{background:#102e54}
+.mtext{width:100%;min-height:80px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px;color:#fff;font-size:.85rem;outline:none;font-family:inherit;resize:vertical;margin-bottom:12px}
+.mtext:focus{border-color:var(--red)}
+.msave{background:var(--red);border:none;color:#fff;padding:11px 20px;border-radius:9px;font-size:.8rem;font-weight:700;cursor:pointer}
+.msave:hover{background:#1d4fd6}
+.mlist{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.mlist .mrow{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:.8rem;color:rgba(255,255,255,.8)}
+.mlist .mrow .d{color:var(--gray);font-size:.72rem}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.wrap{padding:16px}.mgrid{grid-template-columns:1fr}}
+
+/* DASHBOARD */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px}
+.kpi-label{font-size:.68rem;color:var(--gray);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
+.kpi-num{font-family:'Oswald',sans-serif;font-size:1.7rem;font-weight:700;line-height:1}
+.kpi-num.g{color:#4ade80}.kpi-num.r{color:var(--red)}.kpi-num.b{color:#60a5fa}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;min-height:300px}
+.chart-card h4{font-family:'Oswald',sans-serif;font-size:.9rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:14px}
+.chart-wrap{position:relative;height:240px}
+.chart-card.wide{grid-column:1 / -1}
+@media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}.charts-grid{grid-template-columns:1fr}}
+
+/* MEMBRESÍAS / PAGOS */
+.revbar{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.revbar .kpi-num{font-size:1.5rem}
+.exp-soon{color:#fde047!important}
+
+/* COMUNICACIÓN */
+.comm-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.comm-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px}
+.comm-card h4{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;margin-bottom:6px}
+.comm-card .sub{font-size:.78rem;color:var(--gray);margin-bottom:16px;line-height:1.5}
+.comm-card label{display:block;font-size:.72rem;color:var(--gray);margin-bottom:6px;margin-top:12px}
+.comm-card select,.comm-card input,.comm-card textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:#fff;font-size:.85rem;outline:none;font-family:inherit}
+.comm-card select:focus,.comm-card input:focus,.comm-card textarea:focus{border-color:var(--red)}
+.comm-card select option{background:#102e54}
+.comm-card textarea{min-height:120px;resize:vertical;margin-bottom:8px}
+.comm-recipients{font-size:.74rem;color:var(--gray);margin:8px 0}
+.comm-recipients b{color:#fff}
+.wa-send-list{max-height:260px;overflow:auto;margin-top:14px;display:flex;flex-direction:column;gap:7px}
+.wa-send-row{display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:8px 11px;font-size:.8rem}
+.wa-send-row a{background:#25D366;color:#fff;text-decoration:none;padding:6px 12px;border-radius:7px;font-size:.74rem;font-weight:600;white-space:nowrap}
+.wa-send-row a.sent{background:#1a3a25;color:#4ade80}
+@media(max-width:760px){.comm-grid{grid-template-columns:1fr}.revbar{grid-template-columns:1fr}}
+
+/* CALENDARIO */
+.cal-embed{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;min-height:640px}
+.cal-embed iframe{width:100%;height:680px;border:0;display:block}
+.cal-setup{padding:50px 24px;text-align:center;color:var(--gray)}
+.cal-setup input{max-width:420px;margin:14px auto 0;display:block;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px;color:#fff;outline:none}
+
+/* TESTIMONIOS */
+.testi-upload{background:var(--card);border:1px dashed rgba(255,255,255,.18);border-radius:16px;padding:26px;text-align:center;margin-bottom:20px}
+.testi-upload h4{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.testi-upload .sub{font-size:.8rem;color:var(--gray);margin-bottom:16px}
+.testi-upload input[type=file]{display:none}
+.testi-pick{display:inline-block;background:var(--red);color:#fff;padding:12px 26px;border-radius:10px;font-size:.82rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.testi-pick:hover{background:#1d4fd6}
+.testi-status{font-size:.8rem;color:var(--gray);margin-top:12px;min-height:18px}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.testi-item{position:relative;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.testi-item img{width:100%;display:block;aspect-ratio:9/16;object-fit:cover}
+.testi-del{position:absolute;top:8px;right:8px;background:rgba(47, 107, 255,.92);color:#fff;border:none;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.testi-del:hover{background:#1d4fd6}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="login-box">
+    <div class="login-logo"><span class="r">KAIZEN</span> Coaching</div>
+    <div class="login-sub">Backoffice · Acceso privado</div>
+    <form id="login-form">
+      <div class="field">
+        <label>Correo</label>
+        <input type="email" id="email" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label>Contraseña</label>
+        <input type="password" id="password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn" id="login-btn">Entrar</button>
+      <div class="login-err" id="login-err"></div>
+    </form>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="topbar">
+    <div class="logo"><span class="r">KAIZEN</span> Coaching<span class="bo">Backoffice</span></div>
+    <div class="topbar-right">
+      <span class="topbar-email" id="user-email"></span>
+      <button class="logout" id="logout">Salir</button>
+    </div>
+  </div>
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="side-nav tabs">
+        <div class="side-title">Gestión</div>
+        <button class="tab active" data-tab="dash">Dashboard</button>
+        <button class="tab" data-tab="leads">Leads <span class="cnt" id="c-leads">0</span></button>
+        <button class="tab" data-tab="accesos">Accesos $50 <span class="cnt" id="c-accesos">0</span></button>
+        <button class="tab" data-tab="clients">Clientes <span class="cnt" id="c-clients">0</span></button>
+        <button class="tab" data-tab="memb">Membresías <span class="cnt" id="c-memb">0</span></button>
+        <button class="tab" data-tab="pays">Pagos <span class="cnt" id="c-pays">0</span></button>
+        <button class="tab" data-tab="comm">Comunicación</button>
+        <button class="tab" data-tab="cal">Calendario</button>
+        <div class="side-title" style="margin-top:16px">Contenido &amp; Diseño</div>
+        <button class="tab" data-tab="testi">Testimonios <span class="cnt" id="c-testi">0</span></button>
+        <button class="tab" data-tab="blog">Blog <span class="cnt" id="c-blog">0</span></button>
+        <button class="tab" data-tab="trans">Transformaciones <span class="cnt" id="c-trans">0</span></button>
+        <button class="tab" data-tab="vids">En Acción <span class="cnt" id="c-vids">0</span></button>
+        <button class="tab" data-tab="orbital">Orbital (Sistema)</button>
+        <div class="side-title" style="margin-top:16px">Automatización</div>
+        <button class="tab" data-tab="templates">Plantillas de correo</button>
+        <div class="side-title" style="margin-top:16px">Sistema</div>
+        <button class="tab" data-tab="events">Eventos <span class="cnt" id="c-events">0</span></button>
+      </div>
+    </aside>
+    <main class="main">
+
+    <!-- DASHBOARD -->
+    <div id="tab-dash">
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Total leads</div><div class="stat-num" id="s-total">—</div></div>
+        <div class="stat"><div class="stat-label">Nuevos</div><div class="stat-num g" id="s-new">—</div></div>
+        <div class="stat"><div class="stat-label">Esta semana</div><div class="stat-num r" id="s-week">—</div></div>
+        <div class="stat"><div class="stat-label">Clientes</div><div class="stat-num" id="s-subs">—</div></div>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="kpi-label">Ingresos totales</div><div class="kpi-num g" id="k-revenue">—</div></div>
+        <div class="kpi"><div class="kpi-label">MRR (activas)</div><div class="kpi-num b" id="k-mrr">—</div></div>
+        <div class="kpi"><div class="kpi-label">Membresías activas</div><div class="kpi-num" id="k-active">—</div></div>
+        <div class="kpi"><div class="kpi-label">Leads (mes)</div><div class="kpi-num r" id="k-leadmonth">—</div></div>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card"><h4>Leads por mes</h4><div class="chart-wrap"><canvas id="ch-leads-month"></canvas></div></div>
+        <div class="chart-card"><h4>Ingresos por mes</h4><div class="chart-wrap"><canvas id="ch-rev-month"></canvas></div></div>
+        <div class="chart-card"><h4>Leads por programa</h4><div class="chart-wrap"><canvas id="ch-prog"></canvas></div></div>
+        <div class="chart-card"><h4>Leads por status</h4><div class="chart-wrap"><canvas id="ch-status"></canvas></div></div>
+        <div class="chart-card"><h4>Rango de capital de leads</h4><div class="chart-wrap"><canvas id="ch-capital"></canvas></div></div>
+        <div class="chart-card"><h4>Membresías por plan</h4><div class="chart-wrap"><canvas id="ch-plan"></canvas></div></div>
+      </div>
+    </div>
+
+    <!-- MEMBRESÍAS -->
+    <div id="tab-memb" class="hidden">
+      <div class="revbar">
+        <div class="kpi"><div class="kpi-label">Activas</div><div class="kpi-num g" id="m-active">—</div></div>
+        <div class="kpi"><div class="kpi-label">Vencen en 14 días</div><div class="kpi-num exp-soon" id="m-soon">—</div></div>
+        <div class="kpi"><div class="kpi-label">MRR</div><div class="kpi-num b" id="m-mrr">—</div></div>
+      </div>
+      <div class="toolbar">
+        <input class="search" id="memb-search" placeholder="Buscar cliente o plan...">
+        <select class="filter-sel" id="memb-filter">
+          <option value="">Todas</option><option value="active">Activas</option>
+          <option value="paused">Pausadas</option><option value="expired">Vencidas</option><option value="cancelled">Canceladas</option>
+        </select>
+        <button class="refresh" id="memb-refresh">↻ Actualizar</button>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Cliente</th><th>Plan</th><th>Estado</th><th>Inicio</th><th>Vence</th><th>Días</th><th>Mensualidad</th></tr></thead>
+          <tbody id="memb-body"><tr><td colspan="7" class="loading">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PAGOS -->
+    <div id="tab-pays" class="hidden">
+      <div class="revbar">
+        <div class="kpi"><div class="kpi-label">Loops activos</div><div class="kpi-num g" id="p-loops">—</div></div>
+        <div class="kpi"><div class="kpi-label">Pagos fallidos</div><div class="kpi-num b" id="p-failed">—</div></div>
+      </div>
+      <div class="toolbar"><input class="search" id="pay-search" placeholder="Buscar cliente o periodo..."><button class="refresh" id="pay-refresh">↻ Actualizar</button></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Cliente</th><th>Monto</th><th>Periodo</th><th>Método</th><th>Fecha</th><th>Estado</th></tr></thead>
+          <tbody id="pays-body"><tr><td colspan="6" class="loading">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+
+      <div class="revbar" style="margin-top:1.5rem">
+        <div class="kpi"><div class="kpi-label">Links de pago activos</div><div class="kpi-num g" id="pl-active">—</div></div>
+        <div class="kpi"><div class="kpi-label">Links inactivos</div><div class="kpi-num" id="pl-inactive">—</div></div>
+      </div>
+      <div class="toolbar"><div style="font-weight:600;opacity:.85">Links de pago (ONVO)</div><button class="refresh" id="pl-refresh">↻ Actualizar</button></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Plan</th><th>Monto</th><th>Tipo</th><th>Estado</th><th>Pagados</th><th>Creado</th><th>Link</th></tr></thead>
+          <tbody id="pl-body"><tr><td colspan="7" class="loading">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- COMUNICACIÓN -->
+    <div id="tab-comm" class="hidden">
+      <div class="comm-grid">
+        <div class="comm-card">
+          <h4>📧 Email masivo</h4>
+          <div class="sub">Abre tu cliente de correo con todos los destinatarios en copia oculta (BCC).</div>
+          <label>Destinatarios</label>
+          <select id="em-audience">
+            <option value="clients">Clientes (con cuenta)</option>
+            <option value="leads">Leads (con email)</option>
+          </select>
+          <div class="comm-recipients" id="em-count">—</div>
+          <label>Asunto</label>
+          <input type="text" id="em-subject" placeholder="Asunto del correo">
+          <label>Mensaje</label>
+          <textarea id="em-body" placeholder="Escribe tu mensaje..."></textarea>
+          <button class="btn" id="em-send" style="margin-top:6px">Abrir en mi correo</button>
+        </div>
+        <div class="comm-card">
+          <h4>💬 WhatsApp masivo</h4>
+          <div class="sub">Genera la lista con tu mensaje pre-cargado. Enviás uno por uno (WhatsApp no permite envío masivo automático sin API de pago).</div>
+          <label>Destinatarios</label>
+          <select id="wa-audience">
+            <option value="clients">Clientes (con teléfono)</option>
+            <option value="leads">Leads (con teléfono)</option>
+          </select>
+          <div class="comm-recipients" id="wa-count">—</div>
+          <label>Mensaje</label>
+          <textarea id="wa-body" placeholder="Hola {nombre}, ..."></textarea>
+          <button class="btn" id="wa-gen" style="margin-top:6px">Generar lista de envío</button>
+          <div class="wa-send-list" id="wa-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TESTIMONIOS -->
+    <div id="tab-testi" class="hidden">
+      <div class="testi-upload">
+        <h4>📸🎥 Subir testimonio (foto o video)</h4>
+        <div class="sub">Screenshot del cliente (JPG/PNG) <b>o</b> un video de alguien hablando de tu programa (MP4, máx ~100MB). Los videos se reproducen solos (silenciados) en el carrusel.</div>
+        <label class="testi-pick" for="testi-file">Elegir foto o video</label>
+        <input type="file" id="testi-file" accept="image/*,video/*">
+        <div class="testi-status" id="testi-status"></div>
+      </div>
+      <div class="toolbar"><button class="refresh" id="testi-refresh">↻ Actualizar</button></div>
+      <div class="testi-grid" id="testi-grid"><div class="loading">Cargando…</div></div>
+    </div>
+
+    <!-- BLOG -->
+    <div id="tab-blog" class="hidden">
+      <div class="comm-card" style="margin-bottom:20px">
+        <h4>✍️ Nuevo artículo</h4>
+        <div class="sub">Publica un artículo o nota. Podés adjuntar una imagen y un link de video (o subir un video).</div>
+        <div class="mgrid">
+          <label>Categoría<input type="text" id="bl-cat" placeholder="Entrenamiento / Nutrición / Mentalidad"></label>
+          <label>Fecha<input type="text" id="bl-date" placeholder="15 Jun 2026"></label>
+          <label>Título<input type="text" id="bl-title" placeholder="Título del artículo"></label>
+          <label>Tiempo de lectura<input type="text" id="bl-read" placeholder="5 min"></label>
+        </div>
+        <label style="font-size:.72rem;color:var(--gray)">Contenido del artículo (la 1ª oración es el "hook" que se ve en la tarjeta; el resto se lee al hacer click)</label>
+        <textarea id="bl-excerpt" class="mtext" placeholder="Escribí el artículo completo. La primera oración es el gancho que aparece en la tarjeta del blog." rows="8"></textarea>
+        <div class="mgrid">
+          <label>Link de video o Skool (YouTube, Skool, etc.)<input type="url" id="bl-video" placeholder="https://youtube.com/...  o  https://skool.com/..."></label>
+          <label>Imagen de portada<span style="display:flex;gap:8px;align-items:center;margin-top:4px"><label class="testi-pick" for="bl-img" style="padding:8px 16px">Subir imagen</label><span id="bl-img-name" style="font-size:.72rem;color:var(--gray)"></span></span><input type="file" id="bl-img" accept="image/*" style="display:none"></label>
+        </div>
+        <label style="font-size:.72rem;color:var(--gray);margin-top:6px">O subir un video (opcional, máx ~50MB)</label>
+        <span style="display:flex;gap:8px;align-items:center"><label class="testi-pick" for="bl-vidfile" style="padding:8px 16px;background:#1c4470">Subir video</label><span id="bl-vid-name" style="font-size:.72rem;color:var(--gray)"></span></span>
+        <input type="file" id="bl-vidfile" accept="video/*" style="display:none">
+        <div style="margin-top:14px"><button class="btn" id="bl-save" style="width:auto;padding:12px 28px">Publicar artículo</button> <button id="bl-cancel" onclick="blResetForm()" style="display:none;padding:12px 20px;margin-left:8px;border:1px solid var(--gray,#666);background:transparent;color:inherit;border-radius:8px;cursor:pointer">Cancelar edición</button> <span class="testi-status" id="bl-status" style="display:inline-block;margin-left:10px"></span></div>
+      </div>
+      <div class="toolbar"><button class="refresh" id="bl-refresh">↻ Actualizar</button></div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Artículo</th><th>Categoría</th><th>Fecha</th><th>Video</th><th></th></tr></thead>
+        <tbody id="blog-body"><tr><td colspan="5" class="loading">Cargando…</td></tr></tbody>
+      </table></div>
+    </div>
+
+    <!-- TRANSFORMACIONES -->
+    <div id="tab-trans" class="hidden">
+      <div class="comm-card" style="margin-bottom:20px">
+        <h4>🏆 Nueva transformación</h4>
+        <div class="sub">Subí el antes y el después del cliente, el resultado y su nombre. Aparece en el carrusel "Antes &amp; Después".</div>
+        <div class="mgrid">
+          <label>Nombre del cliente<input type="text" id="tr-name" placeholder="Rodrigo Castillo"></label>
+          <label>Etiqueta<input type="text" id="tr-tag" placeholder="Completado / Top Result / Lifestyle"></label>
+          <label>Resultado (grande)<input type="text" id="tr-badge" placeholder="-18kg"></label>
+          <label>Detalle del resultado<input type="text" id="tr-badgesub" placeholder="en 5 meses"></label>
+          <label>Categoría<input type="text" id="tr-cat" placeholder="Pérdida de grasa · Hipertrofia"></label>
+        </div>
+        <label style="font-size:.72rem;color:var(--gray)">Frase del cliente (opcional)</label>
+        <textarea id="tr-quote" class="mtext" placeholder='"Kaizen cambió mi vida..."'></textarea>
+        <div class="mgrid">
+          <label>Foto ANTES<span style="display:flex;gap:8px;align-items:center;margin-top:4px"><label class="testi-pick" for="tr-before" style="padding:8px 16px;background:#1c4470">Subir antes</label><span id="tr-before-name" style="font-size:.72rem;color:var(--gray)"></span></span><input type="file" id="tr-before" accept="image/*" style="display:none"></label>
+          <label>Foto DESPUÉS<span style="display:flex;gap:8px;align-items:center;margin-top:4px"><label class="testi-pick" for="tr-after" style="padding:8px 16px">Subir después</label><span id="tr-after-name" style="font-size:.72rem;color:var(--gray)"></span></span><input type="file" id="tr-after" accept="image/*" style="display:none"></label>
+        </div>
+        <div style="margin-top:14px"><button class="btn" id="tr-save" style="width:auto;padding:12px 28px">Publicar transformación</button> <button id="tr-cancel" onclick="trReset()" style="display:none;padding:12px 20px;margin-left:8px;border:1px solid var(--gray,#666);background:transparent;color:inherit;border-radius:8px;cursor:pointer">Cancelar edición</button> <span class="testi-status" id="tr-status" style="display:inline-block;margin-left:10px"></span></div>
+      </div>
+      <div class="toolbar"><button class="refresh" id="tr-refresh">↻ Actualizar</button></div>
+      <div class="testi-grid" id="trans-grid"><div class="loading">Cargando…</div></div>
+    </div>
+
+    <!-- EN ACCIÓN (Videos) -->
+    <div id="tab-vids" class="hidden">
+      <div class="comm-card" style="margin-bottom:20px">
+        <h4>🎬 Nuevo video</h4>
+        <div class="sub">Pegá un link de YouTube (thumbnail automático), de Skool/externo (abre en pestaña nueva), o subí un video. Aparece en el carrusel "En Acción".</div>
+        <div class="mgrid">
+          <label>Título<input type="text" id="vd-title" placeholder="Título del video"></label>
+          <label>Link (YouTube, Skool, etc.)<input type="url" id="vd-yt" placeholder="https://youtube.com/...  o  https://skool.com/..."></label>
+        </div>
+        <label style="font-size:.72rem;color:var(--gray);margin-top:6px">O subir un video (máx ~50MB)</label>
+        <span style="display:flex;gap:8px;align-items:center"><label class="testi-pick" for="vd-file" style="padding:8px 16px;background:#1c4470">Subir video</label><span id="vd-file-name" style="font-size:.72rem;color:var(--gray)"></span></span>
+        <input type="file" id="vd-file" accept="video/*" style="display:none">
+        <div style="margin-top:14px"><button class="btn" id="vd-save" style="width:auto;padding:12px 28px">Publicar video</button> <button id="vd-cancel" onclick="vdReset()" style="display:none;padding:12px 20px;margin-left:8px;border:1px solid var(--gray,#666);background:transparent;color:inherit;border-radius:8px;cursor:pointer">Cancelar edición</button> <span class="testi-status" id="vd-status" style="display:inline-block;margin-left:10px"></span></div>
+      </div>
+      <div class="toolbar"><button class="refresh" id="vd-refresh">↻ Actualizar</button></div>
+      <div class="testi-grid" id="vids-grid"><div class="loading">Cargando…</div></div>
+    </div>
+
+    <!-- ORBITAL (Sistema) -->
+    <div id="tab-orbital" class="hidden">
+      <div class="comm-card" style="margin-bottom:20px">
+        <h4>🪐 Encabezado de la sección</h4>
+        <div class="mgrid">
+          <label>Etiqueta<input type="text" id="ob-tag" placeholder="Metodología KAIZEN"></label>
+          <label>Subtítulo<input type="text" id="ob-sub" placeholder="Cada nodo representa..."></label>
+        </div>
+        <label style="font-size:.72rem;color:var(--gray)">Título (usa un salto de línea para 2 renglones)</label>
+        <textarea id="ob-title" class="mtext" style="min-height:60px" placeholder="Un sistema.&#10;Resultados reales."></textarea>
+        <button class="btn" id="ob-save-head" style="width:auto;padding:11px 24px;margin-top:4px">Guardar encabezado</button>
+        <span class="testi-status" id="ob-head-status" style="display:inline-block;margin-left:10px"></span>
+      </div>
+      <div class="comm-card" style="margin-bottom:20px">
+        <h4>➕ Agregar nodo</h4>
+        <div class="mgrid">
+          <label>Ícono<select id="ob-icon">
+            <option value="dumbbell">🏋 Pesa</option><option value="leaf">🌿 Hoja</option><option value="bulb">💡 Idea</option>
+            <option value="spark">✨ Brillo</option><option value="chart">📈 Gráfico</option><option value="users">👥 Comunidad</option>
+            <option value="target">🎯 Diana</option><option value="message">💬 Mensaje</option><option value="bolt">⚡ Rayo</option><option value="heart">❤ Corazón</option>
+          </select></label>
+          <label>Nombre corto (nodo)<input type="text" id="ob-label" placeholder="Training"></label>
+          <label style="grid-column:1/-1">Título<input type="text" id="ob-ntitle" placeholder="Entrenamiento Personalizado"></label>
+        </div>
+        <label style="font-size:.72rem;color:var(--gray)">Descripción</label>
+        <textarea id="ob-desc" class="mtext" placeholder="Descripción del pilar..."></textarea>
+        <label style="font-size:.72rem;color:var(--gray)">Detalles (uno por línea)</label>
+        <textarea id="ob-feats" class="mtext" placeholder="Análisis postural&#10;Periodización&#10;..."></textarea>
+        <button class="btn" id="ob-add" style="width:auto;padding:11px 24px;margin-top:4px">Agregar nodo</button>
+        <span class="testi-status" id="ob-status" style="display:inline-block;margin-left:10px"></span>
+      </div>
+      <div class="toolbar"><button class="refresh" id="ob-refresh">↻ Actualizar</button></div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Ícono</th><th>Nodo</th><th>Título</th><th></th></tr></thead>
+        <tbody id="orbital-body"><tr><td colspan="4" class="loading">Cargando…</td></tr></tbody>
+      </table></div>
+    </div>
+
+    <!-- CALENDARIO -->
+    <div id="tab-cal" class="hidden">
+      <div id="cal-container" class="cal-embed">
+        <div class="cal-setup">
+          <div style="font-size:2rem;margin-bottom:10px">📅</div>
+          <div style="font-weight:600;color:#fff;font-size:1.05rem">Conectá tu Google Calendar</div>
+          <input type="text" id="cal-url" placeholder="tu-correo@gmail.com  ·  o pegá el código de inserción de Google">
+          <button class="btn" id="cal-save" style="max-width:280px;margin:14px auto 0">Conectar Google Calendar</button>
+          <div style="font-size:.76rem;color:var(--gray);margin:16px auto 0;line-height:1.7;max-width:440px;text-align:left">
+            <b style="color:rgba(255,255,255,.8)">Cómo conectarlo:</b><br>
+            1. Abrí <b>Google Calendar</b> en la compu → ⚙️ <b>Configuración</b>.<br>
+            2. En la barra izquierda, elegí tu calendario → <b>"Integrar calendario"</b>.<br>
+            3. Copiá el <b>"ID de calendario"</b> (suele ser tu correo) y pegalo arriba.<br>
+            4. Para que se vea acá, en <b>"Permisos de acceso"</b> activá <b>"Hacer disponible de forma pública"</b> (o compartilo).<br>
+            <span style="opacity:.7">También podés pegar directo el <b>código de inserción</b> (la opción "Insertar código").</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEADS -->
+    <div id="tab-leads" class="hidden">
+      <div class="toolbar">
+        <input class="search" id="lead-search" placeholder="Buscar por nombre, teléfono, país...">
+        <select class="filter-sel" id="lead-temp">
+          <option value="">Toda la queue</option>
+          <option value="hot">🔥 Calientes ($1k–3k)</option>
+          <option value="warm">🌡️ Tibios</option>
+          <option value="low">💲 $50 / bajo budget</option>
+        </select>
+        <select class="filter-sel" id="lead-filter">
+          <option value="">Todos los status</option>
+          <option value="new">Nuevos</option>
+          <option value="contacted">Contactados</option>
+          <option value="client">Clientes</option>
+          <option value="discard">Descartados</option>
+        </select>
+        <button class="refresh" id="lead-refresh">↻ Actualizar</button>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr>
+            <th>Temp</th><th>Lead</th><th>Programa</th><th>Metas</th><th>Capital</th><th>Fecha</th><th>Status</th><th>Contactar</th>
+          </tr></thead>
+          <tbody id="leads-body"><tr><td colspan="8" class="loading">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ACCESOS $50 -->
+    <div id="tab-accesos" class="hidden">
+      <p class="csv-hint" style="margin-bottom:14px">Leads que aplicaron a un programa grupal / budget <b>$50–$500</b>. Creales el acceso a su plataforma (enviá la invitación por correo).</p>
+      <div class="toolbar">
+        <input class="search" id="acc-search" placeholder="Buscar...">
+        <button class="refresh" id="acc-refresh">↻ Actualizar</button>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Lead</th><th>Programa</th><th>Contacto</th><th>Fecha</th><th>Acceso</th></tr></thead>
+          <tbody id="accesos-body"><tr><td colspan="5" class="loading">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- EVENTS -->
+    <div id="tab-events" class="hidden">
+      <div class="toolbar"><button class="refresh" id="events-refresh">↻ Actualizar</button></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Evento</th><th>Datos</th><th>Fecha</th></tr></thead>
+          <tbody id="events-body"><tr><td colspan="3" class="loading">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PLANTILLAS DE CORREO -->
+    <div id="tab-templates" class="hidden">
+      <p class="csv-hint" style="margin-bottom:14px">Correos automáticos que recibe el cliente. Editá el asunto, el cuerpo (HTML) y los adjuntos. Variables disponibles: <code>{{nombre}}</code> <code>{{plan}}</code> <code>{{app_url}}</code> <code>{{monto}}</code> <code>{{fecha_pago}}</code></p>
+      <div class="tpl-tabs" id="tpl-tabs"></div>
+      <div class="tpl-editor" id="tpl-editor" style="display:none">
+        <div class="tpl-col">
+          <label class="tpl-l">Nombre interno</label>
+          <div id="tpl-name" class="tpl-name">—</div>
+          <label class="tpl-l">Asunto del correo</label>
+          <input type="text" id="tpl-subject" class="tpl-input" placeholder="Asunto...">
+          <label class="tpl-l">Cuerpo (HTML)</label>
+          <textarea id="tpl-body" class="tpl-textarea" placeholder="<p>Hola {{nombre}}...</p>"></textarea>
+          <label class="tpl-l">Adjuntos</label>
+          <div id="tpl-attachments" class="tpl-atts"></div>
+          <input type="file" id="tpl-file" style="color:#fff;font-size:.8rem;margin-top:8px">
+          <div style="margin-top:16px;display:flex;gap:10px">
+            <button class="msave" id="tpl-save">Guardar plantilla</button>
+            <label style="display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--gray);cursor:pointer"><input type="checkbox" id="tpl-enabled"> Activa</label>
+          </div>
+        </div>
+        <div class="tpl-col">
+          <label class="tpl-l">Vista previa</label>
+          <div class="tpl-preview-subj" id="tpl-prev-subj"></div>
+          <iframe id="tpl-preview" class="tpl-preview"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENTES -->
+    <div id="tab-clients" class="hidden">
+
+      <!-- Invitar / Carga masiva -->
+      <div class="inv-cards">
+        <!-- Individual -->
+        <div class="inv-card">
+          <h4>Invitar cliente</h4>
+          <div class="inv-form">
+            <input id="inv-email" type="email" placeholder="correo@ejemplo.com">
+            <input id="inv-name" type="text" placeholder="Nombre (opcional)">
+            <select id="inv-plan">
+              <option value="">Sin plan específico</option>
+              <option>KalosBody</option>
+              <option>Iron Legion</option>
+              <option>Bellator Temenos</option>
+              <option>Natus Vincere</option>
+            </select>
+            <input id="inv-notes" placeholder="Notas internas (opcional)">
+          </div>
+          <button class="inv-btn" id="inv-send-btn">Enviar invitación</button>
+        </div>
+
+        <!-- CSV Bulk -->
+        <div class="inv-card">
+          <h4>Carga masiva (CSV)</h4>
+          <p class="csv-hint">Formato: <code>email,nombre,plan</code> — una fila por cliente, sin encabezado</p>
+          <input type="file" id="csv-file" accept=".csv,.txt" style="color:#fff;font-size:.8rem;width:100%">
+          <div class="csv-preview" id="csv-preview"></div>
+          <button class="inv-btn" id="csv-send-btn" style="display:none;margin-top:8px">Invitar a todos</button>
+        </div>
+      </div>
+
+      <!-- Invitaciones enviadas -->
+      <div style="margin-bottom:20px">
+        <div class="toolbar"><span style="font-weight:600;font-size:.85rem;color:rgba(255,255,255,.6)">Invitaciones enviadas</span><button class="refresh" id="inv-refresh">↻</button></div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Email</th><th>Nombre</th><th>Plan</th><th>Estado</th><th>Enviada</th><th></th></tr></thead>
+            <tbody id="inv-body"><tr><td colspan="6" class="loading">Cargando…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Clientes registrados -->
+      <div class="toolbar" style="margin-top:8px"><input class="search" id="cli-search" placeholder="Buscar cliente..."><button class="refresh" id="cli-refresh">↻ Actualizar</button></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Cliente</th><th>Contacto</th><th>Suscripción</th><th>Vence</th><th>Registrado</th><th>Gestionar</th></tr></thead>
+          <tbody id="clients-body"><tr><td colspan="6" class="loading">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+    </main>
+  </div>
+</div>
+
+<!-- MODAL GESTIÓN CLIENTE -->
+<div id="modal" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title" id="m-name">Cliente</div><div class="modal-sub" id="m-email"></div></div>
+      <button class="modal-x" id="m-close">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- Perfil / Resumen -->
+      <div class="msec">
+        <div class="msec-h">Perfil</div>
+        <div class="m-tags">
+          <button class="m-tag-btn intro" data-tag="intro" onclick="setClientTag('intro')">Intro</button>
+          <button class="m-tag-btn medium" data-tag="medium" onclick="setClientTag('medium')">Medium</button>
+          <button class="m-tag-btn high_end" data-tag="high_end" onclick="setClientTag('high_end')">High-end</button>
+        </div>
+        <div class="m-summary">
+          <div class="m-stat"><div class="ml">Plan</div><div class="mv" id="m-sum-plan">—</div></div>
+          <div class="m-stat"><div class="ml">Membresía</div><div class="mv" id="m-sum-memb">—</div></div>
+          <div class="m-stat"><div class="ml">Tiempo en el programa</div><div class="mv" id="m-sum-tenure">—</div></div>
+          <div class="m-stat" style="grid-column:1/-1"><div class="ml">Último pago</div><div class="mv" id="m-sum-pay">—</div></div>
+        </div>
+        <label class="tpl-l" style="margin-top:4px">Notas internas</label>
+        <textarea id="m-notes" class="mtext" placeholder="Notas internas sobre el cliente (no las ve el cliente)..."></textarea>
+        <button class="msave" id="m-save-notes" style="margin-top:8px">Guardar perfil</button>
+      </div>
+      <!-- Suscripción -->
+      <div class="msec">
+        <div class="msec-h">Suscripción</div>
+        <div class="mgrid">
+          <label>Plan<select id="m-plan"><option value="">—</option><option>KalosBody</option><option>Iron Legion</option><option>Bellator Temenos</option><option>Natus Vincere</option></select></label>
+          <label>Estado<select id="m-status"><option value="active">Activa</option><option value="paused">Pausada</option><option value="cancelled">Cancelada</option><option value="expired">Vencida</option></select></label>
+          <label>Inicio<input type="date" id="m-start"></label>
+          <label>Vence<input type="date" id="m-end"></label>
+          <label>Mensualidad ($)<input type="number" id="m-price" placeholder="50"></label>
+          <label>URL del App<input type="url" id="m-appurl" placeholder="https://..."></label>
+        </div>
+        <button class="msave" id="m-save-sub">Guardar suscripción</button>
+      </div>
+      <!-- Nuevo pago -->
+      <div class="msec">
+        <div class="msec-h">Registrar pago</div>
+        <div class="mgrid">
+          <label>Monto<input type="number" id="m-pay-amt" placeholder="50" step="0.01"></label>
+          <label>Moneda<select id="m-pay-cur"><option value="USD">USD ($)</option><option value="CRC">Colones (₡)</option></select></label>
+          <label>Periodo<input type="text" id="m-pay-period" placeholder="Junio 2026"></label>
+          <label>Método<select id="m-pay-method"><option value="ONVO">ONVO</option><option value="SINPE">SINPE Móvil</option><option value="Transferencia">Transferencia</option><option value="Efectivo">Efectivo</option></select></label>
+          <label>Fecha<input type="date" id="m-pay-date"></label>
+        </div>
+        <div id="m-pay-preview" style="font-size:.74rem;color:var(--gray);margin:4px 0 10px"></div>
+        <button class="msave" id="m-add-pay">+ Agregar pago</button>
+        <div id="m-pays" class="mlist"></div>
+      </div>
+      <!-- Nuevo mensaje -->
+      <div class="msec">
+        <div class="msec-h">Enviar mensaje</div>
+        <div class="mgrid">
+          <label style="grid-column:1/-1">Asunto<input type="text" id="m-msg-subj" placeholder="Asunto"></label>
+        </div>
+        <textarea id="m-msg-body" class="mtext" placeholder="Escribe el mensaje para el cliente..."></textarea>
+        <button class="msave" id="m-send-msg">Enviar mensaje</button>
+        <div id="m-msgs" class="mlist"></div>
+      </div>
+      <!-- Documentos -->
+      <div class="msec">
+        <div class="msec-h">Documentos del cliente</div>
+        <div style="font-size:.74rem;color:var(--gray);margin-bottom:10px">Subí guías, planes o documentos. El cliente los ve y descarga desde su portal.</div>
+        <input type="file" id="m-doc-file" style="color:#fff;font-size:.8rem">
+        <div id="m-docs" class="mlist" style="margin-top:10px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+const SUPA_URL = 'https://YOUR_PROJECT_REF.supabase.co';
+const SUPA_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const db = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+const $ = id => document.getElementById(id);
+let LEADS = [], EVENTS = [];
+
+const STATUS_LABELS = { new:'Nuevo', contacted:'Contactado', client:'Cliente', discard:'Descartado' };
+
+// ---------- AUTH ----------
+$('login-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = $('login-btn'); btn.disabled = true; btn.textContent = 'Entrando…';
+  $('login-err').textContent = '';
+  const { error } = await db.auth.signInWithPassword({ email: $('email').value.trim(), password: $('password').value });
+  if (error) { $('login-err').textContent = 'Credenciales incorrectas.'; btn.disabled = false; btn.textContent = 'Entrar'; return; }
+  showApp();
+});
+
+$('logout').addEventListener('click', async () => { await db.auth.signOut(); location.reload(); });
+
+// Solo estos correos pueden ver el panel. Cualquier otro va a su portal de cliente.
+const ADMIN_EMAILS = ['coachkaizen@gmail.com','contactoavalverde@gmail.com'];
+const isAdmin = e => ADMIN_EMAILS.includes((e||'').trim().toLowerCase());
+
+async function showApp() {
+  const { data: { session } } = await db.auth.getSession();
+  if (!session) return;
+  if (!isAdmin(session.user.email)) {
+    // No es admin: no puede ver el panel. Lo mandamos a su portal de cliente.
+    const err = $('login-err'); if (err) err.textContent = 'Esta cuenta no tiene acceso al panel. Te llevamos a tu portal…';
+    setTimeout(() => location.replace('/portal'), 800);
+    return;
+  }
+  $('login').style.display = 'none';
+  $('app').style.display = 'block';
+  $('user-email').textContent = session.user.email;
+  loadAll();
+}
+
+// ---------- DATA ----------
+async function loadAll(){
+  await Promise.all([loadLeads(), loadEvents(), loadClients(), loadPaysGlobal(), loadTestimonios(), loadBlog(), loadTrans(), loadVids(), loadInvitations()]);
+  renderDashboard(); renderMemberships(); renderPays(); updateCommCounts();
+  loadPaymentLinks();
+}
+
+function fmtDate(d){ const x=new Date(d); return x.toLocaleDateString('es-CR',{day:'2-digit',month:'short',year:'2-digit'})+' '+x.toLocaleTimeString('es-CR',{hour:'2-digit',minute:'2-digit'}); }
+// Tasa USD→CRC (ajustable). Los montos se guardan en USD (ONVO cobra en USD);
+// mostramos ambas monedas. Si cambia el tipo de cambio, actualizá este número.
+const USD_CRC = 450;   // tasa Banco Central CR (ajustable)
+const fmtUSD = n => '$'+Number(n||0).toLocaleString('en-US',{maximumFractionDigits:2});
+const fmtCRC = n => '₡'+Math.round(Number(n||0)*USD_CRC).toLocaleString('es-CR');
+function money(n){ return fmtUSD(n)+' · '+fmtCRC(n); }   // ambas monedas
+function monthKey(d){ const x=new Date(d); return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0'); }
+function lastMonths(n){ const out=[]; const now=new Date(); for(let i=n-1;i>=0;i--){ const d=new Date(now.getFullYear(),now.getMonth()-i,1); out.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')); } return out; }
+function monthLabel(k){ const [y,m]=k.split('-'); return ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'][parseInt(m)-1]+' '+y.slice(2); }
+function fmtD(d){ if(!d) return '—'; return new Date(d+'T00:00:00').toLocaleDateString('es-CR',{day:'2-digit',month:'short',year:'2-digit'}); }
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function waLink(phone){ const n=(phone||'').replace(/[^0-9]/g,''); return 'https://wa.me/'+n; }
+
+async function loadLeads(){
+  const { data, error } = await db.from('kaizen_leads').select('*').order('created_at',{ascending:false});
+  if(error){ $('leads-body').innerHTML='<tr><td colspan="8" class="empty">Error: '+esc(error.message)+'</td></tr>'; return; }
+  LEADS = data||[];
+  $('c-leads').textContent = LEADS.length;
+  $('c-accesos').textContent = LEADS.filter(l=>leadTemp(l).key==='low').length;
+  renderStats();
+  renderLeads();
+  renderAccesos();
+}
+
+// ── Calificación de leads (queue): caliente = budget $1k–3k
+function leadTemp(l){
+  const cap = l.rango_capital||'';
+  const listo = (l.listo_invertir||'').trim().toLowerCase().startsWith('s');
+  if(cap==='$2000-3000') return { key:'hot',  label:'🔥 Caliente', cls:'temp-hot',  score: listo?6:5 };
+  if(cap==='$1000-2000') return { key:'hot',  label:'🔥 Caliente', cls:'temp-hot',  score: listo?5:4 };
+  if(cap==='$50-500')    return { key:'low',  label:'💲 $50',      cls:'temp-low',  score: listo?2:1 };
+  // sin capital declarado: tibio si dijo que está listo, frío si no
+  if(listo)              return { key:'warm', label:'🌡️ Tibio',    cls:'temp-warm', score: 3 };
+  return { key:'cold', label:'❄️ Frío', cls:'temp-cold', score: 0 };
+}
+async function loadEvents(){
+  const { data } = await db.from('kaizen_events').select('*').order('created_at',{ascending:false}).limit(200);
+  EVENTS = data||[]; $('c-events').textContent = EVENTS.length; renderEvents();
+}
+
+function renderStats(){
+  $('s-total').textContent = LEADS.length;
+  $('s-new').textContent = LEADS.filter(l=>l.status==='new'||!l.status).length;
+  const wk = Date.now()-7*864e5;
+  $('s-week').textContent = LEADS.filter(l=>new Date(l.created_at).getTime()>wk).length;
+  $('s-subs').textContent = (typeof CLIENTS!=='undefined'?CLIENTS.length:0);
+}
+
+function renderLeads(){
+  const q = $('lead-search').value.toLowerCase().trim();
+  const f = $('lead-filter').value;
+  const t = $('lead-temp').value;
+  let rows = LEADS.filter(l=>{
+    const st = l.status||'new';
+    if(f && st!==f) return false;
+    if(t && leadTemp(l).key!==t) return false;
+    if(q){ const hay=[l.name,l.phone,l.pais,l.metas,l.programa].join(' ').toLowerCase(); if(!hay.includes(q)) return false; }
+    return true;
+  });
+  // QUEUE: ordenar por temperatura (caliente arriba), luego por fecha desc
+  rows.sort((a,b)=>{ const d=leadTemp(b).score-leadTemp(a).score; return d!==0?d:(new Date(b.created_at)-new Date(a.created_at)); });
+  if(!rows.length){ $('leads-body').innerHTML='<tr><td colspan="8" class="empty">Sin leads.</td></tr>'; return; }
+  $('leads-body').innerHTML = rows.map(l=>{
+    const st = l.status||'new';
+    const tp = leadTemp(l);
+    return `<tr>
+      <td><span class="pill ${tp.cls}">${tp.label}</span></td>
+      <td><div class="cell-name">${esc(l.name)||'—'}</div><div class="cell-sub">${esc(l.phone)||''} · ${esc(l.pais)||''}${l.edad?' · '+l.edad+' años':''}</div></td>
+      <td>${l.programa?`<span class="pill pill-prog">${esc(l.programa)}</span>`:'—'}</td>
+      <td style="max-width:220px">${esc(l.metas)||'—'}</td>
+      <td>${l.rango_capital?`<span class="pill pill-cap">${esc(l.rango_capital)}</span>`:'—'}<div class="cell-sub">${esc(l.listo_invertir||'')}</div></td>
+      <td style="white-space:nowrap">${fmtDate(l.created_at)}</td>
+      <td><select class="status-sel status-${st}" data-id="${l.id}" onchange="updateStatus(this)">
+        ${Object.keys(STATUS_LABELS).map(k=>`<option value="${k}"${k===st?' selected':''}>${STATUS_LABELS[k]}</option>`).join('')}
+      </select></td>
+      <td>${l.phone?`<a class="wa-btn" href="${waLink(l.phone)}" target="_blank" rel="noopener">WhatsApp</a>`:'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ---------- ACCESOS $50 (leads de bajo budget → crear acceso a la plataforma) ----------
+// Mapea el programa elegido al plan de $50 correspondiente
+function planForPrograma(p){
+  p = (p||'').toLowerCase();
+  if(p.includes('fatloss') || p.includes('fat loss') || p.includes('grasa')) return 'KalosBody';
+  if(p.includes('training') || p.includes('músculo') || p.includes('musculo') || p.includes('fuerza')) return 'Iron Legion';
+  return '';
+}
+function renderAccesos(){
+  const q = ($('acc-search').value||'').toLowerCase().trim();
+  let rows = LEADS.filter(l=>leadTemp(l).key==='low');
+  if(q){ rows = rows.filter(l=>[l.name,l.phone,l.pais,l.programa].join(' ').toLowerCase().includes(q)); }
+  rows.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+  if(!rows.length){ $('accesos-body').innerHTML='<tr><td colspan="5" class="empty">Sin leads de $50 por ahora.</td></tr>'; return; }
+  $('accesos-body').innerHTML = rows.map(l=>{
+    const done = l.status==='client';
+    const plan = planForPrograma(l.programa);
+    return `<tr>
+      <td><div class="cell-name">${esc(l.name)||'—'}</div><div class="cell-sub">${esc(l.pais)||''}${l.edad?' · '+l.edad+' años':''}</div></td>
+      <td>${l.programa?`<span class="pill pill-prog">${esc(l.programa)}</span>`:'—'}${plan?`<div class="cell-sub">→ ${plan}</div>`:''}</td>
+      <td><div class="cell-sub">${esc(l.email)||'<span style="color:#facc15">sin correo</span>'}</div><div class="cell-sub">${esc(l.phone)||''}</div></td>
+      <td style="white-space:nowrap">${fmtDate(l.created_at)}</td>
+      <td>${done ? '<span class="acc-done">✓ Acceso creado</span>' : `<button class="acc-btn" onclick="crearAcceso('${l.id}',this)">+ Crear acceso</button>`}</td>
+    </tr>`;
+  }).join('');
+}
+
+async function crearAcceso(id, btn){
+  const lead = LEADS.find(l=>l.id===id); if(!lead) return;
+  // Si el lead ya trae correo (del formulario), lo usamos; si no, lo pedimos.
+  let email = (lead.email||'').trim();
+  if(email){
+    if(!confirm('Enviar el acceso a:\n'+email+'\n\n('+(lead.name||'')+' · '+(lead.phone||'')+')')) return;
+  } else {
+    email = (prompt('Correo del cliente para enviarle el acceso a la plataforma:\n\n('+(lead.name||'')+' · '+(lead.phone||'')+')')||'').trim();
+  }
+  if(!email) return;
+  if(!email.includes('@')){ alert('Correo inválido'); return; }
+  if(btn){ btn.disabled=true; btn.textContent='Enviando…'; }
+  const plan = planForPrograma(lead.programa);
+  const ok = await doSendInvite(email, lead.name||'', plan, 'Lead $50 · '+(lead.programa||'')+' · '+(lead.phone||''));
+  if(!ok){
+    if(btn){ btn.disabled=false; btn.textContent='+ Crear acceso'; }
+    alert('No se pudo enviar la invitación. Reintentá.');
+    return;
+  }
+  // Solo marcamos 'client' si el guardado realmente persiste; si falla, dejamos el lead en la cola
+  const { error } = await db.from('kaizen_leads').update({ status:'client' }).eq('id', id);
+  if(error){
+    if(btn){ btn.disabled=false; btn.textContent='+ Crear acceso'; }
+    alert('Invitación enviada a '+email+', pero no se pudo marcar el lead como cliente: '+error.message+'\nReintentá para actualizar el estado.');
+    return;
+  }
+  lead.status = 'client';
+  await loadInvitations();
+  renderStats(); renderLeads(); renderAccesos();
+  alert('✓ Invitación enviada a '+email+'\nEl cliente recibirá un correo para acceder a su plataforma.');
+}
+
+async function updateStatus(sel){
+  const id = sel.dataset.id, status = sel.value;
+  sel.className = 'status-sel status-'+status;
+  const { error } = await db.from('kaizen_leads').update({ status }).eq('id', id);
+  const lead = LEADS.find(l=>l.id===id); if(lead) lead.status = status;
+  renderStats();
+  if(error){ alert('No se pudo actualizar: '+error.message); }
+}
+
+
+function renderEvents(){
+  $('events-body').innerHTML = EVENTS.length ? EVENTS.map(e=>`<tr><td><span class="pill pill-prog">${esc(e.event)}</span></td><td style="max-width:400px;font-size:.76rem;color:var(--gray)">${esc(JSON.stringify(e.data||{}))}</td><td>${fmtDate(e.created_at)}</td></tr>`).join('') : '<tr><td colspan="3" class="empty">Sin eventos.</td></tr>';
+}
+
+// ---------- CLIENTES ----------
+let CLIENTS = [], SUBS = [], CUR = null;
+async function loadClients(){
+  const [{data:cli},{data:subs}] = await Promise.all([
+    db.from('kaizen_clients').select('*').order('created_at',{ascending:false}),
+    db.from('kaizen_subscriptions').select('*').order('created_at',{ascending:false})
+  ]);
+  CLIENTS = cli||[]; SUBS = subs||[];
+  $('c-clients').textContent = CLIENTS.length;
+  renderStats();
+  renderClients();
+}
+function subOf(uid){ return SUBS.find(s=>s.user_id===uid) || null; }
+function renderClients(){
+  const q = $('cli-search').value.toLowerCase().trim();
+  let rows = CLIENTS.filter(c=>!q || [c.name,c.email,c.phone].join(' ').toLowerCase().includes(q));
+  if(!rows.length){ $('clients-body').innerHTML='<tr><td colspan="6" class="empty">Sin clientes registrados.</td></tr>'; return; }
+  $('clients-body').innerHTML = rows.map(c=>{
+    const s=subOf(c.user_id);
+    const st=s?(s.status||'active'):null;
+    return `<tr>
+      <td><div class="cell-name">${esc(c.name)||'—'} ${c.tag?`<span class="tag-chip ${esc(c.tag)}">${esc(TAG_LABELS[c.tag]||c.tag)}</span>`:''}</div></td>
+      <td><div class="cell-sub">${esc(c.email)||''}</div><div class="cell-sub">${esc(c.phone)||''}</div></td>
+      <td>${s?`<span class="pill pill-prog">${esc(s.plan)||'—'}</span> <span class="cell-sub">${st}</span>`:'<span class="cell-sub">Sin suscripción</span>'}</td>
+      <td>${s?fmtD(s.end_date):'—'}</td>
+      <td style="white-space:nowrap">${fmtDate(c.created_at)}</td>
+      <td><button class="manage-btn" onclick="openClient('${c.user_id}')">Gestionar</button></td>
+    </tr>`;
+  }).join('');
+}
+
+let CUR_TAG='';
+const TAG_LABELS={ intro:'Intro', medium:'Medium', high_end:'High-end' };
+function tenureText(startISO){
+  if(!startISO) return '—';
+  const start=new Date(startISO), now=new Date();
+  if(isNaN(start)) return '—';
+  let months=(now.getFullYear()-start.getFullYear())*12+(now.getMonth()-start.getMonth());
+  let days=now.getDate()-start.getDate();
+  if(days<0){ months--; days+=new Date(now.getFullYear(),now.getMonth(),0).getDate(); }
+  if(days<0) days=0;   // arranque a fin de mes con mes previo más corto (ej. 31 ene → feb)
+  if(months<0){ months=0; days=Math.max(0,days); }
+  const mTxt = months>0 ? months+(months===1?' mes':' meses') : '';
+  const dTxt = days+(days===1?' día':' días');
+  return (mTxt? mTxt+' · ':'')+dTxt;
+}
+function renderClientTagBtns(){ document.querySelectorAll('.m-tag-btn').forEach(b=>b.classList.toggle('on', b.dataset.tag===CUR_TAG)); }
+function setClientTag(t){ CUR_TAG=(CUR_TAG===t)?'':t; renderClientTagBtns(); }
+
+async function openClient(uid){
+  CUR = CLIENTS.find(c=>c.user_id===uid); if(!CUR) return;
+  $('m-name').textContent = CUR.name||'Cliente';
+  $('m-email').textContent = CUR.email||'';
+  const s = subOf(uid);
+  $('m-plan').value=s?.plan||''; $('m-status').value=s?.status||'active';
+  $('m-start').value=s?.start_date||''; $('m-end').value=s?.end_date||'';
+  $('m-price').value=s?.monthly_price||''; $('m-appurl').value=s?.app_url||'';
+  $('m-pay-amt').value=''; $('m-pay-period').value=''; $('m-pay-method').value='ONVO'; $('m-pay-date').value='';
+  $('m-msg-subj').value=''; $('m-msg-body').value='';
+  // Perfil
+  CUR_TAG = CUR.tag||''; renderClientTagBtns();
+  $('m-notes').value = CUR.notes||'';
+  $('m-sum-plan').textContent = s?.plan || 'Sin plan';
+  const st=s?.status||''; const stLabel={active:'Activa',paused:'Pausada',cancelled:'Cancelada',expired:'Vencida'}[st]||(s?'—':'Sin membresía');
+  const dl = s?.end_date ? daysLeft(s.end_date) : null;
+  $('m-sum-memb').innerHTML = stLabel + (dl!=null?`<small>${dl>=0?dl+' días restantes':'venció hace '+(-dl)+' días'}</small>`:'');
+  $('m-sum-tenure').textContent = tenureText(s?.start_date || CUR.created_at);
+  $('m-sum-pay').textContent = 'Cargando…';
+  $('modal').classList.add('show');
+  loadClientPays(uid); loadClientMsgs(uid); loadClientDocs(uid);
+}
+
+// ---------- DOCUMENTOS DEL CLIENTE ----------
+async function loadClientDocs(uid){
+  const { data } = await db.from('kaizen_documents').select('*').eq('user_id',uid).order('created_at',{ascending:false});
+  $('m-docs').innerHTML = (data&&data.length)
+    ? data.map(d=>`<div class="mrow" style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+        <a href="#" onclick="dlDoc('${esc(d.path)}');return false" style="color:#93c5fd;text-decoration:none">📎 ${esc(d.name)}</a>
+        <span class="d" style="display:flex;gap:10px;align-items:center">${fmtDate(d.created_at)} <button onclick="delDoc('${d.id}','${esc(d.path)}')" style="background:none;border:none;color:#9bbcff;cursor:pointer">✕</button></span>
+      </div>`).join('')
+    : '<div class="mrow d">Sin documentos.</div>';
+}
+async function dlDoc(path){
+  const { data, error } = await db.storage.from('client-docs').createSignedUrl(path, 120);
+  if(error||!data){ alert('No se pudo abrir el documento'); return; }
+  window.open(data.signedUrl, '_blank', 'noopener');
+}
+async function uploadClientDoc(file){
+  if(!CUR||!file) return;
+  const ext=(file.name.split('.').pop()||'bin').toLowerCase();
+  const path=CUR.user_id+'/'+Date.now()+'_'+Math.floor(Math.random()*1e4)+'.'+ext;
+  const up=await db.storage.from('client-docs').upload(path,file,{cacheControl:'3600',upsert:false});
+  if(up.error){ alert('Error al subir: '+up.error.message); return; }
+  const { error }=await db.from('kaizen_documents').insert({ user_id:CUR.user_id, name:file.name, path, size:file.size });
+  if(error){ alert('Error: '+error.message); return; }
+  loadClientDocs(CUR.user_id);
+}
+async function delDoc(id, path){
+  if(!confirm('¿Borrar este documento?')) return;
+  await db.storage.from('client-docs').remove([path]);
+  const { error }=await db.from('kaizen_documents').delete().eq('id',id);
+  if(error){ alert(error.message); return; }
+  loadClientDocs(CUR.user_id);
+}
+$('m-save-notes').onclick=async()=>{
+  if(!CUR) return;
+  const { error } = await db.from('kaizen_clients').update({ notes:$('m-notes').value||null, tag:CUR_TAG||null }).eq('user_id',CUR.user_id);
+  if(error){ alert('Error: '+error.message); return; }
+  CUR.notes=$('m-notes').value; CUR.tag=CUR_TAG; renderClients(); alert('Perfil guardado ✓');
+};
+$('m-close').onclick=()=>$('modal').classList.remove('show');
+$('modal').addEventListener('click',e=>{ if(e.target.id==='modal') $('modal').classList.remove('show'); });
+
+$('m-save-sub').onclick=async()=>{
+  if(!CUR) return;
+  const payload={ user_id:CUR.user_id, plan:$('m-plan').value||null, status:$('m-status').value,
+    start_date:$('m-start').value||null, end_date:$('m-end').value||null,
+    monthly_price:$('m-price').value?parseFloat($('m-price').value):null, app_url:$('m-appurl').value||null };
+  const existing = subOf(CUR.user_id);
+  let res;
+  if(existing) res = await db.from('kaizen_subscriptions').update(payload).eq('id',existing.id);
+  else res = await db.from('kaizen_subscriptions').insert(payload);
+  if(res.error){ alert('Error: '+res.error.message); return; }
+  await loadClients(); alert('Suscripción guardada ✓');
+};
+
+async function loadClientPays(uid){
+  const { data } = await db.from('kaizen_payments').select('*').eq('user_id',uid).order('paid_on',{ascending:false});
+  $('m-pays').innerHTML = (data&&data.length)? data.map(p=>`<div class="mrow">${money(p.amount)} · ${esc(p.period)||''} <span class="d">${esc(p.method)||''} · ${fmtD(p.paid_on)} · ${esc(p.status)}</span></div>`).join('') : '<div class="mrow d">Sin pagos.</div>';
+  const last=(data&&data.length)?data[0]:null;
+  if($('m-sum-pay')) $('m-sum-pay').innerHTML = last ? `${money(last.amount)} · ${esc(last.method)||'—'}<small>${fmtD(last.paid_on)}${last.status?(' · '+esc(last.status)):''}</small>` : 'Sin pagos registrados';
+}
+// Preview en vivo del equivalente en la otra moneda
+function payPreview(){
+  const raw=parseFloat($('m-pay-amt').value); const cur=$('m-pay-cur')?$('m-pay-cur').value:'USD';
+  if(!raw){ $('m-pay-preview').textContent=''; return; }
+  const usd = cur==='CRC' ? raw/USD_CRC : raw;
+  $('m-pay-preview').textContent = 'Se guarda como: '+money(usd);
+}
+['m-pay-amt','m-pay-cur'].forEach(id=>{ const el=$(id); if(el) el.addEventListener('input',payPreview); });
+$('m-add-pay').onclick=async()=>{
+  if(!CUR) return;
+  const raw=parseFloat($('m-pay-amt').value); if(!raw){ alert('Ingresá el monto'); return; }
+  // Guardamos siempre en USD (canónico, igual que ONVO). Si entró en colones, convertimos.
+  const cur=$('m-pay-cur')?$('m-pay-cur').value:'USD';
+  const usd = cur==='CRC' ? +(raw/USD_CRC).toFixed(2) : raw;
+  const { error } = await db.from('kaizen_payments').insert({ user_id:CUR.user_id, amount:usd, period:$('m-pay-period').value||null, method:$('m-pay-method').value||null, paid_on:$('m-pay-date').value||null, status:'paid' });
+  if(error){ alert('Error: '+error.message); return; }
+  $('m-pay-amt').value='';$('m-pay-period').value='';$('m-pay-method').value='ONVO';$('m-pay-date').value='';$('m-pay-preview').textContent='';
+  loadClientPays(CUR.user_id);
+};
+
+async function loadClientMsgs(uid){
+  const { data } = await db.from('kaizen_messages').select('*').eq('user_id',uid).order('created_at',{ascending:false});
+  $('m-msgs').innerHTML = (data&&data.length)? data.map(m=>`<div class="mrow"><b>${esc(m.subject)||'(sin asunto)'}</b> <span class="d">${m.is_read?'leído':'no leído'} · ${fmtDate(m.created_at)}</span><div style="margin-top:4px;color:rgba(255,255,255,.7)">${esc(m.body)||''}</div></div>`).join('') : '<div class="mrow d">Sin mensajes.</div>';
+}
+$('m-send-msg').onclick=async()=>{
+  if(!CUR) return;
+  const body=$('m-msg-body').value.trim(); if(!body){ alert('Escribí el mensaje'); return; }
+  const { error } = await db.from('kaizen_messages').insert({ user_id:CUR.user_id, subject:$('m-msg-subj').value||null, body, is_read:false });
+  if(error){ alert('Error: '+error.message); return; }
+  $('m-msg-subj').value='';$('m-msg-body').value='';
+  loadClientMsgs(CUR.user_id); alert('Mensaje enviado ✓');
+};
+$('m-doc-file').addEventListener('change', e=>{ uploadClientDoc(e.target.files[0]); e.target.value=''; });
+
+// ---------- INVITACIONES ----------
+let INVITATIONS = [];
+async function loadInvitations(){
+  const { data } = await db.from('kaizen_invitations').select('*').order('invited_at',{ascending:false});
+  INVITATIONS = data||[];
+  renderInvitations();
+}
+function renderInvitations(){
+  $('inv-body').innerHTML = INVITATIONS.length ? INVITATIONS.map(i=>`<tr>
+    <td>${esc(i.email)}</td>
+    <td>${esc(i.name)||'—'}</td>
+    <td>${i.plan?`<span class="pill pill-prog">${esc(i.plan)}</span>`:'—'}</td>
+    <td><span class="pill ${i.status==='accepted'?'pill-accepted':'pill-pending'}">${i.status==='accepted'?'Aceptada ✓':'Pendiente'}</span></td>
+    <td>${fmtDate(i.invited_at)}</td>
+    <td><button class="manage-btn" style="font-size:.7rem;padding:5px 10px" onclick="reInvite('${esc(i.email)}',this)">Re-enviar</button></td>
+  </tr>`).join('') : '<tr><td colspan="6" class="empty">Sin invitaciones aún.</td></tr>';
+}
+
+async function doSendInvite(email, name, plan, notes){
+  email = email.trim().toLowerCase();
+  if(!email) return false;
+  const { error: dbErr } = await db.from('kaizen_invitations').upsert(
+    { email, name:name||null, plan:plan||null, notes:notes||null, status:'pending', invited_at:new Date().toISOString() },
+    { onConflict:'email' }
+  );
+  if(dbErr){ console.error(dbErr); return false; }
+  // Correo de bienvenida branded (Resend + plantilla); si Resend no puede (dominio sin verificar),
+  // la función cae al magic link nativo de Supabase. Se autentica con el JWT del admin.
+  try{
+    const { data:{ session } } = await db.auth.getSession();
+    if(!session){ console.error('sin sesión admin'); return false; }
+    const r = await fetch(SUPA_URL + '/functions/v1/send-invite', {
+      method:'POST',
+      headers:{ 'Authorization':'Bearer '+session.access_token, 'Content-Type':'application/json' },
+      body: JSON.stringify({ to:email, name:name||'', plan:plan||'', type:'welcome' })
+    });
+    const d = await r.json().catch(()=>({}));
+    if(!r.ok || !d.ok){ console.error('send-invite', r.status, d); return false; }
+    return true;
+  }catch(e){ console.error(e); return false; }
+}
+
+async function reInvite(email, btn){
+  btn.disabled=true; btn.textContent='Enviando…';
+  const ok = await doSendInvite(email,'','','');
+  btn.disabled=false; btn.textContent='Re-enviar';
+  if(ok) alert('Invitación reenviada a '+email+' ✓');
+  else alert('Error al reenviar. Reintenta.');
+}
+
+// ---------- PAGOS (global) ----------
+let PAYS = [];
+async function loadPaysGlobal(){
+  const { data } = await db.from('kaizen_payments').select('*').order('paid_on',{ascending:false});
+  PAYS = data||[];
+  $('c-pays').textContent = PAYS.length;
+}
+function clientName(uid){ const c=CLIENTS.find(x=>x.user_id===uid); return c?(c.name||c.email||'—'):'—'; }
+function daysLeft(end){ if(!end) return null; return Math.ceil((new Date(end+'T00:00:00')-new Date())/864e5); }
+
+function renderPays(){
+  const q=($('pay-search').value||'').toLowerCase().trim();
+  // Métricas por estado de las suscripciones (loops $50/mes)
+  const loops = SUBS.filter(s=>s.status==='active').length;
+  const failed = SUBS.filter(s=>s.status==='past_due'||s.status==='expired').length;
+  $('p-loops').textContent=loops; $('p-failed').textContent=failed;
+  let rows=PAYS.filter(p=>{ if(!q) return true; return (clientName(p.user_id)+' '+(p.period||'')).toLowerCase().includes(q); });
+  $('pays-body').innerHTML = rows.length ? rows.map(p=>`<tr>
+    <td class="cell-name">${esc(clientName(p.user_id))}</td><td>${money(p.amount)}</td>
+    <td>${esc(p.period)||'—'}</td><td>${esc(p.method)||'—'}</td><td>${fmtD(p.paid_on)}</td>
+    <td><span class="pill ${p.status==='paid'?'pill-active':'pill-paused'}">${p.status==='paid'?'Pagado':esc(p.status||'')}</span></td>
+  </tr>`).join('') : '<tr><td colspan="6" class="empty">Sin pagos registrados.</td></tr>';
+}
+
+// Links de pago de ONVO (vía Edge Function; la secret key no toca el browser)
+async function loadPaymentLinks(){
+  const body=$('pl-body'); if(!body) return;
+  body.innerHTML='<tr><td colspan="6" class="loading">Cargando…</td></tr>';
+  try{
+    const { data:{ session } } = await db.auth.getSession();
+    if(!session) throw new Error('Sesión expirada');
+    const r=await fetch(SUPA_URL+'/functions/v1/list-payment-links',{ method:'POST', headers:{ 'Authorization':'Bearer '+session.access_token, 'Content-Type':'application/json' }, body:'{}' });
+    const d=await r.json();
+    if(!r.ok || !d.ok) throw new Error(d.error||('HTTP '+r.status));
+    const links=d.links||[];
+    $('pl-active').textContent=links.filter(l=>l.isActive).length;
+    $('pl-inactive').textContent=links.filter(l=>!l.isActive).length;
+    body.innerHTML = links.length ? links.map(l=>`<tr>
+      <td class="cell-name">${esc(l.plan)}</td>
+      <td>${l.amount!=null?('$'+l.amount):'—'}</td>
+      <td>${l.recurring?'Mensual':'Único'}</td>
+      <td><span class="pill ${l.isActive?'pill-active':'pill-paused'}">${l.isActive?'Activo':'Inactivo'}</span></td>
+      <td>${l.paid||0}${l.activeLoops?` <small style="opacity:.7">(${l.activeLoops} activos)</small>`:''}</td>
+      <td>${fmtD(l.createdAt)}</td>
+      <td><a href="${esc(l.url)}" target="_blank" rel="noopener" style="color:var(--accent,#3b82f6)">abrir ↗</a></td>
+    </tr>`).join('') : '<tr><td colspan="7" class="empty">Sin links de pago. Creálos en el panel de ONVO.</td></tr>';
+  }catch(e){
+    $('pl-active').textContent='—'; $('pl-inactive').textContent='—';
+    body.innerHTML='<tr><td colspan="7" class="empty">No se pudieron cargar los links: '+esc(e.message||String(e))+'</td></tr>';
+  }
+}
+
+// ---------- MEMBRESÍAS ----------
+function renderMemberships(){
+  const q=($('memb-search').value||'').toLowerCase().trim();
+  const f=$('memb-filter').value;
+  const active=SUBS.filter(s=>(s.status||'active')==='active');
+  const soon=active.filter(s=>{ const d=daysLeft(s.end_date); return d!==null&&d>=0&&d<=14; });
+  const mrr=active.reduce((s,x)=>s+Number(x.monthly_price||0),0);
+  $('m-active').textContent=active.length; $('m-soon').textContent=soon.length; $('m-mrr').textContent=money(mrr);
+  $('c-memb').textContent=SUBS.length;
+  let rows=SUBS.filter(s=>{ const st=s.status||'active'; if(f&&st!==f) return false; if(q&&!(clientName(s.user_id)+' '+(s.plan||'')).toLowerCase().includes(q)) return false; return true; });
+  const stMap={active:['Activa','pill-active'],paused:['Pausada','pill-paused'],cancelled:['Cancelada','pill-cancelled'],expired:['Vencida','pill-cancelled']};
+  $('memb-body').innerHTML = rows.length ? rows.map(s=>{ const st=s.status||'active'; const d=daysLeft(s.end_date); const sm=stMap[st]||['—','pill-paused'];
+    return `<tr><td class="cell-name">${esc(clientName(s.user_id))}</td><td>${s.plan?`<span class="pill pill-prog">${esc(s.plan)}</span>`:'—'}</td>
+    <td><span class="pill ${sm[1]}">${sm[0]}</span></td><td>${fmtD(s.start_date)}</td><td>${fmtD(s.end_date)}</td>
+    <td>${d===null?'—':(d<0?'<span class="exp-soon">vencida</span>':(d<=14?`<span class="exp-soon">${d}</span>`:d))}</td><td>${money(s.monthly_price)}</td></tr>`;
+  }).join('') : '<tr><td colspan="7" class="empty">Sin membresías.</td></tr>';
+}
+
+// ---------- DASHBOARD (charts) ----------
+const CH={}; const RED='#2f6bff',GRN='#4ade80',YEL='#fde047',BLU='#60a5fa',PUR='#a78bfa',ORG='#fb923c',GRY='#555';
+Chart.defaults.color='rgba(255,255,255,.55)'; Chart.defaults.font.family='Inter';
+function mkChart(id,type,labels,data,colors,opts){
+  if(CH[id]) CH[id].destroy();
+  const ctx=document.getElementById(id); if(!ctx) return;
+  CH[id]=new Chart(ctx,{type,data:{labels,datasets:[{data,backgroundColor:colors,borderColor:type==='line'?RED:'rgba(0,0,0,.2)',borderWidth:type==='pie'?2:0,tension:.3,fill:type==='line',borderRadius:type==='bar'?6:0}]},
+    options:Object.assign({responsive:true,maintainAspectRatio:false,plugins:{legend:{display:type==='pie',position:'bottom',labels:{boxWidth:12,padding:12,font:{size:11}}}},
+      scales:type==='pie'?{}:{x:{grid:{display:false}},y:{grid:{color:'rgba(255,255,255,.05)'},beginAtZero:true,ticks:{precision:0}}}},opts||{})});
+}
+function countBy(arr,key,norm){ const m={}; arr.forEach(x=>{ let v=norm?norm(x[key]):x[key]; v=v||'—'; m[v]=(m[v]||0)+1; }); return m; }
+function renderDashboard(){
+  const active=SUBS.filter(s=>(s.status||'active')==='active');
+  $('k-revenue').textContent=money(PAYS.reduce((s,p)=>s+Number(p.amount||0),0));
+  $('k-mrr').textContent=money(active.reduce((s,x)=>s+Number(x.monthly_price||0),0));
+  $('k-active').textContent=active.length;
+  const mk=monthKey(new Date());
+  $('k-leadmonth').textContent=LEADS.filter(l=>monthKey(l.created_at)===mk).length;
+  const months=lastMonths(6), mlabels=months.map(monthLabel);
+  // leads/month
+  const lm=months.map(k=>LEADS.filter(l=>monthKey(l.created_at)===k).length);
+  mkChart('ch-leads-month','bar',mlabels,lm,RED);
+  // revenue/month
+  const rm=months.map(k=>PAYS.filter(p=>p.paid_on&&monthKey(p.paid_on)===k).reduce((s,p)=>s+Number(p.amount||0),0));
+  mkChart('ch-rev-month','line',mlabels,rm,GRN);
+  // leads by program
+  const prog=countBy(LEADS,'programa'); mkChart('ch-prog','pie',Object.keys(prog),Object.values(prog),[RED,ORG,BLU,PUR,GRY]);
+  // leads by status
+  const stMap={new:'Nuevo',contacted:'Contactado',client:'Cliente',discard:'Descartado'};
+  const st=countBy(LEADS,'status',v=>stMap[v||'new']||v); mkChart('ch-status','pie',Object.keys(st),Object.values(st),[GRN,YEL,BLU,GRY]);
+  // capital
+  const cap=countBy(LEADS,'rango_capital'); mkChart('ch-capital','bar',Object.keys(cap),Object.values(cap),BLU);
+  // memberships by plan
+  const pl=countBy(active,'plan'); mkChart('ch-plan','pie',Object.keys(pl),Object.values(pl),[RED,ORG,PUR,BLU,GRY]);
+}
+
+// ---------- COMUNICACIÓN ----------
+function emailAudience(){ const a=$('em-audience').value;
+  if(a==='clients') return CLIENTS.map(c=>c.email).filter(Boolean);
+  return LEADS.map(l=>l.email).filter(Boolean); }
+function waAudience(){ const a=$('wa-audience').value;
+  const src=a==='clients'?CLIENTS:LEADS;
+  return src.filter(x=>x.phone).map(x=>({name:x.name||'',phone:x.phone})); }
+function updateCommCounts(){
+  $('em-count').innerHTML='<b>'+emailAudience().length+'</b> destinatarios';
+  $('wa-count').innerHTML='<b>'+waAudience().length+'</b> destinatarios';
+}
+$('em-audience').onchange=updateCommCounts; $('wa-audience').onchange=updateCommCounts;
+$('em-send').onclick=()=>{
+  const to=emailAudience(); if(!to.length){ alert('No hay destinatarios'); return; }
+  const subj=encodeURIComponent($('em-subject').value||'');
+  const body=encodeURIComponent($('em-body').value||'');
+  // BCC para privacidad; mailto soporta listas (algunos clientes limitan ~50)
+  window.location.href=`mailto:?bcc=${to.join(',')}&subject=${subj}&body=${body}`;
+};
+$('wa-gen').onclick=()=>{
+  const list=waAudience(); const tpl=$('wa-body').value||'';
+  if(!list.length){ alert('No hay destinatarios'); return; }
+  $('wa-list').innerHTML=list.map(r=>{
+    const msg=tpl.replace(/\{nombre\}/gi,(r.name||'').split(' ')[0]||'');
+    const url='https://wa.me/'+(r.phone||'').replace(/[^0-9]/g,'')+'?text='+encodeURIComponent(msg);
+    return `<div class="wa-send-row"><span>${esc(r.name||r.phone)}</span><a href="${url}" target="_blank" rel="noopener" onclick="this.classList.add('sent');this.textContent='Enviado ✓'">Enviar</a></div>`;
+  }).join('');
+};
+
+// ---------- CALENDARIO (Google Calendar) ----------
+const CAL_KEY='kaizen_gcal';
+// Construye la URL de embed a partir de: email/ID, URL completa, o código <iframe> pegado
+function gcalEmbedUrl(input){
+  input=(input||'').trim();
+  const m=input.match(/src=["']([^"']+)["']/);          // pegaron un <iframe ... src="...">
+  if(m) return m[1];
+  if(/^https?:\/\//.test(input)) return input;          // pegaron una URL de embed completa
+  const src=encodeURIComponent(input);                  // es un email / ID de calendario
+  return 'https://calendar.google.com/calendar/embed?src='+src+'&ctz=America%2FCosta_Rica&mode=WEEK&bgcolor=%23141416&showTitle=0&showPrint=0&showCalendars=0';
+}
+function renderCal(){
+  const v=localStorage.getItem(CAL_KEY);
+  document.getElementById('cal-reset-row')?.remove();   // evita duplicar en cada visita al tab
+  if(!v) return;
+  $('cal-container').innerHTML=`<iframe src="${esc(gcalEmbedUrl(v))}" title="Google Calendar"></iframe>`;
+  const wrap=document.createElement('div');
+  wrap.id='cal-reset-row';
+  wrap.style.cssText='text-align:right;margin-top:10px';
+  wrap.innerHTML='<button class="refresh" id="cal-reset">Cambiar calendario</button>';
+  $('cal-container').after(wrap);
+  $('cal-reset').onclick=()=>{ localStorage.removeItem(CAL_KEY); wrap.remove(); location.reload(); };
+}
+function bindCalSave(){ const b=$('cal-save'); if(b) b.onclick=()=>{ const v=($('cal-url').value||'').trim(); if(!v){ alert('Pegá tu correo de Google o el código de inserción del calendario'); return; } localStorage.setItem(CAL_KEY,v); renderCal(); }; }
+
+// ---------- PLANTILLAS DE CORREO ----------
+let TEMPLATES=[], TPL_CUR=null;
+const TPL_SAMPLE={ nombre:'Pedro', plan:'KalosBody', app_url:'https://app.kaizencoaching.com', monto:'$50', fecha_pago:'15 jun 2026' };
+function fillVars(s){ return (s||'').replace(/\{\{(\w+)\}\}/g,(m,k)=> TPL_SAMPLE[k]!=null?TPL_SAMPLE[k]:m); }
+async function loadTemplates(){
+  const { data, error } = await db.from('kaizen_templates').select('*').order('key');
+  if(error){ $('tpl-tabs').innerHTML='<div class="empty">Error: '+esc(error.message)+'. ¿Corriste el SQL de plantillas?</div>'; return; }
+  TEMPLATES = data||[];
+  if(!TEMPLATES.length){ $('tpl-tabs').innerHTML='<div class="empty">Sin plantillas.</div>'; return; }
+  selectTemplate((TPL_CUR&&TPL_CUR.key) || TEMPLATES[0].key);
+}
+function renderTplTabs(){
+  $('tpl-tabs').innerHTML = TEMPLATES.map(t=>`<button class="tpl-tab${TPL_CUR&&TPL_CUR.key===t.key?' active':''}" onclick="selectTemplate('${t.key}')">${esc(t.name)}<div class="tpl-tab-sub">${t.enabled===false?'⏸ Inactiva':'● Activa'}</div></button>`).join('');
+}
+function selectTemplate(key){
+  TPL_CUR = TEMPLATES.find(t=>t.key===key); if(!TPL_CUR) return;
+  $('tpl-editor').style.display='grid';
+  $('tpl-name').textContent = TPL_CUR.name;
+  $('tpl-subject').value = TPL_CUR.subject||'';
+  $('tpl-body').value = TPL_CUR.body_html||'';
+  $('tpl-enabled').checked = TPL_CUR.enabled!==false;
+  renderTplAtts(); renderTplTabs(); updateTplPreview();
+}
+function renderTplAtts(){
+  const atts = TPL_CUR.attachments||[];
+  $('tpl-attachments').innerHTML = atts.length
+    ? atts.map((a,i)=>`<div class="tpl-att"><a href="${esc(a.url)}" target="_blank">📎 ${esc(a.name)}</a><button onclick="delTplAtt(${i})" title="Quitar">✕</button></div>`).join('')
+    : '<div style="font-size:.74rem;color:var(--gray)">Sin adjuntos.</div>';
+}
+function updateTplPreview(){
+  $('tpl-prev-subj').textContent = '✉️ '+fillVars($('tpl-subject').value);
+  const body = fillVars($('tpl-body').value);
+  $('tpl-preview').srcdoc = '<html><head><meta charset="utf-8"><style>body{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#123058;padding:24px;line-height:1.65}a{color:#2f6bff}h2{color:#0e2a4d;margin-top:0}</style></head><body>'+body+'</body></html>';
+}
+async function saveTemplate(){
+  if(!TPL_CUR) return;
+  const payload={ subject:$('tpl-subject').value, body_html:$('tpl-body').value, enabled:$('tpl-enabled').checked, updated_at:new Date().toISOString() };
+  const { error } = await db.from('kaizen_templates').update(payload).eq('id', TPL_CUR.id);
+  if(error){ alert('Error: '+error.message); return; }
+  Object.assign(TPL_CUR, payload); renderTplTabs(); alert('Plantilla guardada ✓');
+}
+async function uploadTplAtt(file){
+  if(!TPL_CUR||!file) return;
+  try{
+    const r = await uploadContent(file, 'tpl');
+    const atts = (TPL_CUR.attachments||[]).concat([{ name:file.name, url:r.url, path:r.path }]);
+    const { error } = await db.from('kaizen_templates').update({ attachments: atts }).eq('id', TPL_CUR.id);
+    if(error) throw error;
+    TPL_CUR.attachments = atts; renderTplAtts();
+  }catch(e){ alert('Error al subir: '+(e.message||e)); }
+}
+async function delTplAtt(i){
+  const atts=(TPL_CUR.attachments||[]).slice();
+  const removed=atts.splice(i,1)[0];
+  const { error } = await db.from('kaizen_templates').update({ attachments: atts }).eq('id', TPL_CUR.id);
+  if(error){ alert(error.message); return; }
+  if(removed&&removed.path){ try{ await db.storage.from('content').remove([removed.path]); }catch(_){} }
+  TPL_CUR.attachments=atts; renderTplAtts();
+}
+
+// ---------- TESTIMONIOS ----------
+let TESTI=[];
+async function loadTestimonios(){
+  const { data } = await db.from('kaizen_testimonios').select('*').order('created_at',{ascending:false});
+  TESTI=data||[]; $('c-testi').textContent=TESTI.length;
+  const g=$('testi-grid');
+  if(!g) return;
+  const isVid=u=>/\.(mp4|webm|mov|m4v)(\?|$)/i.test(u||'');
+  g.innerHTML = TESTI.length ? TESTI.map(t=>`<div class="testi-item">${isVid(t.image_url)?`<video src="${esc(t.image_url)}" muted playsinline preload="metadata" style="width:100%;display:block"></video>`:`<img src="${esc(t.image_url)}" alt="testimonio">`}<button class="testi-del" onclick="delTestimonio('${t.id}','${esc(t.path||'')}')">✕</button></div>`).join('') : '<div class="empty" style="grid-column:1/-1">Aún no hay testimonios. Subí el primero arriba.</div>';
+}
+async function uploadTestimonio(file){
+  const st=$('testi-status');
+  if(!file){ return; }
+  const isVideo=/^video\//.test(file.type), isImage=/^image\//.test(file.type);
+  if(!isVideo && !isImage){ st.textContent='Subí una imagen o un video.'; return; }
+  if(isVideo && file.size>105000000){ st.textContent='El video supera ~100MB. Comprimilo e intentá de nuevo.'; return; }
+  st.textContent='Subiendo…';
+  // Videos → bucket "content" (admite video); imágenes → bucket "testimonios".
+  // El prefijo del path nos dice luego de qué bucket borrar.
+  const bucket=isVideo?'content':'testimonios';
+  const ext=(file.name.split('.').pop()||(isVideo?'mp4':'jpg')).toLowerCase();
+  const path=(isVideo?'testivid_':'t_')+Date.now()+'.'+ext;
+  const up=await db.storage.from(bucket).upload(path,file,{cacheControl:'3600',upsert:false});
+  if(up.error){ st.textContent='Error al subir: '+up.error.message; return; }
+  const url=db.storage.from(bucket).getPublicUrl(path).data.publicUrl;
+  const ins=await db.from('kaizen_testimonios').insert({ image_url:url, path });
+  if(ins.error){ st.textContent='Subido, pero error al guardar: '+ins.error.message; return; }
+  st.textContent='✓ '+(isVideo?'Video':'Testimonio')+' agregado.';
+  setTimeout(()=>{st.textContent='';},2500);
+  loadTestimonios();
+}
+async function delTestimonio(id,path){
+  if(!confirm('¿Borrar este testimonio?')) return;
+  if(path){ const bucket=path.startsWith('testivid_')?'content':'testimonios'; await db.storage.from(bucket).remove([path]); }
+  const { error } = await db.from('kaizen_testimonios').delete().eq('id',id);
+  if(error){ alert('Error: '+error.message); return; }
+  loadTestimonios();
+}
+
+// ---------- helper de subida a Storage 'content' ----------
+async function uploadContent(file, prefix){
+  const ext=(file.name.split('.').pop()||'bin').toLowerCase();
+  const path=(prefix||'f')+'_'+Date.now()+'_'+Math.floor(Math.random()*1e4)+'.'+ext;
+  const up=await db.storage.from('content').upload(path,file,{cacheControl:'3600',upsert:false});
+  if(up.error) throw up.error;
+  return { url: db.storage.from('content').getPublicUrl(path).data.publicUrl, path };
+}
+
+// ---------- BLOG ----------
+let BLOG=[];
+async function loadBlog(){
+  const { data } = await db.from('kaizen_blog').select('*').order('created_at',{ascending:false});
+  BLOG=data||[]; $('c-blog').textContent=BLOG.length;
+  const b=$('blog-body'); if(!b) return;
+  b.innerHTML = BLOG.length ? BLOG.map(p=>`<tr>
+    <td class="cell-name">${esc(p.title)||'—'}</td><td>${esc(p.category)||'—'}</td><td>${esc(p.date)||'—'}</td>
+    <td>${p.image_url?'🖼️':'—'}${p.video_url?' <a class="wa-btn" href="'+esc(p.video_url)+'" target="_blank" rel="noopener" style="background:#1c4470">video</a>':''}</td>
+    <td style="white-space:nowrap"><button onclick="editBlog('${p.id}')" style="margin-right:6px;padding:5px 12px;border:1px solid var(--gray,#666);background:transparent;color:inherit;border-radius:6px;cursor:pointer;font-size:.74rem">✎ Editar</button><button class="testi-del" style="position:static" onclick="delBlog('${p.id}','${esc(p.image_path||'')}')">✕</button></td>
+  </tr>`).join('') : '<tr><td colspan="5" class="empty">Sin artículos.</td></tr>';
+}
+$('bl-img').addEventListener('change',e=>{ $('bl-img-name').textContent=e.target.files[0]?e.target.files[0].name:''; });
+$('bl-vidfile').addEventListener('change',e=>{ $('bl-vid-name').textContent=e.target.files[0]?e.target.files[0].name:''; });
+
+let BL_EDIT=null; // id del artículo en edición (null = creando uno nuevo)
+function blResetForm(){
+  BL_EDIT=null;
+  ['bl-cat','bl-date','bl-title','bl-read','bl-excerpt','bl-video'].forEach(id=>$(id).value='');
+  $('bl-img').value='';$('bl-vidfile').value='';$('bl-img-name').textContent='';$('bl-vid-name').textContent='';
+  $('bl-save').textContent='Publicar artículo';
+  if($('bl-cancel')) $('bl-cancel').style.display='none';
+}
+function editBlog(id){
+  const p=BLOG.find(x=>x.id===id); if(!p) return;
+  BL_EDIT=id;
+  $('bl-cat').value=p.category||''; $('bl-date').value=p.date||''; $('bl-title').value=p.title||'';
+  $('bl-read').value=p.read_time||''; $('bl-excerpt').value=p.excerpt||''; $('bl-video').value=p.video_url||'';
+  $('bl-img').value=''; $('bl-img-name').textContent=p.image_url?'Imagen actual (subí una nueva para reemplazar)':'';
+  $('bl-vidfile').value=''; $('bl-vid-name').textContent='';
+  $('bl-save').textContent='Guardar cambios';
+  if($('bl-cancel')) $('bl-cancel').style.display='inline-block';
+  $('bl-title').scrollIntoView({behavior:'smooth',block:'center'});
+}
+$('bl-save').onclick=async()=>{
+  const title=$('bl-title').value.trim();
+  if(!title){ $('bl-status').textContent='El título es obligatorio'; return; }
+  $('bl-status').textContent=BL_EDIT?'Guardando…':'Publicando…';
+  try{
+    const imgF=$('bl-img').files[0], vidF=$('bl-vidfile').files[0];
+    const payload={ category:$('bl-cat').value.trim()||null, title, excerpt:$('bl-excerpt').value.trim()||null, date:$('bl-date').value.trim()||null, read_time:$('bl-read').value.trim()||null };
+    // Video: si hay archivo nuevo lo sube; si no, usa el link del campo (o lo deja igual en edición si está vacío)
+    const vlink=$('bl-video').value.trim();
+    if(vidF){ const r=await uploadContent(vidF,'blogvid'); payload.video_url=r.url; }
+    else if(vlink){ payload.video_url=vlink; }
+    else if(!BL_EDIT){ payload.video_url=null; }
+    // Imagen: si hay archivo nuevo lo sube; si no, en edición se CONSERVA la actual
+    if(imgF){ const r=await uploadContent(imgF,'blog'); payload.image_url=r.url; payload.image_path=r.path; }
+    else if(!BL_EDIT){ payload.image_url=null; payload.image_path=null; }
+
+    const { error } = BL_EDIT
+      ? await db.from('kaizen_blog').update(payload).eq('id',BL_EDIT)
+      : await db.from('kaizen_blog').insert(payload);
+    if(error) throw error;
+    $('bl-status').textContent=BL_EDIT?'✓ Cambios guardados':'✓ Publicado';
+    blResetForm();
+    setTimeout(()=>$('bl-status').textContent='',2500);
+    loadBlog();
+  }catch(e){ $('bl-status').textContent='Error: '+e.message; }
+};
+async function delBlog(id,path){ if(!confirm('¿Borrar este artículo?'))return; if(path)await db.storage.from('content').remove([path]); const{error}=await db.from('kaizen_blog').delete().eq('id',id); if(error){alert(error.message);return;} if(BL_EDIT===id) blResetForm(); loadBlog(); }
+$('bl-refresh').addEventListener('click',loadBlog);
+
+// ---------- TRANSFORMACIONES ----------
+let TRANS=[];
+async function loadTrans(){
+  const { data } = await db.from('kaizen_transformaciones').select('*').order('created_at',{ascending:false});
+  TRANS=data||[]; $('c-trans').textContent=TRANS.length;
+  const g=$('trans-grid'); if(!g) return;
+  g.innerHTML = TRANS.length ? TRANS.map(t=>`<div class="testi-item">
+    <img src="${esc(t.after_url||t.before_url||'')}" alt="${esc(t.name)}">
+    <div style="padding:10px 12px"><div style="font-weight:700;font-size:.85rem">${esc(t.name)||'—'}</div><div style="font-size:.72rem;color:var(--red);font-weight:700">${esc(t.badge||'')} ${esc(t.badge_sub||'')}</div><button onclick="editTrans('${t.id}')" style="margin-top:6px;padding:4px 11px;border:1px solid var(--gray,#666);background:transparent;color:inherit;border-radius:6px;cursor:pointer;font-size:.7rem">✎ Editar</button></div>
+    <button class="testi-del" onclick="delTrans('${t.id}','${esc(t.before_path||'')}','${esc(t.after_path||'')}')">✕</button>
+  </div>`).join('') : '<div class="empty" style="grid-column:1/-1">Sin transformaciones.</div>';
+}
+$('tr-before').addEventListener('change',e=>{ $('tr-before-name').textContent=e.target.files[0]?e.target.files[0].name:''; });
+$('tr-after').addEventListener('change',e=>{ $('tr-after-name').textContent=e.target.files[0]?e.target.files[0].name:''; });
+
+let TR_EDIT=null; // id de la transformación en edición (null = nueva)
+function trReset(){
+  TR_EDIT=null;
+  ['tr-name','tr-tag','tr-badge','tr-badgesub','tr-cat','tr-quote'].forEach(id=>$(id).value='');
+  $('tr-before').value='';$('tr-after').value='';$('tr-before-name').textContent='';$('tr-after-name').textContent='';
+  $('tr-save').textContent='Publicar transformación';
+  if($('tr-cancel')) $('tr-cancel').style.display='none';
+}
+function editTrans(id){
+  const t=TRANS.find(x=>x.id===id); if(!t) return;
+  TR_EDIT=id;
+  $('tr-name').value=t.name||''; $('tr-tag').value=t.tag||''; $('tr-badge').value=t.badge||'';
+  $('tr-badgesub').value=t.badge_sub||''; $('tr-cat').value=t.category||''; $('tr-quote').value=t.quote||'';
+  $('tr-before').value=''; $('tr-before-name').textContent=t.before_url?'Foto actual (subí una para reemplazar)':'';
+  $('tr-after').value=''; $('tr-after-name').textContent=t.after_url?'Foto actual (subí una para reemplazar)':'';
+  $('tr-save').textContent='Guardar cambios';
+  if($('tr-cancel')) $('tr-cancel').style.display='inline-block';
+  $('tr-name').scrollIntoView({behavior:'smooth',block:'center'});
+}
+$('tr-save').onclick=async()=>{
+  const name=$('tr-name').value.trim();
+  if(!name){ $('tr-status').textContent='El nombre es obligatorio'; return; }
+  $('tr-status').textContent=TR_EDIT?'Guardando…':'Publicando…';
+  try{
+    const payload={ name, tag:$('tr-tag').value.trim()||null, badge:$('tr-badge').value.trim()||null, badge_sub:$('tr-badgesub').value.trim()||null, category:$('tr-cat').value.trim()||null, quote:$('tr-quote').value.trim()||null };
+    const bF=$('tr-before').files[0], aF=$('tr-after').files[0];
+    // Fotos: si subís una nueva se reemplaza; al editar sin subir, se CONSERVA la actual
+    if(bF){ const r=await uploadContent(bF,'before'); payload.before_url=r.url; payload.before_path=r.path; }
+    else if(!TR_EDIT){ payload.before_url=null; payload.before_path=null; }
+    if(aF){ const r=await uploadContent(aF,'after'); payload.after_url=r.url; payload.after_path=r.path; }
+    else if(!TR_EDIT){ payload.after_url=null; payload.after_path=null; }
+    const { error } = TR_EDIT
+      ? await db.from('kaizen_transformaciones').update(payload).eq('id',TR_EDIT)
+      : await db.from('kaizen_transformaciones').insert(payload);
+    if(error) throw error;
+    $('tr-status').textContent=TR_EDIT?'✓ Cambios guardados':'✓ Publicado';
+    trReset();
+    setTimeout(()=>$('tr-status').textContent='',2500);
+    loadTrans();
+  }catch(e){ $('tr-status').textContent='Error: '+e.message; }
+};
+async function delTrans(id,bp,ap){ if(!confirm('¿Borrar esta transformación?'))return; const rm=[bp,ap].filter(Boolean); if(rm.length)await db.storage.from('content').remove(rm); const{error}=await db.from('kaizen_transformaciones').delete().eq('id',id); if(error){alert(error.message);return;} if(TR_EDIT===id) trReset(); loadTrans(); }
+$('tr-refresh').addEventListener('click',loadTrans);
+
+// ---------- EN ACCIÓN (Videos) ----------
+function ytId(u){ if(!u) return ''; const m=u.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/); return m?m[1]:''; }
+let VIDS=[];
+async function loadVids(){
+  const { data } = await db.from('kaizen_videos').select('*').order('created_at',{ascending:false});
+  VIDS=data||[]; $('c-vids').textContent=VIDS.length;
+  const g=$('vids-grid'); if(!g) return;
+  g.innerHTML = VIDS.length ? VIDS.map(v=>{
+    const yt=v.type==='youtube'?ytId(v.youtube_url):'';
+    const ext=v.type==='youtube'&&!yt&&v.youtube_url;   // link externo (ej. Skool)
+    let thumb, tipo;
+    if(yt){ thumb=`<img src="https://img.youtube.com/vi/${yt}/hqdefault.jpg" alt="">`; tipo='YouTube'; }
+    else if(ext){ thumb=`<div style="aspect-ratio:9/16;display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#102e54,#0c2440);color:rgba(255,255,255,.5);font-size:2rem">↗</div>`; tipo='Link externo'; }
+    else { thumb=`<video src="${esc(v.video_url)}#t=0.4" muted></video>`; tipo='Subido'; }
+    return `<div class="testi-item">${thumb}<div style="padding:9px 11px;font-size:.8rem;font-weight:600">${esc(v.title)||'—'}<div style="font-size:.68rem;color:var(--gray)">${tipo}</div><button onclick="editVid('${v.id}')" style="margin-top:6px;padding:4px 11px;border:1px solid var(--gray,#666);background:transparent;color:inherit;border-radius:6px;cursor:pointer;font-size:.7rem">✎ Editar</button></div><button class="testi-del" onclick="delVid('${v.id}','${esc(v.video_path||'')}')">✕</button></div>`;
+  }).join('') : '<div class="empty" style="grid-column:1/-1">Sin videos.</div>';
+}
+$('vd-file').addEventListener('change',e=>{ $('vd-file-name').textContent=e.target.files[0]?e.target.files[0].name:''; });
+
+let VD_EDIT=null; // id del video en edición (null = nuevo)
+function vdReset(){
+  VD_EDIT=null;
+  $('vd-title').value='';$('vd-yt').value='';$('vd-file').value='';$('vd-file-name').textContent='';
+  $('vd-save').textContent='Publicar video';
+  if($('vd-cancel')) $('vd-cancel').style.display='none';
+}
+function editVid(id){
+  const v=VIDS.find(x=>x.id===id); if(!v) return;
+  VD_EDIT=id;
+  $('vd-title').value=v.title||'';
+  $('vd-yt').value=(v.type==='youtube')?(v.youtube_url||''):'';
+  $('vd-file').value=''; $('vd-file-name').textContent=(v.type==='upload')?'Video actual (subí uno nuevo para reemplazar)':'';
+  $('vd-save').textContent='Guardar cambios';
+  if($('vd-cancel')) $('vd-cancel').style.display='inline-block';
+  $('vd-title').scrollIntoView({behavior:'smooth',block:'center'});
+}
+$('vd-save').onclick=async()=>{
+  const title=$('vd-title').value.trim(), yt=$('vd-yt').value.trim(), f=$('vd-file').files[0];
+  if(!VD_EDIT && !yt && !f){ $('vd-status').textContent='Pegá un link de YouTube o subí un video'; return; }
+  $('vd-status').textContent=VD_EDIT?'Guardando…':'Publicando…';
+  try{
+    const row={ title:title||null };
+    if(f){ const r=await uploadContent(f,'vid'); row.type='upload'; row.video_url=r.url; row.video_path=r.path; row.youtube_url=null; }
+    else if(yt){ row.type='youtube'; row.youtube_url=yt; row.video_url=null; row.video_path=null; }
+    // editando sin archivo ni link nuevo → solo cambia el título (se conserva el video)
+    const { error } = VD_EDIT
+      ? await db.from('kaizen_videos').update(row).eq('id',VD_EDIT)
+      : await db.from('kaizen_videos').insert(row);
+    if(error) throw error;
+    $('vd-status').textContent=VD_EDIT?'✓ Cambios guardados':'✓ Publicado';
+    vdReset();
+    setTimeout(()=>$('vd-status').textContent='',2500);
+    loadVids();
+  }catch(e){ $('vd-status').textContent='Error: '+e.message; }
+};
+async function delVid(id,path){ if(!confirm('¿Borrar este video?'))return; if(path)await db.storage.from('content').remove([path]); const{error}=await db.from('kaizen_videos').delete().eq('id',id); if(error){alert(error.message);return;} if(VD_EDIT===id) vdReset(); loadVids(); }
+$('vd-refresh').addEventListener('click',loadVids);
+
+// ---------- ORBITAL (Sistema) ----------
+const ICON_LABELS={dumbbell:'🏋 Pesa',leaf:'🌿 Hoja',bulb:'💡 Idea',spark:'✨ Brillo',chart:'📈 Gráfico',users:'👥 Comunidad',target:'🎯 Diana',message:'💬 Mensaje',bolt:'⚡ Rayo',heart:'❤ Corazón'};
+async function loadOrbital(){
+  const [{data:nodes},{data:settings}]=await Promise.all([
+    db.from('kaizen_orbital').select('*').order('sort',{ascending:true}),
+    db.from('kaizen_settings').select('*')
+  ]);
+  const s=Object.fromEntries((settings||[]).map(r=>[r.key,r.value]));
+  $('ob-tag').value=s.orbital_tag||''; $('ob-sub').value=s.orbital_sub||''; $('ob-title').value=(s.orbital_title||'').replace(/\\n/g,'\n');
+  const b=$('orbital-body'); if(!b) return;
+  const list=nodes||[];
+  b.innerHTML = list.length ? list.map(n=>`<tr>
+    <td>${ICON_LABELS[n.icon]||n.icon||'—'}</td><td class="cell-name">${esc(n.label)||'—'}</td><td>${esc(n.title)||'—'}</td>
+    <td><button class="testi-del" style="position:static" onclick="delOrbital('${n.id}')">✕</button></td>
+  </tr>`).join('') : '<tr><td colspan="4" class="empty">Sin nodos.</td></tr>';
+}
+$('ob-save-head').onclick=async()=>{
+  $('ob-head-status').textContent='Guardando…';
+  const rows=[
+    {key:'orbital_tag',value:$('ob-tag').value.trim()},
+    {key:'orbital_title',value:$('ob-title').value.trim().replace(/\n/g,'\\n')},
+    {key:'orbital_sub',value:$('ob-sub').value.trim()}
+  ];
+  const { error }=await db.from('kaizen_settings').upsert(rows,{onConflict:'key'});
+  $('ob-head-status').textContent=error?('Error: '+error.message):'✓ Guardado';
+  setTimeout(()=>$('ob-head-status').textContent='',2500);
+};
+$('ob-add').onclick=async()=>{
+  const label=$('ob-label').value.trim();
+  if(!label){ $('ob-status').textContent='El nombre del nodo es obligatorio'; return; }
+  $('ob-status').textContent='Agregando…';
+  const { error }=await db.from('kaizen_orbital').insert({ icon:$('ob-icon').value, label, title:$('ob-ntitle').value.trim()||label, descr:$('ob-desc').value.trim()||null, feats:$('ob-feats').value.trim()||null, sort:Date.now()%100000 });
+  if(error){ $('ob-status').textContent='Error: '+error.message; return; }
+  ['ob-label','ob-ntitle','ob-desc','ob-feats'].forEach(id=>$(id).value='');
+  $('ob-status').textContent='✓ Agregado'; setTimeout(()=>$('ob-status').textContent='',2500);
+  loadOrbital();
+};
+async function delOrbital(id){ if(!confirm('¿Borrar este nodo?'))return; const{error}=await db.from('kaizen_orbital').delete().eq('id',id); if(error){alert(error.message);return;} loadOrbital(); }
+$('ob-refresh').addEventListener('click',loadOrbital);
+
+// ---------- UI ----------
+const TABS=['dash','leads','accesos','clients','memb','pays','comm','testi','blog','trans','vids','orbital','templates','cal','events'];
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  TABS.forEach(n=>$('tab-'+n).classList.toggle('hidden', n!==t.dataset.tab));
+  if(t.dataset.tab==='dash') renderDashboard();
+  if(t.dataset.tab==='cal'){ renderCal(); bindCalSave(); }
+  if(t.dataset.tab==='testi') loadTestimonios();
+  if(t.dataset.tab==='blog') loadBlog();
+  if(t.dataset.tab==='trans') loadTrans();
+  if(t.dataset.tab==='vids') loadVids();
+  if(t.dataset.tab==='orbital') loadOrbital();
+  if(t.dataset.tab==='accesos') renderAccesos();
+  if(t.dataset.tab==='templates') loadTemplates();
+}));
+$('tpl-save').addEventListener('click', saveTemplate);
+$('tpl-subject').addEventListener('input', updateTplPreview);
+$('tpl-body').addEventListener('input', updateTplPreview);
+$('tpl-file').addEventListener('change', e=>{ uploadTplAtt(e.target.files[0]); e.target.value=''; });
+$('testi-file').addEventListener('change', e=>{ uploadTestimonio(e.target.files[0]); e.target.value=''; });
+$('testi-refresh').addEventListener('click', loadTestimonios);
+$('lead-search').addEventListener('input', renderLeads);
+$('lead-filter').addEventListener('change', renderLeads);
+$('lead-temp').addEventListener('change', renderLeads);
+$('lead-refresh').addEventListener('click', loadLeads);
+$('acc-search').addEventListener('input', renderAccesos);
+$('acc-refresh').addEventListener('click', loadLeads);
+$('cli-search').addEventListener('input', renderClients);
+$('cli-refresh').addEventListener('click', loadClients);
+$('inv-refresh').addEventListener('click', loadInvitations);
+
+// Invitar individualmente
+$('inv-send-btn').addEventListener('click', async()=>{
+  const email = $('inv-email').value.trim();
+  const name  = $('inv-name').value.trim();
+  const plan  = $('inv-plan').value;
+  const notes = $('inv-notes').value.trim();
+  if(!email){ alert('Ingresá el email del cliente'); return; }
+  const btn = $('inv-send-btn');
+  btn.disabled=true; btn.textContent='Enviando…';
+  const ok = await doSendInvite(email, name, plan, notes);
+  btn.disabled=false; btn.textContent='Enviar invitación';
+  if(ok){
+    alert('Invitación enviada a '+email+' ✓\n\nEl cliente recibirá un correo para acceder a su plataforma.');
+    $('inv-email').value=''; $('inv-name').value=''; $('inv-plan').value=''; $('inv-notes').value='';
+    await loadInvitations();
+  } else {
+    alert('Error al enviar. Verificá el email e intentá de nuevo.');
+  }
+});
+
+// CSV bulk invite
+let CSV_ROWS = [];
+$('csv-file').addEventListener('change', e=>{
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev=>{
+    const lines = ev.target.result.trim().split(/\r?\n/);
+    CSV_ROWS = lines.map(line=>{
+      const [email,name='',plan=''] = line.split(',').map(s=>s.trim().replace(/^"|"$/g,''));
+      return { email, name, plan };
+    }).filter(r=>r.email && r.email.includes('@'));
+    $('csv-preview').innerHTML = CSV_ROWS.length
+      ? `<table><thead><tr><th>Email</th><th>Nombre</th><th>Plan</th></tr></thead><tbody>${CSV_ROWS.map(r=>`<tr><td>${esc(r.email)}</td><td>${esc(r.name)||'—'}</td><td>${esc(r.plan)||'—'}</td></tr>`).join('')}</tbody></table><div style="margin-top:6px;color:var(--gray);font-size:.72rem">${CSV_ROWS.length} contacto(s) listos para invitar</div>`
+      : '<div style="color:#3b76ff;font-size:.78rem">No se encontraron emails válidos.</div>';
+    $('csv-send-btn').style.display = CSV_ROWS.length ? '' : 'none';
+  };
+  reader.readAsText(file);
+});
+
+$('csv-send-btn').addEventListener('click', async()=>{
+  if(!CSV_ROWS.length){ alert('Cargá un CSV primero'); return; }
+  const btn = $('csv-send-btn');
+  btn.disabled=true;
+  let ok=0, fail=0;
+  for(let i=0;i<CSV_ROWS.length;i++){
+    const r=CSV_ROWS[i];
+    btn.textContent=`Enviando ${i+1}/${CSV_ROWS.length}…`;
+    const res = await doSendInvite(r.email, r.name, r.plan, '');
+    res ? ok++ : fail++;
+    if(i<CSV_ROWS.length-1) await new Promise(r=>setTimeout(r,1100));
+  }
+  btn.disabled=false; btn.textContent='Invitar a todos';
+  alert(`${ok} invitación(es) enviadas${fail?' · '+fail+' error(es)':''} ✓`);
+  CSV_ROWS=[]; $('csv-file').value=''; $('csv-preview').innerHTML='';
+  $('csv-send-btn').style.display='none';
+  await loadInvitations();
+});
+$('memb-search').addEventListener('input', renderMemberships);
+$('memb-filter').addEventListener('change', renderMemberships);
+$('memb-refresh').addEventListener('click', async()=>{ await loadClients(); renderMemberships(); });
+$('pay-search').addEventListener('input', renderPays);
+$('pay-refresh').addEventListener('click', async()=>{ await loadPaysGlobal(); renderPays(); });
+$('pl-refresh').addEventListener('click', loadPaymentLinks);
+$('events-refresh').addEventListener('click', loadEvents);
+
+// auto-login si hay sesión
+showApp();
+</script>
+</body>
+</html>

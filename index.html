@@ -1,0 +1,2858 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAIZEN Coaching — Training · Nutrition · Lifestyle</title>
+<meta name="description" content="Coaching de élite con Coach Kaizen. Programación basada en ciencia para perder grasa, construir músculo y transformar tu físico, salud y estilo de vida. Resultados reales y verificables.">
+<link rel="canonical" href="https://kaizencoaching.com/">
+<meta name="theme-color" content="#081c36">
+<!-- Open Graph (WhatsApp / Facebook / LinkedIn) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KAIZEN Coaching">
+<meta property="og:locale" content="es_CR">
+<meta property="og:url" content="https://kaizencoaching.com/">
+<meta property="og:title" content="KAIZEN Coaching — Entrena diferente. Vive sin límites.">
+<meta property="og:description" content="Coaching de élite con Coach Kaizen. Training, Nutrición y Lifestyle basados en ciencia. Resultados reales para personas reales.">
+<meta property="og:image" content="https://kaizencoaching.com/assets/coach-1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1600">
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KAIZEN Coaching — Entrena diferente. Vive sin límites.">
+<meta name="twitter:description" content="Coaching de élite con Coach Kaizen. Training, Nutrición y Lifestyle basados en ciencia.">
+<meta name="twitter:image" content="https://kaizencoaching.com/assets/coach-1.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#2f6bff;
+  --red2:#3b76ff;
+  --redglow:rgba(47, 107, 255,0.35);
+  --black:#06182f;
+  --dark:#0a2342;
+  --card:#0e2a4d;
+  --white:#ffffff;
+  --gray:#888;
+  --border:rgba(255,255,255,0.07);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden}
+::selection{background:var(--red);color:#fff}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#000}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
+
+/* ─── NAV ─── */
+/* ─── PILL NAV (React Bits port) ─── */
+#nav{ /* container */
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:999;
+  --base:#2f6bff; --pill-bg:#0e2a4d; --hover-text:#fff; --pill-text:#fff;
+}
+.pill-nav{
+  --nav-h:46px; --pill-pad-x:20px; --pill-gap:4px;
+  width:max-content;display:flex;align-items:center;gap:8px;box-sizing:border-box;
+}
+.pill-logo{
+  width:var(--nav-h);height:var(--nav-h);border-radius:50%;
+  background:var(--base);display:inline-flex;align-items:center;justify-content:center;
+  overflow:hidden;text-decoration:none;flex-shrink:0;
+  box-shadow:0 6px 20px rgba(47, 107, 255,.4);
+}
+.pill-logo-text{font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;color:#fff;letter-spacing:.02em}
+.pill-nav-items{
+  position:relative;display:flex;align-items:center;height:var(--nav-h);
+  background:rgba(20,20,22,.7);backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid rgba(255,255,255,.08);border-radius:9999px;
+}
+.pill-list{list-style:none;display:flex;align-items:stretch;gap:var(--pill-gap);margin:0;padding:4px;height:100%}
+.pill-list>li{display:flex;height:100%}
+.pill{
+  display:inline-flex;align-items:center;justify-content:center;height:100%;
+  padding:0 var(--pill-pad-x);background:var(--pill-bg);color:var(--pill-text);
+  text-decoration:none;border-radius:9999px;box-sizing:border-box;
+  font-weight:600;font-size:.78rem;line-height:0;text-transform:uppercase;letter-spacing:.06em;
+  white-space:nowrap;cursor:pointer;position:relative;overflow:hidden;
+}
+.pill.pill-cta{background:var(--base);color:#fff}
+.pill .hover-circle{position:absolute;left:50%;bottom:0;border-radius:50%;background:var(--base);z-index:1;display:block;pointer-events:none;will-change:transform}
+.pill-cta .hover-circle{background:#fff}
+.pill .label-stack{position:relative;display:inline-block;line-height:1;z-index:2}
+.pill .pill-label{position:relative;z-index:2;display:inline-block;line-height:1;will-change:transform}
+.pill .pill-label-hover{position:absolute;left:0;top:0;color:var(--hover-text);z-index:3;display:inline-block;will-change:transform,opacity}
+.pill-cta .pill-label-hover{color:var(--base)}
+.pnav-desktop{display:block}
+.pnav-mobile-only{display:none}
+.mobile-menu-button{
+  width:var(--nav-h,46px);height:var(--nav-h,46px);border-radius:50%;
+  background:rgba(20,20,22,.75);border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;padding:0}
+.hamburger-line{width:18px;height:2px;background:#fff;border-radius:1px;transform-origin:center}
+.mobile-menu-popover{
+  position:absolute;top:62px;left:0;right:0;
+  background:rgba(14,14,15,.97);backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.08);border-radius:22px;
+  box-shadow:0 16px 48px rgba(0,0,0,.5);z-index:998;opacity:0;visibility:hidden;transform-origin:top center;
+  padding:6px;
+}
+.mobile-menu-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.mobile-menu-link{display:block;padding:13px 18px;color:#fff;background:rgba(255,255,255,.04);text-decoration:none;font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;border-radius:14px;transition:all .2s}
+.mobile-menu-link:hover{background:var(--base);color:#fff}
+@media(max-width:860px){
+  #nav{left:0;right:0;transform:none;width:100%;top:14px;padding:0 16px}
+  .pill-nav{width:100%;justify-content:space-between}
+  .pnav-desktop{display:none}
+  .pnav-mobile-only{display:block}
+  .mobile-menu-button{display:flex}
+}
+
+/* ─── HERO ─── */
+#hero{
+  position:relative;height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:#081c36;
+}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden;background:#081c36}
+.hero-vid{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  opacity:0;will-change:opacity;
+  transition:opacity 1.4s ease;   /* el crossfade lo controla el montaje en JS */
+  pointer-events:none;            /* video de fondo: los toques pasan al contenido */
+}
+/* Ocultar el botón de play nativo que iOS/Chrome móvil dibujan sobre el video */
+.hero-vid::-webkit-media-controls,
+.hero-vid::-webkit-media-controls-enclosure,
+.hero-vid::-webkit-media-controls-panel,
+.hero-vid::-webkit-media-controls-play-button,
+.hero-vid::-webkit-media-controls-overlay-play-button,
+.hero-vid::-webkit-media-controls-start-playback-button{
+  display:none !important;
+  -webkit-appearance:none;
+  opacity:0 !important;
+}
+@media(prefers-reduced-motion:reduce){.hero-vid:nth-child(1){opacity:.6;transition:none}}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(160deg,rgba(7,7,7,.82) 0%,rgba(7,7,7,.55) 48%,rgba(90,0,0,.42) 100%);
+}
+.hero-overlay2{
+  position:absolute;bottom:0;left:0;right:0;height:220px;z-index:1;
+  background:linear-gradient(to top,var(--black),transparent);
+}
+.hero-content{
+  position:relative;z-index:2;
+  text-align:center;max-width:980px;padding:0 24px;
+}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(47, 107, 255,.12);
+  border:1px solid rgba(47, 107, 255,.3);
+  border-radius:100px;padding:6px 20px;
+  font-size:.7rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:#8fb4ff;margin-bottom:32px;
+}
+.hero-pill-dot{
+  width:6px;height:6px;background:#8fb4ff;
+  border-radius:50%;animation:blink 1.6s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-title{
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(3.2rem,9vw,7.5rem);
+  font-weight:700;line-height:.9;
+  text-transform:uppercase;letter-spacing:-.01em;
+  margin-bottom:28px;
+}
+.hero-line{display:block;overflow:hidden}
+.hero-word{display:inline-block}
+.hero-red{
+  color:var(--red);
+  text-shadow:0 0 60px rgba(47, 107, 255,.4);
+}
+.hero-sub{
+  font-size:1.05rem;color:rgba(255,255,255,.65);
+  max-width:520px;margin:0 auto 44px;
+  line-height:1.7;
+}
+.hero-ctas{
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+}
+.btn-fire{
+  background:var(--red);color:#fff;
+  padding:16px 44px;font-size:.85rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  border:none;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:12px;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
+  transition:all .3s;
+  box-shadow:0 8px 32px rgba(47, 107, 255,.35);
+}
+.btn-fire:hover{background:#1d4fd6;transform:translateY(-3px);box-shadow:0 12px 40px rgba(47, 107, 255,.5)}
+.btn-ghost{
+  background:transparent;color:#fff;
+  padding:16px 44px;font-size:.85rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.25);
+  cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:12px;
+  transition:all .3s;
+}
+.btn-ghost:hover{border-color:var(--red);color:var(--red)}
+.scroll-cue{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:rgba(255,255,255,.3);font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+}
+.scroll-bar{
+  width:1px;height:56px;
+  background:linear-gradient(to bottom,transparent,var(--red));
+  animation:scrollDrop 2.2s infinite;
+}
+@keyframes scrollDrop{
+  0%{transform:scaleY(0);transform-origin:top;opacity:0}
+  40%{transform:scaleY(1);transform-origin:top;opacity:1}
+  40.01%{transform:scaleY(1);transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom;opacity:0}
+}
+
+/* ─── STATS ─── */
+#stats{
+  padding:72px 6%;
+  background:linear-gradient(to right,#08203c,#0e2a4d,#08203c);
+  border-top:1px solid rgba(47, 107, 255,.15);
+  border-bottom:1px solid rgba(47, 107, 255,.15);
+}
+.stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+.stat-block{text-align:center}
+.stat-num{
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(2.4rem,5vw,3.8rem);font-weight:700;
+  color:var(--red);line-height:1;margin-bottom:8px;
+}
+.stat-suffix{font-size:.7em;vertical-align:super}
+.stat-lbl{
+  font-size:.75rem;color:rgba(255,255,255,.45);
+  letter-spacing:.14em;text-transform:uppercase;
+}
+.stat-divider{
+  width:1px;background:rgba(255,255,255,.08);
+  margin:auto;display:none;
+}
+
+/* ─── SECTION UTILS ─── */
+.sec{padding:110px 6%}
+.sec-inner{max-width:1200px;margin:0 auto}
+.sec-tag{
+  display:inline-block;
+  font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--red);margin-bottom:14px;
+}
+.sec-h{
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(2rem,5vw,3.4rem);font-weight:700;
+  line-height:1.05;text-transform:uppercase;margin-bottom:18px;
+}
+.sec-h .r{color:var(--red)}
+.sec-p{font-size:.98rem;color:rgba(255,255,255,.55);line-height:1.8;max-width:520px}
+.fade-up{opacity:0;transform:translateY(48px)}
+
+/* ─── APP DE ENTRENAMIENTO ─── */
+.app-hd{text-align:center;max-width:640px;margin:0 auto}
+.app-hd .sec-h{margin:0 auto 18px}
+.app-hd .sec-p{margin:0 auto}
+.app-wrap{display:grid;grid-template-columns:auto 1fr;gap:72px;align-items:center;max-width:1000px;margin:56px auto 0;padding:0 6%}
+.app-phone{position:relative;justify-self:center}
+.app-phone-frame{position:relative;width:296px;height:600px;background:#0a2342;border:2px solid rgba(255,255,255,.12);border-radius:46px;padding:12px;box-shadow:0 34px 90px rgba(0,0,0,.65)}
+.app-phone-frame::before{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:#0a2342;border-radius:0 0 16px 16px;z-index:3}
+.app-phone-screen{width:100%;height:100%;border-radius:36px;overflow:hidden;background:#000}
+.app-phone-screen video{width:100%;height:100%;object-fit:cover;display:block}
+.app-glow{position:absolute;inset:-50px;background:radial-gradient(circle at 50% 42%,var(--redglow),transparent 66%);filter:blur(34px);z-index:-1}
+.app-feats{display:flex;flex-direction:column;gap:24px}
+.app-feat{display:flex;gap:16px;align-items:flex-start}
+.app-feat-ic{flex-shrink:0;width:46px;height:46px;border-radius:13px;background:rgba(47, 107, 255,.12);border:1px solid rgba(47, 107, 255,.28);display:flex;align-items:center;justify-content:center;color:var(--red2)}
+.app-feat-tx h4{font-family:'Oswald',sans-serif;font-size:1.08rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;margin:0 0 5px;color:#fff}
+.app-feat-tx p{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.6;margin:0}
+.app-integrations{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+.app-int{font-size:.72rem;font-weight:600;color:rgba(255,255,255,.7);background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:20px;padding:5px 12px}
+@media(max-width:860px){.app-wrap{grid-template-columns:1fr;gap:48px;max-width:420px}.app-feats{gap:20px}}
+
+/* ─── ORBITAL SERVICES ─── */
+#services{background:var(--black);overflow:hidden}
+.services-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+  max-width:1200px;margin:0 auto;
+}
+.services-left{}
+.services-right{display:flex;justify-content:center}
+.orbital-wrap{
+  position:relative;width:480px;height:480px;
+  flex-shrink:0;
+}
+.orb-ring{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.06);
+}
+.orb-ring-1{width:400px;height:400px}
+.orb-ring-2{width:280px;height:280px;border-color:rgba(47, 107, 255,.1)}
+.orb-glow{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle,rgba(47, 107, 255,.25),transparent 70%);
+  animation:orbGlow 3s ease-in-out infinite;
+}
+@keyframes orbGlow{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}50%{transform:translate(-50%,-50%) scale(1.4);opacity:1}}
+.orb-center{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:90px;height:90px;border-radius:50%;
+  background:radial-gradient(135deg,#3a0000,#1a0000);
+  border:2px solid rgba(47, 107, 255,.4);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:20;
+  box-shadow:0 0 40px rgba(47, 107, 255,.2),inset 0 0 20px rgba(47, 107, 255,.1);
+}
+.orb-center-kz{
+  font-family:'Oswald',sans-serif;
+  font-size:1.4rem;font-weight:700;color:var(--red);
+  line-height:1;letter-spacing:.05em;
+}
+.orb-center-sub{
+  font-size:.48rem;letter-spacing:.18em;
+  color:rgba(255,255,255,.4);text-transform:uppercase;margin-top:2px;
+}
+.orb-node{
+  position:absolute;top:50%;left:50%;
+  width:56px;height:56px;
+  margin-left:-28px;margin-top:-28px;
+  cursor:pointer;z-index:15;
+  transition:z-index 0s;
+}
+.orb-node-btn{
+  width:74px;height:74px;border-radius:50%;
+  background:rgba(14,14,14,.92);
+  border:2px solid rgba(255,255,255,.28);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);
+  position:relative;
+  box-shadow:0 6px 24px rgba(0,0,0,.5);
+}
+.orb-node-btn svg{width:32px;height:32px}
+.orb-node:hover .orb-node-btn,.orb-node.active .orb-node-btn{color:#fff}
+.svc-card-icon svg{width:26px;height:26px;color:var(--red)}
+.bfeat-icon svg{width:22px;height:22px;color:var(--red)}
+.orb-node-btn::before{
+  content:'';position:absolute;inset:-6px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(47, 107, 255,.15) 0%,transparent 70%);
+  opacity:0;transition:opacity .3s;
+}
+.orb-node:hover .orb-node-btn,
+.orb-node.active .orb-node-btn{
+  background:var(--red);
+  border-color:var(--red);
+  transform:scale(1.35);
+  box-shadow:0 0 30px rgba(47, 107, 255,.5);
+}
+.orb-node:hover .orb-node-btn::before,
+.orb-node.active .orb-node-btn::before{opacity:1}
+.orb-lbl{
+  position:absolute;
+  white-space:nowrap;
+  font-size:.65rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+  transition:color .3s;
+  pointer-events:none;
+}
+.orb-node:hover .orb-lbl,
+.orb-node.active .orb-lbl{color:#fff}
+/* label positioning per node — set dynamically */
+.orb-node.pulse .orb-node-btn{animation:nodePulse .9s ease-in-out infinite}
+@keyframes nodePulse{0%,100%{box-shadow:0 0 0 0 rgba(47, 107, 255,.4)}50%{box-shadow:0 0 0 12px rgba(47, 107, 255,0)}}
+
+.service-info{margin-top:32px;min-height:160px}
+.svc-card{
+  background:rgba(47, 107, 255,.07);
+  border:1px solid rgba(47, 107, 255,.18);
+  border-radius:10px;padding:24px;
+  display:none;
+  animation:fadeSlide .3s ease;
+}
+.svc-card.show{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.svc-card-top{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.svc-card-icon{font-size:2rem}
+.svc-card-title{
+  font-family:'Oswald',sans-serif;
+  font-size:1.35rem;font-weight:600;
+}
+.svc-card-desc{
+  font-size:.87rem;color:rgba(255,255,255,.65);
+  line-height:1.75;margin-bottom:16px;
+}
+.svc-feats{display:flex;flex-direction:column;gap:8px}
+.svc-feat{
+  display:flex;align-items:center;gap:10px;
+  font-size:.82rem;color:rgba(255,255,255,.75);
+}
+.svc-feat::before{content:'';width:5px;height:5px;background:var(--red);border-radius:50%;flex-shrink:0}
+.svc-hint{
+  font-size:.78rem;color:rgba(255,255,255,.3);
+  text-align:center;margin-top:20px;letter-spacing:.08em;
+}
+
+/* ─── CHATS / iMESSAGE ─── */
+#chats{background:#0a2342}
+.chats-hd{text-align:center;max-width:640px;margin:0 auto 72px}
+.chats-row{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+}
+.chat-device{
+  background:#102e54;border-radius:26px;
+  border:1px solid rgba(255,255,255,.07);
+  overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.chat-device:hover{transform:translateY(-10px);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.chat-statusbar{
+  background:#102e54;
+  padding:14px 20px 10px;
+  display:flex;align-items:center;gap:14px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.chat-av{
+  width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--red),#6e0000);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:.85rem;color:#fff;flex-shrink:0;
+}
+.chat-info-name{font-weight:600;font-size:.88rem}
+.chat-info-active{
+  font-size:.68rem;color:#30d158;
+  display:flex;align-items:center;gap:4px;
+}
+.chat-info-active::before{
+  content:'';width:6px;height:6px;
+  background:#30d158;border-radius:50%;
+}
+.chat-body{
+  padding:16px;
+  min-height:360px;max-height:360px;
+  overflow:hidden;
+  display:flex;flex-direction:column;gap:8px;
+}
+.msg{
+  max-width:80%;padding:10px 15px;
+  border-radius:20px;font-size:.8rem;
+  line-height:1.55;opacity:0;
+  transform:translateY(8px);
+  transition:all .4s ease;
+}
+.msg.in{
+  background:#16386a;color:rgba(255,255,255,.88);
+  border-bottom-left-radius:5px;align-self:flex-start;
+}
+.msg.out{
+  background:#007AFF;color:#fff;
+  border-bottom-right-radius:5px;align-self:flex-end;
+}
+.msg.coach{
+  background:var(--red);color:#fff;
+  border-bottom-right-radius:5px;align-self:flex-end;
+}
+.msg.big-emoji{
+  background:none!important;
+  font-size:2rem;padding:4px 8px;
+}
+.msg.visible{opacity:1;transform:translateY(0)}
+.typing{
+  display:flex;align-items:center;gap:5px;
+  padding:10px 14px;
+  background:#16386a;
+  border-radius:20px;border-bottom-left-radius:5px;
+  align-self:flex-start;
+  width:60px;opacity:0;
+  transition:opacity .3s;
+}
+.typing.visible{opacity:1}
+.td{
+  width:7px;height:7px;border-radius:50%;
+  background:#888;
+  animation:typeBounce 1.4s ease-in-out infinite;
+}
+.td:nth-child(2){animation-delay:.2s}
+.td:nth-child(3){animation-delay:.4s}
+@keyframes typeBounce{
+  0%,80%,100%{transform:translateY(0);opacity:.5}
+  40%{transform:translateY(-5px);opacity:1}
+}
+
+/* ─── RESULTS CAROUSEL ─── */
+#results{background:var(--black);padding:100px 0}
+.results-hd{text-align:center;padding:0 6%;margin-bottom:60px}
+.swiper-results{padding:10px 6% 60px!important}
+.swiper-results .swiper-slide{width:320px}
+.res-card{
+  background:var(--card);
+  border-radius:18px;overflow:hidden;
+  border:1px solid var(--border);
+  transition:all .3s;
+}
+.res-card:hover{border-color:rgba(47, 107, 255,.25);transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.res-img{
+  position:relative;height:260px;overflow:hidden;
+}
+.res-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .5s;
+}
+.res-card:hover .res-img img{transform:scale(1.06)}
+/* before/after */
+.res-img .res-before{position:absolute;inset:0;opacity:0;transition:opacity .45s}
+.res-card:hover .res-img .res-before{opacity:1}
+.res-ba-tag{position:absolute;top:14px;left:14px;background:rgba(0,0,0,.7);color:#fff;padding:3px 11px;border-radius:100px;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;z-index:3}
+.res-card:hover .res-ba-tag::after{content:' · ANTES'}
+.res-ba-tag::after{content:' · DESPUÉS'}
+.res-badge{
+  position:absolute;top:14px;right:14px;
+  background:var(--red);color:#fff;
+  padding:4px 14px;border-radius:100px;
+  font-size:.67rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+}
+.res-stat{
+  position:absolute;bottom:14px;left:14px;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;padding:8px 14px;
+}
+.res-stat-num{
+  font-family:'Oswald',sans-serif;
+  font-size:1.6rem;font-weight:700;color:var(--red);line-height:1;
+}
+.res-stat-lbl{font-size:.65rem;color:rgba(255,255,255,.5);letter-spacing:.1em}
+.res-body{padding:20px}
+.res-name{
+  font-family:'Oswald',sans-serif;
+  font-size:1.15rem;font-weight:600;margin-bottom:4px;
+}
+.res-detail{font-size:.78rem;color:var(--red);font-weight:600;margin-bottom:10px}
+.res-quote{
+  font-size:.8rem;color:rgba(255,255,255,.5);
+  line-height:1.65;font-style:italic;
+}
+.swiper-pagination-bullet{background:rgba(255,255,255,.2)!important}
+.swiper-pagination-bullet-active{background:var(--red)!important}
+
+/* ─── VIDEO GALLERY ─── */
+#gallery{background:#090909}
+.gallery-hd{max-width:1200px;margin:0 auto 56px}
+/* VIDEO CAROUSEL (En Acción) */
+#gallery{overflow:hidden}
+.swiper-vids{padding:30px 0 16px!important;overflow:visible;margin-top:18px}
+.swiper-vids .swiper-slide{width:300px;height:auto;opacity:.5;transition:opacity .4s}
+.swiper-vids .swiper-slide-active{opacity:1}
+.vcard{position:relative;border-radius:18px;overflow:hidden;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:#0e2a4d;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.swiper-vids .swiper-slide-active .vcard{border-color:rgba(47, 107, 255,.5);box-shadow:0 28px 70px rgba(47, 107, 255,.22)}
+.vcard .vthumb{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#0e2a4d}
+.vthumb-link{display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#102e54,#0c2440);color:rgba(255,255,255,.5);font-size:2.4rem}
+.vcard-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 55%);display:flex;align-items:flex-end;padding:16px}
+.vplay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;background:rgba(47, 107, 255,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem;color:#fff;transition:all .3s;backdrop-filter:blur(4px)}
+.vcard:hover .vplay{transform:translate(-50%,-50%) scale(1.12);box-shadow:0 0 30px rgba(47, 107, 255,.5)}
+.vlabel{font-size:.85rem;font-weight:600;color:#fff;letter-spacing:.02em;line-height:1.3}
+.vids-pag{text-align:center;margin-top:26px}
+@media(max-width:600px){.swiper-vids .swiper-slide{width:250px}}
+
+/* VIDEO LIGHTBOX */
+.vlightbox{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;padding:24px}
+.vlightbox.open{display:flex}
+.vlightbox-x{position:absolute;top:22px;right:28px;background:none;border:none;color:rgba(255,255,255,.7);font-size:2rem;cursor:pointer;z-index:2}
+.vlightbox-x:hover{color:#fff}
+.vlightbox-inner{max-width:460px;width:100%}
+.vlightbox-inner video{width:100%;max-height:84vh;border-radius:14px;background:#000;display:block}
+.vlightbox-inner iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:14px;display:block}
+.vlightbox-inner img{width:100%;max-height:88vh;object-fit:contain;border-radius:14px;display:block}
+.vlightbox.wide .vlightbox-inner{max-width:620px}
+.res-img{cursor:zoom-in}
+/* Modal de artículo del blog (click en la tarjeta → leer completo) */
+.ncard{cursor:pointer}
+.blogmodal{position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.92);display:none;overflow-y:auto;padding:48px 16px}
+.blogmodal.open{display:block}
+.blogmodal-x{position:fixed;top:18px;right:24px;background:none;border:none;color:rgba(255,255,255,.7);font-size:2rem;cursor:pointer;z-index:2;line-height:1}
+.blogmodal-x:hover{color:#fff}
+.blogmodal-card{max-width:760px;margin:0 auto;background:#0f0f10;border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden}
+.blogmodal-img{width:100%;max-height:340px;object-fit:cover;display:block}
+.blogmodal-body{padding:30px 32px 44px}
+.blogmodal-cat{color:#2f6bff;font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.blogmodal-title{font-family:'Oswald',sans-serif;font-size:2rem;font-weight:800;line-height:1.15;margin:0 0 10px;color:#fff}
+.blogmodal-meta{color:rgba(255,255,255,.5);font-size:.82rem;margin-bottom:22px}
+.blogmodal-text{color:rgba(255,255,255,.86);line-height:1.85;font-size:1.02rem;white-space:pre-wrap}
+
+/* ─── NEWS ─── */
+#news{background:var(--black)}
+.news-top{
+  max-width:1200px;margin:0 auto 56px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:24px;
+}
+.btn-outline{
+  background:transparent;color:rgba(255,255,255,.6);
+  padding:10px 28px;font-size:.78rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.15);
+  cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .3s;
+}
+.btn-outline:hover{border-color:var(--red);color:var(--red)}
+.news-grid{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+.ncard{
+  background:var(--card);border-radius:14px;
+  border:1px solid var(--border);overflow:hidden;
+  cursor:pointer;transition:all .3s;
+}
+.ncard:hover{border-color:rgba(47, 107, 255,.25);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.ncard-img{height:200px;overflow:hidden}
+.ncard-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .5s;
+}
+.ncard:hover .ncard-img img{transform:scale(1.06)}
+.ncard-body{padding:22px}
+.ncat{
+  font-size:.67rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--red);margin-bottom:10px;
+}
+.ntitle{
+  font-family:'Oswald',sans-serif;
+  font-size:1.08rem;font-weight:600;line-height:1.3;margin-bottom:12px;
+}
+.nexcerpt{
+  font-size:.8rem;color:rgba(255,255,255,.45);
+  line-height:1.7;margin-bottom:18px;
+}
+.nmeta{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:.72rem;color:rgba(255,255,255,.3);
+}
+.nread{
+  color:var(--red);font-weight:600;font-size:.75rem;
+  text-decoration:none;
+  display:flex;align-items:center;gap:4px;
+  transition:gap .2s;
+}
+.nread:hover{gap:8px}
+
+/* ─── NEWSLETTER ─── */
+#newsletter{
+  padding:90px 6%;
+  background:linear-gradient(135deg,#06182f 0%,#080808 40%,#06182f 100%);
+  border-top:1px solid rgba(47, 107, 255,.15);
+  border-bottom:1px solid rgba(47, 107, 255,.15);
+  text-align:center;
+}
+.nl-inner{max-width:600px;margin:0 auto}
+.nl-icon{font-size:2.8rem;margin-bottom:20px}
+.nl-sub{font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.7;margin-top:14px}
+.nl-form{display:flex;gap:12px;margin-top:36px}
+.nl-input{
+  flex:1;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  padding:14px 20px;color:#fff;
+  font-size:.9rem;font-family:'Inter',sans-serif;
+  outline:none;transition:border-color .2s;
+}
+.nl-input:focus{border-color:var(--red)}
+.nl-input::placeholder{color:rgba(255,255,255,.25)}
+.nl-perks{
+  display:flex;justify-content:center;gap:32px;
+  margin-top:24px;flex-wrap:wrap;
+}
+.nl-perk{
+  display:flex;align-items:center;gap:6px;
+  font-size:.75rem;color:rgba(255,255,255,.4);
+}
+.nl-perk::before{content:'✓';color:var(--red);font-weight:700}
+
+/* ─── BOOKING ─── */
+#booking{
+  padding:130px 6%;
+  background:var(--black);
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.booking-glow{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(47, 107, 255,.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.booking-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(47, 107, 255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(47, 107, 255,.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+}
+.booking-inner{position:relative;z-index:2;max-width:700px;margin:0 auto}
+.dan-av{
+  width:110px;height:110px;border-radius:50%;
+  background:linear-gradient(135deg,var(--red),#5a0000);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Oswald',sans-serif;font-size:2.2rem;
+  font-weight:700;color:#fff;
+  margin:0 auto 28px;
+  border:3px solid rgba(47, 107, 255,.4);
+  box-shadow:0 0 50px rgba(47, 107, 255,.2),inset 0 0 30px rgba(47, 107, 255,.1);
+  position:relative;
+}
+.dan-av::after{
+  content:'';position:absolute;inset:-8px;
+  border-radius:50%;
+  border:1px solid rgba(47, 107, 255,.2);
+  animation:ringPulse 2.5s ease-in-out infinite;
+}
+@keyframes ringPulse{
+  0%,100%{transform:scale(1);opacity:.5}
+  50%{transform:scale(1.08);opacity:1}
+}
+.dan-tag{
+  font-size:.7rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--red);margin-bottom:14px;
+}
+.booking-feats{
+  display:flex;justify-content:center;gap:44px;
+  margin:36px 0;flex-wrap:wrap;
+}
+.bfeat{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.bfeat-icon{font-size:1.6rem}
+.bfeat-txt{
+  font-size:.75rem;color:rgba(255,255,255,.5);
+  text-align:center;max-width:100px;line-height:1.5;
+}
+.booking-note{
+  font-size:.78rem;color:rgba(255,255,255,.3);
+  margin-top:20px;letter-spacing:.06em;
+}
+
+/* ─── LEAD FORM ─── */
+.lead-form{
+  width:100%;max-width:560px;margin:0 auto;
+  display:flex;flex-direction:column;gap:12px;
+  margin-top:32px;
+}
+.lead-row{display:flex;gap:12px}
+.lead-input{
+  flex:1;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  padding:14px 18px;color:#fff;
+  font-size:.9rem;font-family:'Inter',sans-serif;
+  outline:none;transition:border-color .2s;
+  min-width:0;
+}
+.lead-input:focus{border-color:var(--red)}
+.lead-input::placeholder{color:rgba(255,255,255,.28)}
+.lead-select{appearance:none;cursor:pointer;background:rgba(255,255,255,.05)}
+.lead-select option{background:#102e54;color:#fff}
+.lead-field{display:flex;flex-direction:column;gap:8px;text-align:left}
+.lead-label{
+  font-size:.82rem;font-weight:600;
+  color:rgba(255,255,255,.78);
+  letter-spacing:.01em;line-height:1.4;
+}
+.lead-radios{display:flex;flex-wrap:wrap;gap:10px}
+.lead-radio{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.12);
+  padding:11px 16px;cursor:pointer;
+  font-size:.85rem;color:rgba(255,255,255,.7);
+  transition:all .2s;border-radius:10px;
+  user-select:none;
+}
+.lead-radio:hover{border-color:rgba(47, 107, 255,.5);color:#fff}
+.lead-radio input{accent-color:var(--red);cursor:pointer;width:15px;height:15px;margin:0}
+.lead-radio:has(input:checked){
+  border-color:var(--red);
+  background:rgba(47, 107, 255,.14);
+  color:#fff;
+}
+@media(max-width:560px){
+  .lead-row{flex-direction:column}
+  .lead-radios{flex-direction:column}
+  .lead-radio{width:100%}
+}
+
+/* ─── FOOTER ─── */
+footer{
+  background:#040404;
+  padding:70px 6% 30px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.ft-grid{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:60px;margin-bottom:60px;
+}
+.ft-logo-wrap{}
+.ft-logo{
+  font-family:'Oswald',sans-serif;font-size:1.9rem;font-weight:700;
+  margin-bottom:14px;
+  display:inline-block;
+}
+.ft-logo .r{color:var(--red)}
+.ft-tag{
+  font-size:.78rem;color:rgba(255,255,255,.35);
+  line-height:1.8;max-width:270px;
+}
+.socials{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.soc{
+  width:38px;height:38px;border-radius:9px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;color:rgba(255,255,255,.75);
+  transition:all .25s;cursor:pointer;
+}
+.soc svg{width:18px;height:18px;fill:currentColor}
+.soc:hover{background:var(--red);border-color:var(--red);color:#fff;transform:translateY(-2px)}
+.ft-h{
+  font-family:'Oswald',sans-serif;font-size:.85rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.7);margin-bottom:20px;
+}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ft-links a{
+  color:rgba(255,255,255,.35);text-decoration:none;
+  font-size:.83rem;transition:color .2s;
+}
+.ft-links a:hover{color:var(--red)}
+.ft-bottom{
+  max-width:1200px;margin:0 auto;
+  padding-top:28px;border-top:1px solid rgba(255,255,255,.05);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.75rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:12px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .services-layout{grid-template-columns:1fr;gap:60px}
+  .orbital-wrap{width:420px;height:420px}
+  .orb-ring-1{width:360px;height:360px}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .chats-row{grid-template-columns:1fr}
+  .vgrid{grid-template-columns:1fr}
+  .vcard:nth-child(1){grid-row:span 1}
+  .news-grid{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .orbital-wrap{width:340px;height:340px}
+  .orb-ring-1{width:300px;height:300px}
+  .nl-form{flex-direction:column}
+}
+@media(max-width:480px){
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .ft-grid{grid-template-columns:1fr}
+  .booking-feats{gap:24px}
+}
+
+body{background:#081c36!important}
+
+/* ════════════════════════════════════════════════
+   LIQUID GLASS UTILITIES
+═══════════════════════════════════════════════ */
+.glass{
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid rgba(255,255,255,0.07);
+}
+.glass-dark{
+  background:rgba(10,10,11,0.65);
+  backdrop-filter:blur(32px) saturate(180%);
+  -webkit-backdrop-filter:blur(32px) saturate(180%);
+  border:1px solid rgba(255,255,255,0.06);
+}
+.glass-red{
+  background:rgba(47, 107, 255,0.07);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid rgba(47, 107, 255,0.18);
+}
+
+/* ════════════════════════════════════════════════
+   UPGRADED CHAT PHONES — liquid glass
+═══════════════════════════════════════════════ */
+.chat-device{
+  background:rgba(20,20,22,0.7)!important;
+  backdrop-filter:blur(32px) saturate(160%)!important;
+  -webkit-backdrop-filter:blur(32px) saturate(160%)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  box-shadow:0 20px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06)!important;
+}
+.chat-statusbar{
+  background:rgba(255,255,255,0.03)!important;
+  border-bottom:1px solid rgba(255,255,255,0.06)!important;
+}
+.msg.in{
+  background:rgba(60,60,62,0.8)!important;
+  backdrop-filter:blur(8px)!important;
+  border:1px solid rgba(255,255,255,0.06)!important;
+}
+
+/* ════════════════════════════════════════════════
+   MSG SPRING ANIMATION
+═══════════════════════════════════════════════ */
+.msg{
+  transform-origin:bottom left;
+  will-change:transform,opacity;
+}
+.msg.out,.msg.coach{transform-origin:bottom right!important}
+.msg{opacity:0;transform:scale(.85) translateY(12px)}
+.msg.visible{
+  animation:msgSpring .5s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+.msg.out.visible,.msg.coach.visible{
+  animation:msgSpringRight .5s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes msgSpring{
+  0%{opacity:0;transform:scale(.82) translate(-8px,14px)}
+  100%{opacity:1;transform:scale(1) translate(0,0)}
+}
+@keyframes msgSpringRight{
+  0%{opacity:0;transform:scale(.82) translate(8px,14px)}
+  100%{opacity:1;transform:scale(1) translate(0,0)}
+}
+.msg.big-emoji.visible{
+  animation:emojiPop .6s cubic-bezier(.34,1.76,.64,1) forwards!important;
+}
+@keyframes emojiPop{
+  0%{opacity:0;transform:scale(0) rotate(-10deg)}
+  70%{transform:scale(1.2) rotate(5deg)}
+  100%{opacity:1;transform:scale(1) rotate(0deg)}
+}
+
+/* ════════════════════════════════════════════════
+   UPGRADED SECTION BACKGROUNDS — glass
+═══════════════════════════════════════════════ */
+#stats{
+  background:rgba(10,10,11,0.6)!important;
+  backdrop-filter:blur(20px)!important;
+  -webkit-backdrop-filter:blur(20px)!important;
+}
+.res-card,.ncard{
+  background:rgba(17,17,17,0.7)!important;
+  backdrop-filter:blur(20px)!important;
+  -webkit-backdrop-filter:blur(20px)!important;
+  border:1px solid rgba(255,255,255,0.07)!important;
+}
+.nl-input,.lead-input{
+  background:rgba(255,255,255,0.04)!important;
+  backdrop-filter:blur(12px)!important;
+  border:1px solid rgba(255,255,255,0.1)!important;
+}
+footer{
+  background:rgba(4,4,4,0.85)!important;
+  backdrop-filter:blur(20px)!important;
+  border-top:1px solid rgba(255,255,255,0.05)!important;
+}
+#booking{background:transparent!important}
+#newsletter{
+  background:rgba(10,10,11,0.6)!important;
+  backdrop-filter:blur(24px)!important;
+}
+
+/* ════════════════════════════════════════════════
+   HERO GLASS PILL
+═══════════════════════════════════════════════ */
+.hero-pill{
+  background:rgba(47, 107, 255,0.1)!important;
+  backdrop-filter:blur(16px)!important;
+  border:1px solid rgba(47, 107, 255,0.25)!important;
+}
+
+/* ═══════════════ PROGRAMAS / PRICING ═══════════════ */
+#programas{background:var(--black);overflow:hidden}
+.plans-hd{text-align:center;max-width:680px;margin:0 auto 18px}
+.plans-hd .sec-tag,.plans-hd .sec-p{margin-left:auto;margin-right:auto}
+.plans-hd .sec-h{margin:0 auto}
+.plans-group-label{
+  text-align:center;font-family:'Oswald',sans-serif;
+  font-size:.8rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin:54px 0 26px;
+}
+.plans-group-label span{color:var(--red)}
+.plan-grid{
+  display:grid;gap:22px;max-width:1200px;margin:0 auto;
+  grid-template-columns:repeat(2,1fr);
+}
+.plan-card{
+  position:relative;border-radius:28px;
+  background:rgba(17,17,19,0.72);
+  backdrop-filter:blur(22px) saturate(150%);
+  -webkit-backdrop-filter:blur(22px) saturate(150%);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:34px 30px;display:flex;flex-direction:column;
+  transition:transform .35s ease, border-color .35s ease;
+}
+.plan-card:hover{transform:translateY(-6px)}
+.plan-aura{
+  position:absolute;inset:-2px;border-radius:30px;z-index:-1;
+  opacity:0;filter:blur(26px);transition:opacity .4s;
+}
+.plan-card:hover .plan-aura{opacity:.45}
+.plan-card.featured{border-color:rgba(47, 107, 255,.5)}
+.plan-badge{
+  position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:var(--red);color:#fff;
+  font-size:.62rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  padding:7px 18px;border-radius:100px;white-space:nowrap;
+  box-shadow:0 6px 20px rgba(47, 107, 255,.45);
+}
+.plan-name{
+  font-family:'Oswald',sans-serif;font-size:1.9rem;font-weight:700;
+  letter-spacing:.02em;text-transform:uppercase;margin-bottom:8px;
+}
+.plan-tagline{font-size:.86rem;color:rgba(255,255,255,.55);line-height:1.6;min-height:42px}
+.plan-desc{font-size:.76rem;color:rgba(255,255,255,.34);line-height:1.6;margin:12px 0 0}
+.plan-price-wrap{
+  margin:22px 0;padding:18px 0;
+  border-top:1px solid rgba(255,255,255,.07);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.plan-price{font-family:'Oswald',sans-serif;font-size:2.6rem;font-weight:700;line-height:1;display:flex;align-items:baseline;gap:6px}
+.plan-price .cur{font-size:1.4rem;font-weight:600;color:rgba(255,255,255,.7)}
+.plan-price .per{font-size:.9rem;font-weight:500;color:rgba(255,255,255,.45)}
+.plan-price-alt{font-size:.8rem;color:#8fb4ff;margin-top:8px;font-weight:600}
+.plan-apply{font-family:'Oswald',sans-serif;font-size:1.5rem;font-weight:700;letter-spacing:.02em;color:#8fb4ff;text-transform:uppercase}
+.plan-price-note{font-size:.72rem;color:rgba(255,255,255,.35);margin-top:6px;line-height:1.5;font-style:italic}
+.plan-feats{list-style:none;display:flex;flex-direction:column;gap:11px;margin:4px 0 26px;flex:1}
+.plan-feat{position:relative;padding-left:26px;font-size:.82rem;color:rgba(255,255,255,.75);line-height:1.45}
+.plan-feat::before{
+  content:'';position:absolute;left:0;top:1px;
+  width:17px;height:17px;border-radius:50%;
+  background:rgba(74,222,128,.14);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%234ade80' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center;
+}
+.plan-cta{
+  width:100%;text-align:center;text-decoration:none;
+  padding:15px;font-size:.82rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  border-radius:12px;transition:all .25s;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  cursor:pointer;border:none;
+}
+.plan-cta.solid{background:var(--red);color:#fff;box-shadow:0 8px 26px rgba(47, 107, 255,.35)}
+.plan-cta.solid:hover{background:#1d4fd6;transform:translateY(-2px)}
+.plan-cta.wa{background:#25D366;color:#fff;box-shadow:0 8px 26px rgba(37,211,102,.32)}
+.plan-cta.wa:hover{background:#1eb955;transform:translateY(-2px)}
+.plan-cta.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.22)}
+.plan-cta.ghost:hover{border-color:var(--red);color:#8fb4ff}
+.plan-cta.plan-pay{background:var(--red);color:#fff;box-shadow:0 8px 26px rgba(47, 107, 255,.35)}
+.plan-cta.plan-pay:hover{background:#1d4fd6;transform:translateY(-2px)}
+@media(max-width:880px){.plan-grid{grid-template-columns:1fr;max-width:460px}}
+/* ─── Checkout modal (ONVO) ─── */
+.pay-overlay{display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;overflow:auto}
+.pay-overlay.open{display:flex}
+.pay-box{background:#0e2a4d;border:1px solid rgba(255,255,255,.1);border-radius:20px;max-width:440px;width:100%;padding:30px 26px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.pay-x{position:absolute;top:14px;right:16px;background:none;border:none;color:rgba(255,255,255,.6);font-size:1.6rem;cursor:pointer;line-height:1}
+.pay-x:hover{color:#fff}
+.pay-box h3{font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700;text-transform:uppercase;margin:0 0 4px;color:#fff}
+.pay-box h3 .r{color:var(--red)}
+.pay-sub{font-size:.85rem;color:var(--gray);margin-bottom:18px}
+.pay-input{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:13px 14px;color:#fff;font-size:.95rem;outline:none;margin-bottom:11px}
+.pay-input:focus{border-color:var(--red)}
+.pay-err{color:#b6cdff;font-size:.82rem;margin-top:8px;min-height:1em}
+.pay-secure{display:flex;align-items:center;gap:7px;font-size:.74rem;color:var(--gray);margin-top:16px;line-height:1.4}
+#onvo-container{min-height:200px;margin-top:6px}
+.pay-done{text-align:center;padding:10px 0}
+.pay-done .pd-ico{font-size:2.6rem;margin-bottom:10px}
+.pay-done p{color:rgba(255,255,255,.7);font-size:.92rem;line-height:1.6}
+/* resumen del pedido (marca KAIZEN) */
+#pay-summary{margin-bottom:20px}
+.pay-brand{font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:.12em;font-size:.8rem;color:#fff;margin-bottom:14px}
+.pay-brand .r{color:var(--red);margin:0 3px}
+.pay-order{display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.pay-order-plan{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;text-transform:uppercase;color:#fff}
+.pay-order-tag{font-size:.72rem;color:var(--gray);margin-top:2px}
+.pay-order-price{font-family:'Oswald',sans-serif;font-size:1.5rem;font-weight:700;color:var(--red2);white-space:nowrap}
+.pay-order-price span{font-size:.72rem;color:var(--gray);font-weight:400}
+.pay-incl{list-style:none;padding:0;margin:12px 0}
+.pay-incl li{position:relative;padding-left:22px;font-size:.82rem;color:rgba(255,255,255,.72);line-height:1.5;margin-bottom:6px}
+.pay-incl li::before{content:'✓';position:absolute;left:0;color:var(--red2);font-weight:700}
+.pay-recurring{background:rgba(250,204,21,.08);border:1px solid rgba(250,204,21,.28);border-radius:10px;padding:11px 13px;font-size:.78rem;color:#e8d9a0;line-height:1.55}
+.pay-recurring b{color:#facc15}
+.pay-step-label{font-family:'Oswald',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--red2);margin-bottom:12px}
+.pay-row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+
+/* ═══════════════ TESTIMONIOS CAROUSEL ═══════════════ */
+#testimonios{background:var(--black);overflow:hidden}
+.swiper-testi{padding:30px 0 16px!important;overflow:visible;margin-top:18px}
+.swiper-testi .swiper-slide{width:320px;height:auto;transition:opacity .4s,transform .4s;opacity:.45}
+.swiper-testi .swiper-slide-active{opacity:1}
+.testi-card{
+  border-radius:22px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
+  background:#0e2a4d;box-shadow:0 24px 60px rgba(0,0,0,.55);
+}
+.swiper-testi .swiper-slide-active .testi-card{border-color:rgba(47, 107, 255,.5);box-shadow:0 30px 80px rgba(47, 107, 255,.25)}
+.testi-card img,.testi-card video{width:100%;display:block;object-fit:cover}
+.testi-card video{max-height:560px;background:#000}
+.testi-pag{text-align:center;margin-top:28px}
+.testi-empty{text-align:center;color:var(--gray);font-size:.95rem;padding:50px 20px}
+@media(max-width:600px){.swiper-testi .swiper-slide{width:260px}}
+
+/* ═══════════════ SOCIAL: barra arriba-derecha ═══════════════ */
+.social-top{position:fixed;top:20px;right:24px;z-index:1000;display:flex;gap:8px}
+.social-top a{
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(20,20,22,.7);backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.8);text-decoration:none;transition:all .25s;
+}
+.social-top a svg{width:17px;height:17px;fill:currentColor}
+.social-top a:hover{background:var(--red);border-color:var(--red);color:#fff;transform:translateY(-2px)}
+.social-top a.skool:hover{background:#f5c518;border-color:#f5c518;color:#0e2a4d}
+.social-top a.spotify:hover{background:#1DB954;border-color:#1DB954}
+@media(max-width:980px){.social-top{display:none}}
+
+/* ═══════════════ SOCIAL: sección ═══════════════ */
+#social{background:var(--black);text-align:center;overflow:hidden}
+.social-hd{max-width:640px;margin:0 auto 14px}
+.social-hd .sec-tag,.social-hd .sec-p{margin-left:auto;margin-right:auto}
+.social-hd .sec-h{margin:0 auto}
+.skool-card{
+  max-width:760px;margin:34px auto 30px;
+  background:linear-gradient(135deg,rgba(245,197,24,.12),rgba(47, 107, 255,.1));
+  border:1px solid rgba(245,197,24,.4);border-radius:24px;padding:34px 30px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;text-align:left;
+}
+.skool-card .k-info{flex:1;min-width:240px}
+.skool-card .k-tag{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#f5c518;margin-bottom:8px}
+.skool-card .k-title{font-family:'Oswald',sans-serif;font-size:1.7rem;font-weight:700;margin-bottom:8px}
+.skool-card .k-desc{font-size:.9rem;color:rgba(255,255,255,.6);line-height:1.6}
+.skool-btn{background:#f5c518;color:#0e2a4d;text-decoration:none;padding:15px 32px;border-radius:12px;font-weight:800;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;transition:all .25s;box-shadow:0 8px 26px rgba(245,197,24,.3)}
+.skool-btn:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.social-grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;max-width:820px;margin:0 auto}
+.social-link{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;
+  padding:14px 22px;text-decoration:none;color:#fff;transition:all .25s;min-width:200px;
+}
+.social-link svg{width:24px;height:24px;fill:currentColor;flex-shrink:0;color:rgba(255,255,255,.85)}
+.social-link .sl-name{font-weight:700;font-size:.9rem}
+.social-link .sl-handle{font-size:.76rem;color:var(--gray)}
+.social-link:hover{border-color:var(--red);transform:translateY(-3px);background:rgba(47, 107, 255,.08)}
+@media(max-width:600px){.social-link{min-width:auto;width:100%}.skool-card{flex-direction:column;text-align:center}}
+
+/* ═══════════════ COACH CAROUSEL (coverflow) ═══════════════ */
+#coach{background:var(--black);overflow:hidden}
+.coach-hd{text-align:center;max-width:640px;margin:0 auto 8px}
+.coach-hd .sec-tag,.coach-hd .sec-p{margin-left:auto;margin-right:auto}
+.coach-hd .sec-h{margin:0 auto}
+.swiper-coach{padding:46px 0 14px!important;overflow:visible}
+.swiper-coach .swiper-slide{
+  width:312px;height:432px;
+  transition:opacity .4s;
+}
+.coach-card{
+  width:100%;height:100%;position:relative;
+  border-radius:26px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
+  background:#0e2a4d;
+  box-shadow:0 30px 60px rgba(0,0,0,.55);
+}
+.coach-card::before{
+  content:'KAIZEN · DANIEL SOLIS';position:absolute;inset:0;z-index:0;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:rgba(255,255,255,.22);font-family:'Oswald',sans-serif;
+  letter-spacing:.22em;font-size:.78rem;
+  background:linear-gradient(140deg,#0e2a4d,#0c0c0c);
+}
+.coach-card img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block}
+.coach-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(7,7,7,.55) 0%,transparent 42%);
+}
+.swiper-coach .swiper-slide-active .coach-card{
+  border-color:rgba(47, 107, 255,.55);
+  box-shadow:0 36px 90px rgba(47, 107, 255,.28),0 0 0 1px rgba(47, 107, 255,.3);
+}
+.coach-pag{text-align:center;margin-top:30px;position:relative!important}
+@media(max-width:600px){
+  .swiper-coach .swiper-slide{width:248px;height:344px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ FLOATING PATHS BACKGROUND ═══════════ -->
+
+<!-- ═══════════════════════════════ NAV (PillNav) ═══════════════════════════════ -->
+<div id="nav">
+  <nav class="pill-nav" aria-label="Primary">
+    <a class="pill-logo" href="#hero" aria-label="Inicio" id="pill-logo"><span class="pill-logo-text">KAIZEN</span></a>
+    <div class="pill-nav-items pnav-desktop" id="pill-nav-items">
+      <ul class="pill-list" role="menubar">
+        <li role="none"><a role="menuitem" href="#programas" class="pill"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Programas</span><span class="pill-label-hover" aria-hidden="true">Programas</span></span></a></li>
+        <li role="none"><a role="menuitem" href="#testimonios" class="pill"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Testimonios</span><span class="pill-label-hover" aria-hidden="true">Testimonios</span></span></a></li>
+        <li role="none"><a role="menuitem" href="#gallery" class="pill"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">En Acción</span><span class="pill-label-hover" aria-hidden="true">En Acción</span></span></a></li>
+        <li role="none"><a role="menuitem" href="#news" class="pill"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Blog</span><span class="pill-label-hover" aria-hidden="true">Blog</span></span></a></li>
+        <li role="none"><a role="menuitem" href="/portal" class="pill"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Ingresar</span><span class="pill-label-hover" aria-hidden="true">Ingresar</span></span></a></li>
+        <li role="none"><a role="menuitem" href="#booking" class="pill pill-cta"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Agendar</span><span class="pill-label-hover" aria-hidden="true">Agendar</span></span></a></li>
+      </ul>
+    </div>
+    <button class="mobile-menu-button pnav-mobile-only" id="pill-hamburger" aria-label="Abrir menú">
+      <span class="hamburger-line"></span><span class="hamburger-line"></span>
+    </button>
+  </nav>
+  <div class="mobile-menu-popover pnav-mobile-only" id="pill-mobile-menu">
+    <ul class="mobile-menu-list">
+      <li><a href="#programas" class="mobile-menu-link">Programas</a></li>
+      <li><a href="#testimonios" class="mobile-menu-link">Testimonios</a></li>
+      <li><a href="#gallery" class="mobile-menu-link">En Acción</a></li>
+      <li><a href="#news" class="mobile-menu-link">Blog</a></li>
+      <li><a href="/portal" class="mobile-menu-link">Ingresar</a></li>
+      <li><a href="#booking" class="mobile-menu-link">Agendar Call</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ SOCIAL TOP-RIGHT ═══════════════════════════════ -->
+<div class="social-top">
+  <a href="https://www.instagram.com/kaizen_coaching" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.794 0-1.439-.646-1.439-1.44 0-.794.646-1.439 1.44-1.439.793 0 1.439.645 1.439 1.439z"/></svg></a>
+  <a href="https://www.tiktok.com/@kaizen_coaching" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+  <a href="https://www.youtube.com/@danielsolisfournier" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+  <a href="https://www.facebook.com/share/1BmuwXURuy/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+  <a class="skool" href="https://www.skool.com/YOUR-COMMUNITY" target="_blank" rel="noopener" aria-label="Skool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></a>
+  <a href="https://wa.me/50600000000" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg></a>
+</div>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <video id="hero-vid-1" class="hero-vid" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture></video>
+    <video id="hero-vid-2" class="hero-vid" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture></video>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay2"></div>
+  <div class="hero-content">
+    <div class="hero-pill">
+      <span class="hero-pill-dot"></span>
+      Transformación Real · Resultados Verificables
+    </div>
+    <h1 class="hero-title">
+      <span class="hero-line"><span class="hero-word">Entrena</span> <span class="hero-word hero-red">diferente.</span></span>
+      <span class="hero-line"><span class="hero-word">Vive</span> <span class="hero-word">sin</span></span>
+      <span class="hero-line"><span class="hero-word hero-red">límites.</span></span>
+    </h1>
+    <div class="hero-ctas">
+      <a href="#programas" class="btn-fire">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6.5 6.5h11M6.5 12h11M6.5 17.5h11"/><circle cx="3" cy="6.5" r="1.2"/><circle cx="3" cy="12" r="1.2"/><circle cx="3" cy="17.5" r="1.2"/></svg>
+        Elegir mi Plan
+      </a>
+      <a href="#booking" class="btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Agendar Call Gratis
+      </a>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ STATS ═══════════════════════════════ -->
+<div id="stats">
+  <div class="stats-inner">
+    <div class="stat-block fade-up">
+      <div class="stat-num"><span class="count" data-target="100">0</span><span class="stat-suffix">+</span></div>
+      <div class="stat-lbl">Clientes Transformados</div>
+    </div>
+    <div class="stat-block fade-up">
+      <div class="stat-num"><span class="count" data-target="8">0</span><span class="stat-suffix">+</span></div>
+      <div class="stat-lbl">Años de Experiencia</div>
+    </div>
+    <div class="stat-block fade-up">
+      <div class="stat-num"><span class="count" data-target="98">0</span><span class="stat-suffix">%</span></div>
+      <div class="stat-lbl">Tasa de Éxito</div>
+    </div>
+    <div class="stat-block fade-up">
+      <div class="stat-num"><span class="count" data-target="5">0</span></div>
+      <div class="stat-lbl">Países · 1 Comunidad</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ GLOW FEATURE CARDS ═══════════════════════════════ -->
+<!-- ═══════════════════════════════ SERVICES / ORBITAL ═══════════════════════════════ -->
+<section id="services" class="sec">
+  <div class="services-layout">
+    <div class="services-left">
+      <div class="sec-tag fade-up" id="orb-tag">Metodología KAIZEN</div>
+      <h2 class="sec-h fade-up" id="orb-title">Un sistema.<br><span class="r">Resultados reales.</span></h2>
+      <p class="sec-p fade-up" id="orb-sub">Cada nodo representa un pilar de tu transformación. Haz clic para explorar lo que trabajamos juntos en cada área.</p>
+      <div class="service-info" id="service-info">
+        <div class="svc-hint">← Haz clic en cualquier nodo del sistema</div>
+      </div>
+    </div>
+    <div class="services-right">
+      <div class="orbital-wrap" id="orbital">
+        <div class="orb-ring orb-ring-1"></div>
+        <div class="orb-ring orb-ring-2"></div>
+        <div class="orb-glow"></div>
+        <div class="orb-center">
+          <div class="orb-center-kz">KAIZEN</div>
+          <div class="orb-center-sub">System</div>
+        </div>
+        <!-- nodes injected by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ PROGRAMAS / PRICING ═══════════════════════════════ -->
+<section id="programas" class="sec">
+  <div class="plans-hd">
+    <div class="sec-tag fade-up">Programas</div>
+    <h2 class="sec-h fade-up">Elige tu <span class="r">camino.</span></h2>
+    <p class="sec-p fade-up">Programación basada en ciencia. Desde grupos accesibles hasta coaching 1:1 completamente personalizado.</p>
+  </div>
+
+  <!-- Grupo 1: Programas grupales $50 -->
+  <div class="plans-group-label fade-up">Programas grupales · <span>$50/mes</span></div>
+  <div class="plan-grid">
+
+    <!-- KALOSBODY -->
+    <div class="plan-card fade-up">
+      <div class="plan-aura" style="background:linear-gradient(140deg,#FF3D3D,#FF3D77)"></div>
+      <div class="plan-name">KalosBody</div>
+      <div class="plan-tagline">La guía optimizada para perder grasa y construir un cuerpo estético y esbelto.</div>
+      <p class="plan-desc">Basado en ciencia y principios fundamentales de entrenamiento, nutrición y recuperación.</p>
+      <div class="plan-price-wrap">
+        <div class="plan-price"><span class="cur">$</span>50<span class="per">/mes</span></div>
+        <div class="plan-price-note">La mitad que un café diario, con resultados que duran toda la vida.</div>
+      </div>
+      <ul class="plan-feats">
+        <li class="plan-feat">Fullbody 3 veces por semana</li>
+        <li class="plan-feat">Rutinas nuevas cada 2.5 meses</li>
+        <li class="plan-feat">Programación semanal ajustada</li>
+        <li class="plan-feat">Acceso al app de Coaching</li>
+        <li class="plan-feat">Acceso a comunidad de Skool</li>
+        <li class="plan-feat">Grupo privado (QA/Comunidad)</li>
+        <li class="plan-feat">Revisión de métricas de progreso</li>
+        <li class="plan-feat">Sesión de coaching grupal semanal</li>
+        <li class="plan-feat">Guía completa en entrenamiento</li>
+        <li class="plan-feat">Guía completa en nutrición</li>
+        <li class="plan-feat">Guía completa en recuperación</li>
+        <li class="plan-feat">Contenido exclusivo, guías, eventos y regalías</li>
+      </ul>
+      <button type="button" class="plan-cta plan-pay" onclick="openCheckout('KalosBody')">Suscribirme · $50/mes</button>
+    </div>
+
+    <!-- IRON LEGION -->
+    <div class="plan-card fade-up">
+      <div class="plan-aura" style="background:linear-gradient(140deg,#7aa5ff,#FFD700)"></div>
+      <div class="plan-name">Iron Legion</div>
+      <div class="plan-tagline">La guía optimizada para construir masa muscular y fuerza.</div>
+      <p class="plan-desc">Basado en ciencia y principios fundamentales de hipertrofia, fuerza, fisiología y biomecánica.</p>
+      <div class="plan-price-wrap">
+        <div class="plan-price"><span class="cur">$</span>50<span class="per">/mes</span></div>
+        <div class="plan-price-note">La mitad que un café diario, con resultados que duran toda la vida.</div>
+      </div>
+      <ul class="plan-feats">
+        <li class="plan-feat">Torso/Limbs 4 veces por semana</li>
+        <li class="plan-feat">Rutinas nuevas cada 2.5 meses</li>
+        <li class="plan-feat">Programación semanal ajustada</li>
+        <li class="plan-feat">Acceso al app de Coaching</li>
+        <li class="plan-feat">Acceso a comunidad de Skool</li>
+        <li class="plan-feat">Grupo privado (QA/Comunidad)</li>
+        <li class="plan-feat">Revisión de métricas de progreso</li>
+        <li class="plan-feat">Sesión de coaching grupal semanal</li>
+        <li class="plan-feat">Guía completa en entrenamiento</li>
+        <li class="plan-feat">Guía completa en nutrición</li>
+        <li class="plan-feat">Guía completa en recuperación</li>
+        <li class="plan-feat">Contenido exclusivo, guías, eventos y regalías</li>
+      </ul>
+      <button type="button" class="plan-cta plan-pay" onclick="openCheckout('Iron Legion')">Suscribirme · $50/mes</button>
+    </div>
+  </div>
+
+  <!-- Grupo 2: Coaching personalizado (premium) -->
+  <div class="plans-group-label fade-up">Coaching personalizado · <span>Aplicación requerida</span></div>
+  <div class="plan-grid">
+
+    <!-- BELLATOR TEMENOS -->
+    <div class="plan-card featured fade-up">
+      <div class="plan-aura" style="background:linear-gradient(140deg,#7C3AED,#2f6bff)"></div>
+      <div class="plan-name">Bellator Temenos</div>
+      <div class="plan-tagline">Progreso garantizado, resultados óptimos y adaptación al individuo.</div>
+      <p class="plan-desc">Hipertrofia, fuerza, fisiología, biomecánica, nutrición, suplementación, recuperación y control de fatiga.</p>
+      <div class="plan-price-wrap">
+        <div class="plan-apply">Solo por aplicación</div>
+        <div class="plan-price-note">Coaching personalizado con medición de todas las métricas que garantizan progreso. Aplica para conocer tu plan.</div>
+      </div>
+      <ul class="plan-feats">
+        <li class="plan-feat">Rutina completamente personalizada</li>
+        <li class="plan-feat">Nutrición completamente personalizada</li>
+        <li class="plan-feat">Protocolos de recuperación personalizados</li>
+        <li class="plan-feat">Acceso al app de Coaching</li>
+        <li class="plan-feat">Acceso a comunidad de Skool</li>
+        <li class="plan-feat">Seguimiento diario</li>
+        <li class="plan-feat">Revisión de métricas de progreso</li>
+        <li class="plan-feat">Grupo privado (QA/Comunidad)</li>
+        <li class="plan-feat">Sesión de coaching grupal semanal</li>
+        <li class="plan-feat">Guías completas: entrenamiento, nutrición y recuperación</li>
+        <li class="plan-feat">Contenido exclusivo, guías, eventos y regalías</li>
+      </ul>
+      <a class="plan-cta solid" href="#booking">Aplicar ahora</a>
+    </div>
+
+    <!-- NATUS VINCERE -->
+    <div class="plan-card featured fade-up">
+      <div class="plan-badge">Más exclusivo · 1:1</div>
+      <div class="plan-aura" style="background:linear-gradient(140deg,#FFD700,#2f6bff)"></div>
+      <div class="plan-name">Natus Vincere</div>
+      <div class="plan-tagline">Progreso garantizado y adaptación al individuo con seguimiento 1:1.</div>
+      <p class="plan-desc">Todo lo de Bellator, más seguimiento semanal en llamada 1:1 y entrenamientos en vivo.</p>
+      <div class="plan-price-wrap">
+        <div class="plan-apply">Solo por aplicación</div>
+        <div class="plan-price-note">Coaching 1:1 con asesoramiento profesional cada semana en llamada y entrenamientos en vivo. Aplica para conocer tu plan.</div>
+      </div>
+      <ul class="plan-feats">
+        <li class="plan-feat">Rutina completamente personalizada</li>
+        <li class="plan-feat">Nutrición completamente personalizada</li>
+        <li class="plan-feat">Protocolos de recuperación personalizados</li>
+        <li class="plan-feat">Acceso al app de Coaching</li>
+        <li class="plan-feat">Acceso a comunidad de Skool</li>
+        <li class="plan-feat">Seguimiento diario + Acceso 24/7</li>
+        <li class="plan-feat">Revisión de métricas de progreso</li>
+        <li class="plan-feat">Grupo privado (QA/Comunidad)</li>
+        <li class="plan-feat">Sesión 1:1 privada semanal de coaching</li>
+        <li class="plan-feat">Sesión de coaching grupal semanal</li>
+        <li class="plan-feat">Guías completas: entrenamiento, nutrición y recuperación</li>
+        <li class="plan-feat">Contenido exclusivo, guías, eventos y regalías</li>
+      </ul>
+      <a class="plan-cta solid" href="#booking">Aplicar ahora</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CHATS ═══════════════════════════════ -->
+<section id="testimonios" class="sec">
+  <div class="chats-hd">
+    <div class="sec-tag fade-up">Testimonios</div>
+    <h2 class="sec-h fade-up">Lo que dicen <span class="r">mis clientes.</span></h2>
+    <p class="sec-p fade-up" style="margin:0 auto;text-align:center">Conversaciones y resultados reales, directo de quienes ya lo viven.</p>
+  </div>
+  <div class="swiper swiper-testi fade-up">
+    <div class="swiper-wrapper" id="testi-wrapper"></div>
+    <div class="testi-pag"></div>
+  </div>
+  <div id="testi-empty" class="testi-empty" style="display:none">Pronto: testimonios reales de clientes. 🔥</div>
+</section>
+
+<!-- ═══════════════════════════════ RESULTS CAROUSEL ═══════════════════════════════ -->
+<section id="results">
+  <div class="results-hd">
+    <div class="sec-tag fade-up">Transformaciones</div>
+    <h2 class="sec-h fade-up">Antes &amp; después: <span class="r">la prueba.</span></h2>
+  </div>
+  <div class="swiper swiper-results">
+    <div class="swiper-wrapper" id="results-wrapper"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ VIDEO GALLERY (En Acción) ═══════════════════════════════ -->
+<section id="gallery" class="sec">
+  <div class="gallery-hd">
+    <div class="sec-tag fade-up">En Acción</div>
+    <h2 class="sec-h fade-up">El trabajo <span class="r">habla solo.</span></h2>
+  </div>
+  <div class="swiper swiper-vids fade-up">
+    <div class="swiper-wrapper" id="vids-wrapper"></div>
+    <div class="vids-pag"></div>
+  </div>
+  <div id="vids-empty" class="testi-empty" style="display:none">Pronto: videos en acción. 🔥</div>
+</section>
+
+<!-- Video lightbox -->
+<div id="vlightbox" class="vlightbox"><button class="vlightbox-x" id="vlightbox-x">✕</button><div class="vlightbox-inner" id="vlightbox-inner"></div></div>
+<div id="blogmodal" class="blogmodal"><button class="blogmodal-x" id="blogmodal-x" aria-label="Cerrar">✕</button><div class="blogmodal-card" id="blogmodal-card"></div></div>
+
+<!-- ═══════════════════════════════ CHECKOUT (ONVO) ═══════════════════════════════ -->
+<div id="pay-modal" class="pay-overlay">
+  <div class="pay-box">
+    <button class="pay-x" id="pay-x" aria-label="Cerrar">✕</button>
+    <!-- Resumen del pedido (tu marca) — visible en pasos 1 y 2 -->
+    <div id="pay-summary">
+      <div class="pay-brand">KAIZEN<span class="r">·</span>COACHING</div>
+      <div class="pay-order">
+        <div>
+          <div class="pay-order-plan" id="pay-plan-name">KalosBody</div>
+          <div class="pay-order-tag">Suscripción mensual</div>
+        </div>
+        <div class="pay-order-price">$50<span>/mes</span></div>
+      </div>
+      <ul class="pay-incl">
+        <li>Rutinas + programación semanal ajustada</li>
+        <li>App de coaching + comunidad privada en Skool</li>
+        <li>Guías completas: entrenamiento, nutrición y recuperación</li>
+        <li>Sesión de coaching grupal semanal</li>
+      </ul>
+      <div class="pay-recurring">
+        🔄 <b>Cargo automático mensual.</b> Se te cobrarán <b>$50 cada mes</b> automáticamente hasta que canceles. Podés cancelar cuando quieras desde tu portal o escribiéndole a Kaizen.
+      </div>
+    </div>
+    <!-- Paso 1: datos -->
+    <div id="pay-step-form">
+      <div class="pay-step-label">1. Tus datos</div>
+      <input id="pay-name" class="pay-input" type="text" placeholder="Nombre completo" autocomplete="name">
+      <input id="pay-email" class="pay-input" type="email" placeholder="Correo electrónico" autocomplete="email">
+      <input id="pay-phone" class="pay-input" type="tel" placeholder="Teléfono (8 dígitos)" autocomplete="tel">
+      <button type="button" class="btn-fire" id="pay-continue" style="width:100%;justify-content:center;padding:15px;margin-top:4px">Continuar al pago →</button>
+      <div class="pay-err" id="pay-err"></div>
+      <div class="pay-secure">🔒 Pago encriptado de extremo a extremo. Tu tarjeta nunca toca nuestros servidores.</div>
+    </div>
+    <!-- Paso 2: tarjeta (formulario propio, branded — tokeniza directo a ONVO) -->
+    <div id="pay-step-card" style="display:none">
+      <div class="pay-step-label">2. Pagá con tu tarjeta</div>
+      <input id="pay-card-name" class="pay-input" type="text" placeholder="Nombre en la tarjeta" autocomplete="cc-name">
+      <input id="pay-card-num" class="pay-input" type="text" inputmode="numeric" placeholder="Número de tarjeta" autocomplete="cc-number" maxlength="23">
+      <div class="pay-row2">
+        <input id="pay-card-exp" class="pay-input" type="text" inputmode="numeric" placeholder="MM/AA" autocomplete="cc-exp" maxlength="5">
+        <input id="pay-card-cvv" class="pay-input" type="text" inputmode="numeric" placeholder="CVV" autocomplete="cc-csc" maxlength="4">
+      </div>
+      <button type="button" class="btn-fire" id="pay-submit" style="width:100%;justify-content:center;padding:15px;margin-top:4px">Pagar $50 / mes</button>
+      <div class="pay-err" id="pay-err2"></div>
+      <div class="pay-secure">🔒 Tu tarjeta viaja cifrada directo a ONVO · cobro recurrente de $50/mes</div>
+    </div>
+    <!-- Paso 3: éxito -->
+    <div id="pay-step-done" class="pay-done" style="display:none">
+      <div class="pd-ico">🔥</div>
+      <h3>¡Listo! Bienvenido a KAIZEN</h3>
+      <p>Tu suscripción está activa. Te enviamos un correo para <b>crear tu cuenta</b> y entrar a tu plataforma. Revisá tu bandeja (y spam).</p>
+      <button type="button" class="btn-fire" id="pay-done-close" style="width:100%;justify-content:center;padding:14px;margin-top:14px">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lbox" id="lightbox">
+  <button class="lbox-close" id="lbox-close">✕</button>
+  <video id="lbox-video" controls style="max-width:92vw;max-height:88vh;border-radius:10px">
+    <source src="" type="video/mp4">
+  </video>
+</div>
+
+<!-- ═══════════════════════════════ NEWS ═══════════════════════════════ -->
+<section id="news" class="sec">
+  <div class="news-top">
+    <div>
+      <div class="sec-tag fade-up">Blog &amp; Noticias</div>
+      <h2 class="sec-h fade-up">Conocimiento <span class="r">que transforma.</span></h2>
+    </div>
+    <a href="https://www.youtube.com/@danielsolisfournier" target="_blank" rel="noopener" class="btn-outline fade-up">Ver todo en YouTube →</a>
+  </div>
+  <div class="news-grid" id="news-grid"></div>
+</section>
+
+<!-- ═══════════════════════════════ COACH CAROUSEL ═══════════════════════════════ -->
+<section id="coach" class="sec">
+  <div class="coach-hd">
+    <div class="sec-tag fade-up">El Coach</div>
+    <h2 class="sec-h fade-up">Kaizen <span class="r">Kaizen.</span></h2>
+    <p class="sec-p fade-up">Practica lo que predica. La misma ciencia que vas a aplicar, construida sobre resultados reales.</p>
+  </div>
+  <div class="swiper swiper-coach fade-up">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><div class="coach-card"><img src="assets/coach-1.jpg" alt="Coach Kaizen — KAIZEN Coaching" loading="lazy" onerror="this.style.display='none'"></div></div>
+      <div class="swiper-slide"><div class="coach-card"><img src="assets/coach-2.jpg" alt="Coach Kaizen — KAIZEN Coaching" loading="lazy" onerror="this.style.display='none'"></div></div>
+      <div class="swiper-slide"><div class="coach-card"><img src="assets/coach-3.jpg" alt="Coach Kaizen — KAIZEN Coaching" loading="lazy" onerror="this.style.display='none'"></div></div>
+      <div class="swiper-slide"><div class="coach-card"><img src="assets/coach-4.jpg" alt="Coach Kaizen — KAIZEN Coaching" loading="lazy" onerror="this.style.display='none'"></div></div>
+      <div class="swiper-slide"><div class="coach-card"><img src="assets/coach-5.jpg" alt="Coach Kaizen — KAIZEN Coaching" loading="lazy" onerror="this.style.display='none'"></div></div>
+      <div class="swiper-slide"><div class="coach-card"><img src="assets/coach-6.jpg" alt="Coach Kaizen — KAIZEN Coaching" loading="lazy" onerror="this.style.display='none'"></div></div>
+      <div class="swiper-slide"><div class="coach-card"><img src="assets/coach-7.jpg" alt="Coach Kaizen — KAIZEN Coaching" loading="lazy" onerror="this.style.display='none'"></div></div>
+      <div class="swiper-slide"><div class="coach-card"><img src="assets/coach-8.jpg" alt="Coach Kaizen — KAIZEN Coaching" loading="lazy" onerror="this.style.display='none'"></div></div>
+      <div class="swiper-slide"><div class="coach-card"><img src="assets/coach-9.jpg" alt="Coach Kaizen — KAIZEN Coaching" loading="lazy" onerror="this.style.display='none'"></div></div>
+      <div class="swiper-slide"><div class="coach-card"><img src="assets/coach-10.jpg" alt="Coach Kaizen — KAIZEN Coaching" loading="lazy" onerror="this.style.display='none'"></div></div>
+    </div>
+    <div class="coach-pag"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ APP DE ENTRENAMIENTO ═══════════════════════════════ -->
+<section id="app" class="sec">
+  <div class="app-hd fade-up">
+    <span class="sec-tag">App de Entrenamiento</span>
+    <h2 class="sec-h">Todo tu proceso, <span class="r">en tu bolsillo.</span></h2>
+    <p class="sec-p">Rutinas, seguimiento y tu evolución completa en un solo lugar. Entrená con todo desde el teléfono — donde sea que estés.</p>
+  </div>
+  <div class="app-wrap">
+    <div class="app-phone fade-up">
+      <div class="app-glow"></div>
+      <div class="app-phone-frame">
+        <div class="app-phone-screen">
+          <video src="assets/app-demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        </div>
+      </div>
+    </div>
+    <div class="app-feats fade-up">
+      <div class="app-feat">
+        <div class="app-feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div class="app-feat-tx"><h4>Rutinas personalizadas</h4><p>Tu plan semana a semana, con series, repeticiones y progresión clara para cada sesión.</p></div>
+      </div>
+      <div class="app-feat">
+        <div class="app-feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <div class="app-feat-tx"><h4>Seguimiento de progreso</h4><p>Registrá cargas, métricas y fotos. Mirá tu evolución real a lo largo del tiempo.</p></div>
+      </div>
+      <div class="app-feat">
+        <div class="app-feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+        <div class="app-feat-tx"><h4>Biblioteca de ejercicios</h4><p>Video de cada movimiento con la técnica correcta para que entrenes seguro y efectivo.</p></div>
+      </div>
+      <div class="app-feat">
+        <div class="app-feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.65-9.5 9-9.5 9z"/><path d="M3.5 12h4l1.5-4 3 8 1.5-4h4"/></svg></div>
+        <div class="app-feat-tx"><h4>Nutrición y macros</h4><p>Tu plan nutricional con tracking de calorías y macros. Se conecta con Apple Health, MyFitnessPal y Fitbit.</p>
+          <div class="app-integrations">
+            <span class="app-int"> Apple Health</span>
+            <span class="app-int">MyFitnessPal</span>
+            <span class="app-int">Fitbit</span>
+          </div>
+        </div>
+      </div>
+      <div class="app-feat">
+        <div class="app-feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="app-feat-tx"><h4>Soporte directo de Kaizen</h4><p>Ajustes, feedback y acompañamiento durante todo el proceso, directo desde la app.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ BOOKING ═══════════════════════════════ -->
+<section id="booking">
+  <div class="booking-glow"></div>
+  <div class="booking-grid"></div>
+  <div class="booking-inner">
+    <div class="dan-av fade-up">DS</div>
+    <div class="dan-tag fade-up">Coach Kaizen · Head Coach</div>
+    <div class="sec-tag fade-up">Aplicación de Coaching</div>
+    <h2 class="sec-h fade-up">Aplica para trabajar<br><span class="r">con Kaizen.</span></h2>
+    <p class="sec-p fade-up" style="margin:0 auto 8px;text-align:center;max-width:560px">Este es el único medio de solicitud para aplicar a los programas. Si completas todas las preguntas, tu solicitud será revisada y, si eres un potencial cliente, serás contactado por mensaje de texto para agendar una llamada.</p>
+    <p class="sec-p fade-up" style="margin:0 auto;text-align:center;max-width:560px;font-size:.82rem;color:rgba(255,255,255,.4)">Por favor no completes el formulario si no estás 100% dispuesto a comprometerte a cambiar tus resultados en físico, salud y estilo de vida.</p>
+    <!-- Application Form (replica del Google Form) -->
+    <form id="lead-form" class="lead-form fade-up" onsubmit="handleLead(event)">
+      <!-- Honeypot anti-bot: invisible para humanos; si se llena, descartamos el envío -->
+      <input type="text" id="lead-hp" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true"
+        style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
+
+      <div class="lead-field">
+        <label class="lead-label">¿Qué programa te interesa? *</label>
+        <div class="lead-radios" id="lead-programa">
+          <label class="lead-radio"><input type="radio" name="programa" value="Coaching 1:1" required><span>Coaching 1:1</span></label>
+          <label class="lead-radio"><input type="radio" name="programa" value="Fatloss Group"><span>Fatloss Group</span></label>
+          <label class="lead-radio"><input type="radio" name="programa" value="Training Group"><span>Training Group</span></label>
+          <label class="lead-radio"><input type="radio" name="programa" value="Todos"><span>Todos</span></label>
+        </div>
+      </div>
+
+      <div class="lead-field">
+        <label class="lead-label" for="lead-metas">¿Cuáles son tus metas principales al trabajar conmigo? *</label>
+        <input type="text" id="lead-metas" class="lead-input" placeholder="Músculo / fuerza / resistencia / perder grasa / hábitos / etc." required>
+      </div>
+
+      <div class="lead-row">
+        <div class="lead-field" style="flex:1">
+          <label class="lead-label" for="lead-name">Nombre completo *</label>
+          <input type="text" id="lead-name" class="lead-input" placeholder="Tu nombre completo" required autocomplete="name">
+        </div>
+        <div class="lead-field" style="flex:1">
+          <label class="lead-label" for="lead-pais">País de residencia *</label>
+          <input type="text" id="lead-pais" class="lead-input" placeholder="Tu país" required autocomplete="country-name">
+        </div>
+      </div>
+
+      <div class="lead-row">
+        <div class="lead-field" style="flex:1">
+          <label class="lead-label" for="lead-edad">Edad *</label>
+          <input type="number" id="lead-edad" class="lead-input" placeholder="Tu edad" min="14" max="99" required>
+        </div>
+        <div class="lead-field" style="flex:1">
+          <label class="lead-label" for="lead-phone">Número de teléfono *</label>
+          <input type="tel" id="lead-phone" class="lead-input" placeholder="Para ser contactado" required autocomplete="tel">
+        </div>
+      </div>
+
+      <div class="lead-row">
+        <div class="lead-field" style="flex:1">
+          <label class="lead-label" for="lead-email">Correo electrónico *</label>
+          <input type="email" id="lead-email" class="lead-input" placeholder="tucorreo@ejemplo.com" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="lead-field">
+        <label class="lead-label">¿Estás listo para invertir en tu físico, salud y vida personal? *</label>
+        <div class="lead-radios" id="lead-listo">
+          <label class="lead-radio"><input type="radio" name="listo" value="Sí" required><span>Sí</span></label>
+          <label class="lead-radio"><input type="radio" name="listo" value="No"><span>No</span></label>
+        </div>
+      </div>
+
+      <div class="lead-field">
+        <label class="lead-label">Rango de capital disponible para invertir en tus metas *</label>
+        <div class="lead-radios" id="lead-capital">
+          <label class="lead-radio"><input type="radio" name="capital" value="$50-500" required><span>$50 – $500</span></label>
+          <label class="lead-radio"><input type="radio" name="capital" value="$1000-2000"><span>$1,000 – $2,000</span></label>
+          <label class="lead-radio"><input type="radio" name="capital" value="$2000-3000"><span>$2,000 – $3,000</span></label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-fire" id="lead-btn" style="width:100%;font-size:1rem;padding:18px;justify-content:center;margin-top:8px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Enviar mi aplicación
+      </button>
+    </form>
+    <div id="lead-success" style="display:none;text-align:center;padding:32px 0">
+      <div style="font-size:3rem;margin-bottom:16px">🔥</div>
+      <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:800;letter-spacing:.02em;color:#4ade80;margin-bottom:10px">LET'S GO!!</div>
+      <div style="font-size:.9rem;color:rgba(255,255,255,.6)">Aplicación recibida. Si eres un potencial cliente, Kaizen te contactará por mensaje de texto para agendar tu llamada.</div>
+    </div>
+    <div class="booking-note fade-up">Cupos limitados · Solo aplicaciones serias</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SOCIAL / COMUNIDAD ═══════════════════════════════ -->
+<section id="social" class="sec">
+  <div class="social-hd">
+    <div class="sec-tag fade-up">Comunidad</div>
+    <h2 class="sec-h fade-up">Sumate a la <span class="r">comunidad KAIZEN.</span></h2>
+    <p class="sec-p fade-up">Contenido diario, retos y una comunidad real que te empuja a tu mejor versión. Seguí a Kaizen en todas las plataformas.</p>
+  </div>
+
+  <div class="skool-card fade-up">
+    <div class="k-info">
+      <div class="k-tag">★ Comunidad privada</div>
+      <div class="k-title">KAIZEN Coaching en Skool</div>
+      <div class="k-desc">El núcleo de la comunidad: rutinas, guías, soporte directo y un grupo de gente comprometida con su transformación.</div>
+    </div>
+    <a class="skool-btn" href="https://www.skool.com/YOUR-COMMUNITY" target="_blank" rel="noopener">Unirme a Skool →</a>
+  </div>
+
+  <div class="social-grid fade-up">
+    <a class="social-link" href="https://www.instagram.com/kaizen_coaching" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.794 0-1.439-.646-1.439-1.44 0-.794.646-1.439 1.44-1.439.793 0 1.439.645 1.439 1.439z"/></svg>
+      <div><div class="sl-name">Instagram</div><div class="sl-handle">@kaizen_coaching</div></div>
+    </a>
+    <a class="social-link" href="https://www.tiktok.com/@kaizen_coaching" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      <div><div class="sl-name">TikTok</div><div class="sl-handle">@kaizen_coaching</div></div>
+    </a>
+    <a class="social-link" href="https://www.youtube.com/@danielsolisfournier" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      <div><div class="sl-name">YouTube</div><div class="sl-handle">@danielsolisfournier</div></div>
+    </a>
+    <a class="social-link" href="https://www.facebook.com/share/1BmuwXURuy/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      <div><div class="sl-name">Facebook</div><div class="sl-handle">KAIZEN Coaching</div></div>
+    </a>
+    <a class="social-link" href="https://wa.me/50600000000" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+      <div><div class="sl-name">WhatsApp</div><div class="sl-handle">+506 6109 9877</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer>
+  <div class="ft-grid">
+    <div class="ft-logo-wrap">
+      <div class="ft-logo"><span class="r">KAIZEN</span> Coaching</div>
+      <div class="ft-tag">Training · Nutrition · Lifestyle. Coaching de élite para personas que quieren resultados reales y duraderos.</div>
+      <div class="socials">
+        <a class="soc" href="https://www.instagram.com/kaizen_coaching" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.794 0-1.439-.646-1.439-1.44 0-.794.646-1.439 1.44-1.439.793 0 1.439.645 1.439 1.439z"/></svg>
+        </a>
+        <a class="soc" href="https://www.tiktok.com/@kaizen_coaching" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </a>
+        <a class="soc" href="https://www.youtube.com/@danielsolisfournier" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a class="soc" href="https://www.facebook.com/share/1BmuwXURuy/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a class="soc" href="https://wa.me/50600000000?text=Hola%20Coach%2C%20quiero%20info%20sobre%20KAIZEN%20Coaching" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-h">Servicios</div>
+      <ul class="ft-links">
+        <li><a href="#programas">Coaching Online</a></li>
+        <li><a href="#programas">Plan de Entrenamiento</a></li>
+        <li><a href="#programas">Plan Nutricional</a></li>
+        <li><a href="#programas">Coaching de Mentalidad</a></li>
+        <li><a href="#programas">Comunidad KAIZEN</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-h">Recursos</div>
+      <ul class="ft-links">
+        <li><a href="#news">Blog</a></li>
+        <li><a href="https://www.youtube.com/@danielsolisfournier" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+        <li><a href="#booking">Agendar Call</a></li>
+        <li><a href="https://wa.me/50600000000" target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-h">Contacto</div>
+      <ul class="ft-links">
+        <li><a href="/portal">Portal de Miembros</a></li>
+        <li><a href="#booking">Agendar Call</a></li>
+        <li><a href="https://wa.me/50600000000" target="_blank" rel="noopener">WhatsApp Directo</a></li>
+        <li><a href="mailto:coachkaizen@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>© 2025 KAIZEN Coaching · Todos los derechos reservados</span>
+    <span>Diseñado para transformar vidas 🔥 <span style="opacity:.35;font-size:.85em">· build 2026.06.15c</span></span>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════ WHATSAPP WIDGET ═══════════════════════════════ -->
+<a id="wa-fab" href="https://wa.me/50600000000?text=Hola%20Coach%2C%20quiero%20info%20sobre%20KAIZEN%20Coaching" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 32 32" width="30" height="30" fill="currentColor" aria-hidden="true">
+    <path d="M16.003 3C9.38 3 4 8.38 4 15.003c0 2.117.553 4.18 1.602 6L4 29l8.18-1.563A12.94 12.94 0 0 0 16.003 27C22.626 27 28 21.626 28 15.003 28 8.38 22.626 3 16.003 3zm0 21.8c-1.86 0-3.68-.5-5.27-1.444l-.378-.224-4.854.927.93-4.73-.246-.39a9.78 9.78 0 0 1-1.51-5.236c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.025 6.96 2.886a9.78 9.78 0 0 1 2.886 6.964c0 5.43-4.43 9.847-9.86 9.847zm5.41-7.38c-.297-.15-1.758-.868-2.03-.967-.272-.1-.47-.15-.668.15-.198.296-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.76-1.653-2.057-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.496.099-.198.05-.372-.025-.52-.074-.15-.668-1.612-.916-2.206-.241-.58-.486-.5-.668-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/>
+  </svg>
+  <span class="wa-pulse"></span>
+</a>
+<style>
+#wa-fab{
+  position:fixed;right:22px;bottom:22px;z-index:9998;
+  width:60px;height:60px;border-radius:50%;
+  background:#25D366;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 28px rgba(37,211,102,.45);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+#wa-fab:hover{transform:scale(1.08);box-shadow:0 12px 36px rgba(37,211,102,.6)}
+#wa-fab .wa-pulse{
+  position:absolute;inset:0;border-radius:50%;
+  border:2px solid #25D366;
+  animation:waPulse 2.2s ease-out infinite;
+  pointer-events:none;
+}
+@keyframes waPulse{
+  0%{transform:scale(1);opacity:.7}
+  100%{transform:scale(1.7);opacity:0}
+}
+@media(max-width:560px){
+  #wa-fab{width:54px;height:54px;right:16px;bottom:16px}
+}
+</style>
+
+<!-- ═══════════════════════════════ SCRIPTS ═══════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://js.onvopay.com/v1/"></script>
+<script>
+// ══════════════════════════════════════════════
+// SUPABASE INIT
+// ══════════════════════════════════════════════
+const SUPA_URL  = 'https://YOUR_PROJECT_REF.supabase.co';
+const SUPA_KEY  = 'YOUR_SUPABASE_ANON_KEY';
+const db = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+// ── Track page view
+(async () => {
+  try {
+    await db.from('kaizen_events').insert({ event: 'page_view', data: { ref: document.referrer, ua: navigator.userAgent.slice(0,120) } });
+  } catch(e) {}
+})();
+
+// ══════════════════════════════════════════════
+// CHECKOUT ONVO — suscripción $50/mes
+// 1) datos → Edge Function create-subscription → subscriptionId
+// 2) widget onvo.pay() recolecta la tarjeta (iframe ONVO) y confirma
+// 3) webhook firmado provisiona la cuenta + invitación
+// ══════════════════════════════════════════════
+const ONVO_PUBLIC_KEY = '';
+let _payPlan = '', _payContact = {};
+function _g(id){ return document.getElementById(id); }
+function openCheckout(plan){
+  _payPlan = plan; _payContact = {};
+  _g('pay-plan-name').textContent = plan;
+  _g('pay-summary').style.display = 'block';
+  _g('pay-step-form').style.display = 'block';
+  _g('pay-step-card').style.display = 'none';
+  _g('pay-step-done').style.display = 'none';
+  _g('pay-err').textContent = ''; _g('pay-err2').textContent = '';
+  _g('pay-modal').classList.add('open');
+}
+function closeCheckout(){ _g('pay-modal').classList.remove('open'); }
+_g('pay-x').addEventListener('click', closeCheckout);
+_g('pay-done-close').addEventListener('click', closeCheckout);
+_g('pay-modal').addEventListener('click', e => { if(e.target.id==='pay-modal') closeCheckout(); });
+
+// Paso 1 → 2: validar contacto y pasar al formulario de tarjeta
+_g('pay-continue').addEventListener('click', () => {
+  const name = _g('pay-name').value.trim();
+  const email = _g('pay-email').value.trim();
+  const phone = _g('pay-phone').value.trim();
+  const err = _g('pay-err'); err.textContent = '';
+  if(!name){ err.textContent = 'Ingresá tu nombre.'; return; }
+  if(!email.includes('@')){ err.textContent = 'Ingresá un correo válido.'; return; }
+  _payContact = { name, email, phone };
+  _g('pay-card-name').value = name;
+  _g('pay-step-form').style.display = 'none';
+  _g('pay-step-card').style.display = 'block';
+});
+
+// Formato amigable de los inputs de tarjeta
+_g('pay-card-num').addEventListener('input', e => {
+  e.target.value = e.target.value.replace(/\D/g,'').slice(0,19).replace(/(.{4})/g,'$1 ').trim();
+});
+_g('pay-card-exp').addEventListener('input', e => {
+  let v = e.target.value.replace(/\D/g,'').slice(0,4);
+  e.target.value = v.length >= 3 ? v.slice(0,2)+'/'+v.slice(2) : v;
+});
+
+// Paso 2: tokenizar la tarjeta (directo a ONVO con la publishable key) + crear suscripción
+_g('pay-submit').addEventListener('click', async () => {
+  const err = _g('pay-err2'); err.textContent = '';
+  const btn = _g('pay-submit');
+  const holderName = _g('pay-card-name').value.trim();
+  const number = _g('pay-card-num').value.replace(/\s/g,'');
+  const exp = _g('pay-card-exp').value.trim();
+  const cvv = _g('pay-card-cvv').value.trim();
+  const m = exp.match(/^(\d{2})\/(\d{2})$/);
+  if(!holderName){ err.textContent = 'Ingresá el nombre de la tarjeta.'; return; }
+  if(number.length < 13){ err.textContent = 'Número de tarjeta inválido.'; return; }
+  if(!m){ err.textContent = 'Vencimiento inválido (MM/AA).'; return; }
+  if(cvv.length < 3){ err.textContent = 'CVV inválido.'; return; }
+  const orig = btn.textContent; btn.disabled = true; btn.textContent = 'Procesando…';
+  try {
+    // 1) Tokenizar la tarjeta DIRECTO a ONVO (la tarjeta no toca nuestro servidor)
+    const tok = await fetch('https://api.onvopay.com/v1/payment-methods', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + ONVO_PUBLIC_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'card', card: { number, expMonth: parseInt(m[1],10), expYear: 2000 + parseInt(m[2],10), cvv, holderName } })
+    });
+    const pm = await tok.json();
+    if(!tok.ok || !pm.id){ throw new Error((pm && (pm.message?.[0] || pm.message)) || 'Tarjeta rechazada'); }
+    // 2) Crear la suscripción $50/mes con ese PM (Edge Function, secret server-side)
+    const r = await fetch(SUPA_URL + '/functions/v1/create-subscription', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + SUPA_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ paymentMethodId: pm.id, customerId: pm.customerId, ..._payContact, plan: _payPlan })
+    });
+    const d = await r.json();
+    if(!r.ok || !d.ok){ throw new Error(d.error || ('HTTP ' + r.status)); }
+    // 2b) 3DS: si el banco pide autenticación, mostramos el challenge EN la página
+    //     (SDK de ONVO). El cobro solo se completa si pasa la verificación.
+    if(d.requiresAction && d.paymentIntentId){
+      if(typeof ONVO === 'undefined'){ throw new Error('No se pudo cargar el verificador de seguridad. Recargá e intentá de nuevo.'); }
+      btn.textContent = 'Verificación del banco…';
+      const onvo = ONVO(ONVO_PUBLIC_KEY);
+      const res = await onvo.handleNextAction({ paymentIntentId: d.paymentIntentId });
+      if(res && res.error){ throw new Error(res.error.message || 'No se completó la verificación 3DS.'); }
+      const st = res && res.paymentIntent && res.paymentIntent.status;
+      if(st && st !== 'succeeded'){ throw new Error('El pago no se completó (verificación: ' + st + ').'); }
+    }
+    // 3) Éxito → el webhook firmado provisiona la cuenta + invitación
+    _g('pay-summary').style.display = 'none';
+    _g('pay-step-card').style.display = 'none';
+    _g('pay-step-done').style.display = 'block';
+    try { db.from('kaizen_events').insert({ event: 'checkout_success', data: { plan: _payPlan } }); } catch(_){}
+  } catch(e) {
+    err.textContent = 'No se pudo procesar el pago: ' + (e.message || e);
+  } finally {
+    btn.disabled = false; btn.textContent = orig;
+  }
+});
+
+// ── Hero: montaje en loop con crossfade de los videos de Kaizen (kaizen_videos).
+//    Rotamos por sus clips reales; si agrega/cambia videos en el backoffice, el hero se actualiza.
+(async () => {
+  const layers = [document.getElementById('hero-vid-1'), document.getElementById('hero-vid-2')];
+  if (layers.some(l => !l)) return;
+  let clips = [];
+  try {
+    const { data } = await db.from('kaizen_videos').select('video_url, sort').eq('type', 'upload').order('sort', { ascending: true });
+    clips = (data || []).map(v => v.video_url).filter(u => u && /\.mp4(\?|$)/i.test(u));
+  } catch (e) {}
+  if (!clips.length) return; // sin videos → queda el fondo oscuro + overlay (sin demo)
+
+  const PEAK = '0.6'; // misma opacidad que tenía el hero (legibilidad del texto)
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Atributos/propiedades para que iOS/Android autoplaytéen SIN gesto ni botón.
+  layers.forEach(v => {
+    v.muted = true; v.defaultMuted = true; v.setAttribute('muted', '');
+    v.loop = true; v.playsInline = true;
+    v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
+    v.setAttribute('autoplay', '');
+    v.style.transition = 'opacity 1.4s ease'; v.style.opacity = '0';
+  });
+
+  const safePlay = (v) => { try { const p = v.play(); if (p && p.catch) p.catch(() => {}); } catch (_) {} };
+  const load = (layer, url) => { const v = layers[layer]; if (v.src !== url) { v.src = url; try { v.load(); } catch (_) {} } safePlay(v); };
+
+  // Kickstart: si iOS bloquea el autoplay (p.ej. modo bajo consumo), el primer
+  // gesto/scroll lo arranca; y al volver a la pestaña se reanuda. Sin botones.
+  const kick = () => layers.forEach(v => { if (v.paused && v.src) safePlay(v); });
+  ['touchstart', 'pointerdown', 'click', 'scroll', 'keydown'].forEach(ev =>
+    window.addEventListener(ev, kick, { passive: true }));
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) kick(); });
+
+  let i = 0, active = 0;
+  load(0, clips[0]);
+  layers[0].style.opacity = PEAK;
+  if (reduce || clips.length < 2) return; // accesibilidad / un solo clip → sin rotación
+
+  setInterval(() => {
+    i = (i + 1) % clips.length;
+    const incoming = 1 - active, outgoing = active;
+    load(incoming, clips[i]);
+    layers[incoming].style.opacity = PEAK;
+    layers[outgoing].style.opacity = '0';
+    // iOS rinde mejor con un solo video activo → pausamos el saliente tras el crossfade
+    setTimeout(() => { try { layers[outgoing].pause(); } catch (_) {} }, 1600);
+    active = incoming;
+  }, 7000); // ~7s por clip con crossfade
+})();
+</script>
+<script>
+// ── Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
+
+// ══════════════════════════════════════════════
+
+// ══════════════════════════════════════════════
+// PILL NAV (vanilla port of React Bits PillNav)
+// ══════════════════════════════════════════════
+(function pillNav() {
+  const ease = 'power3.out';
+  const circles = Array.from(document.querySelectorAll('.pill .hover-circle'));
+  const tls = [];
+
+  function layout() {
+    circles.forEach((circle, i) => {
+      const pill = circle.parentElement;
+      const rect = pill.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      if (!w || !h) return;
+      const R = ((w * w) / 4 + h * h) / (2 * h);
+      const D = Math.ceil(2 * R) + 2;
+      const delta = Math.ceil(R - Math.sqrt(Math.max(0, R * R - (w * w) / 4))) + 1;
+      const originY = D - delta;
+      circle.style.width = D + 'px';
+      circle.style.height = D + 'px';
+      circle.style.bottom = -delta + 'px';
+      gsap.set(circle, { xPercent: -50, scale: 0, transformOrigin: `50% ${originY}px` });
+
+      const label = pill.querySelector('.pill-label');
+      const hover = pill.querySelector('.pill-label-hover');
+      if (label) gsap.set(label, { y: 0 });
+      if (hover) gsap.set(hover, { y: h + 12, opacity: 0 });
+
+      tls[i] && tls[i].kill();
+      const tl = gsap.timeline({ paused: true });
+      tl.to(circle, { scale: 1.2, xPercent: -50, duration: 2, ease, overwrite: 'auto' }, 0);
+      if (label) tl.to(label, { y: -(h + 8), duration: 2, ease, overwrite: 'auto' }, 0);
+      if (hover) { gsap.set(hover, { y: Math.ceil(h + 100), opacity: 0 }); tl.to(hover, { y: 0, opacity: 1, duration: 2, ease, overwrite: 'auto' }, 0); }
+      tls[i] = tl;
+    });
+  }
+  layout();
+  window.addEventListener('resize', layout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout).catch(() => {});
+
+  document.querySelectorAll('.pill').forEach((pill, i) => {
+    pill.addEventListener('mouseenter', () => { if (tls[i]) tls[i].tweenTo(tls[i].duration(), { duration: .3, ease, overwrite: 'auto' }); });
+    pill.addEventListener('mouseleave', () => { if (tls[i]) tls[i].tweenTo(0, { duration: .2, ease, overwrite: 'auto' }); });
+  });
+
+  // Logo spin on hover
+  const logo = document.getElementById('pill-logo');
+  if (logo) logo.addEventListener('mouseenter', () => gsap.fromTo(logo, { rotate: 0 }, { rotate: 360, duration: .5, ease, overwrite: 'auto' }));
+
+  // Initial load animation
+  gsap.from('#pill-logo', { scale: 0, duration: .6, ease });
+  gsap.from('#pill-nav-items', { width: 0, duration: .6, ease, overflow: 'hidden' });
+
+  // Mobile menu
+  let open = false;
+  const ham = document.getElementById('pill-hamburger');
+  const menu = document.getElementById('pill-mobile-menu');
+  if (ham && menu) {
+    const lines = ham.querySelectorAll('.hamburger-line');
+    ham.addEventListener('click', () => {
+      open = !open;
+      if (open) {
+        gsap.to(lines[0], { rotation: 45, y: 3.5, duration: .3, ease });
+        gsap.to(lines[1], { rotation: -45, y: -3.5, duration: .3, ease });
+        gsap.set(menu, { visibility: 'visible' });
+        gsap.fromTo(menu, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .3, ease });
+      } else {
+        gsap.to(lines[0], { rotation: 0, y: 0, duration: .3, ease });
+        gsap.to(lines[1], { rotation: 0, y: 0, duration: .3, ease });
+        gsap.to(menu, { opacity: 0, y: 10, duration: .2, ease, onComplete: () => gsap.set(menu, { visibility: 'hidden' }) });
+      }
+    });
+    menu.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', () => { open = false; gsap.to(lines[0], { rotation: 0, y: 0, duration: .2 }); gsap.to(lines[1], { rotation: 0, y: 0, duration: .2 }); gsap.to(menu, { opacity: 0, y: 10, duration: .2, onComplete: () => gsap.set(menu, { visibility: 'hidden' }) }); }));
+  }
+})();
+
+// ══════════════════════════════════════════════
+// HERO ENTRANCE ANIMATION
+// ══════════════════════════════════════════════
+// DecryptedText effect (vanilla port of React Bits component) — runs once on load
+function decryptText(el, opts) {
+  opts = opts || {};
+  const speed = opts.speed || 45;
+  const delay = opts.delay || 0;
+  const sequential = opts.sequential !== false;          // default sequential
+  const maxIterations = opts.maxIterations || 12;
+  const chars = opts.characters || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*';
+  const original = el.dataset.decrypt || el.textContent;
+  el.dataset.decrypt = original;
+  const arr = original.split('');
+  const scramble = (rev) => arr.map((c, i) =>
+    c === ' ' ? ' ' : (rev.has(i) ? original[i] : chars[Math.floor(Math.random() * chars.length)])
+  ).join('');
+  // reduced motion: skip scramble
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = original; return;
+  }
+  let revealed = new Set(), iter = 0;
+  el.textContent = scramble(revealed);                    // scramble immediately (no plain-text flash)
+  setTimeout(() => {
+    const iv = setInterval(() => {
+      if (sequential) {
+        if (revealed.size >= arr.length) { clearInterval(iv); el.textContent = original; return; }
+        revealed.add(revealed.size);
+        el.textContent = scramble(revealed);
+      } else {
+        el.textContent = scramble(revealed); iter++;
+        if (iter >= maxIterations) { clearInterval(iv); el.textContent = original; }
+      }
+    }, speed);
+  }, delay);
+}
+
+(function heroAnim() {
+  const words = Array.from(document.querySelectorAll('.hero-word'));
+  const sub = document.querySelector('.hero-sub');
+
+  // GSAP fades elements in (opacity only); decrypt owns the text scramble→reveal
+  const tl = gsap.timeline({ delay: .3 });
+  tl.from('.hero-pill', { opacity: 0, y: 20, duration: .7, ease: 'power3.out' })
+    .from('.hero-word', { opacity: 0, duration: .5, ease: 'power2.out', stagger: .1 }, '-=.3')
+    .from('.hero-ctas', { opacity: 0, y: 20, duration: .7, ease: 'power3.out' }, '-=.3');
+
+  // Decrypt runs once on load. Each call scrambles immediately (under opacity:0),
+  // then resolves after its delay — aligned with the fade-in.
+  words.forEach((w, i) => decryptText(w, { speed: 38, delay: 650 + i * 140, sequential: true }));
+  if (sub) decryptText(sub, { speed: 20, delay: 1100, sequential: false, maxIterations: 14 });
+})();
+
+// ══════════════════════════════════════════════
+// SCROLL FADE-UP (global)
+// ══════════════════════════════════════════════
+document.querySelectorAll('.fade-up').forEach(el => {
+  gsap.to(el, {
+    opacity: 1, y: 0, duration: .9,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: el,
+      start: 'top 88%',
+      once: true
+    }
+  });
+});
+
+// ══════════════════════════════════════════════
+// COUNTER ANIMATION
+// ══════════════════════════════════════════════
+document.querySelectorAll('.count').forEach(el => {
+  const target = parseInt(el.dataset.target);
+  ScrollTrigger.create({
+    trigger: el,
+    start: 'top 90%',
+    once: true,
+    onEnter: () => {
+      gsap.to({ val: 0 }, {
+        val: target,
+        duration: 2.2,
+        ease: 'power2.out',
+        onUpdate: function() {
+          el.textContent = Math.round(this.targets()[0].val);
+        }
+      });
+    }
+  });
+});
+
+// ══════════════════════════════════════════════
+// ORBITAL TIMELINE (adapted from RadialOrbitalTimeline)
+// ══════════════════════════════════════════════
+// Minimalist line icons (Lucide-style, currentColor)
+const _ic = inner => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">${inner}</svg>`;
+const ICONS = {
+  dumbbell: _ic('<path d="M14.4 14.4 9.6 9.6"/><path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z"/><path d="m21.5 21.5-1.4-1.4"/><path d="M3.9 3.9 2.5 2.5"/><path d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z"/>'),
+  leaf: _ic('<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>'),
+  bulb: _ic('<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>'),
+  spark: _ic('<path d="M9.94 14.06A2 2 0 0 0 8.5 12.6L2.4 11a.5.5 0 0 1 0-1l6.1-1.6A2 2 0 0 0 9.94 6.94L11.5.8a.5.5 0 0 1 1 0l1.56 6.14A2 2 0 0 0 15.5 8.4L21.6 10a.5.5 0 0 1 0 1l-6.1 1.6a2 2 0 0 0-1.44 1.46L12.5 20.2a.5.5 0 0 1-1 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/>'),
+  chart: _ic('<path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/>'),
+  users: _ic('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'),
+  target: _ic('<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>'),
+  message: _ic('<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>'),
+  bolt: _ic('<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>'),
+  heart: _ic('<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/>')
+};
+function resolveIcon(v){ return ICONS[v] || v || ''; }
+
+const DEFAULT_SERVICES = [
+  { icon:'dumbbell', label:'Training', title:'Entrenamiento Personalizado', desc:'Programas de entrenamiento diseñados específicamente para tu cuerpo, objetivos y estilo de vida. Sin rutinas genéricas.', features:['Análisis de movimiento y postural','Periodización inteligente','Ajustes semanales según progreso','Técnica y prevención de lesiones'], related:[1,4] },
+  { icon:'leaf', label:'Nutrición', title:'Plan Nutricional de Élite', desc:'Nutrición basada en ciencia adaptada a tu metabolismo, preferencias y metas. Sin restricciones absurdas.', features:['Cálculo de macros y calorías','Timing estratégico de nutrientes','Meal prep y recetas prácticas','Suplementación evidenciada'], related:[0,2] },
+  { icon:'bulb', label:'Mentalidad', title:'Coaching Mental', desc:'El cuerpo siempre cede antes que la mente. Trabajamos la psicología del cambio para hacer tus resultados inevitables.', features:['Framework de hábitos duraderos','Manejo del estrés y ansiedad','Visualización y objetivos claros','Mindset de alto rendimiento'], related:[3,5] },
+  { icon:'spark', label:'Lifestyle', title:'Estilo de Vida Integral', desc:'No es una dieta, es un estilo de vida. Integramos fitness y nutrición en tu vida real, no al revés.', features:['Balance trabajo-entreno','Sueño y recuperación óptima','Socialización sin sabotear metas','Sostenibilidad a largo plazo'], related:[2,4] },
+  { icon:'chart', label:'Seguimiento', title:'Monitoreo Continuo', desc:'Seguimiento semanal detallado con ajustes en tiempo real. No te dejamos solo en el proceso.', features:['Check-ins semanales con Kaizen','Métricas y biometría','Ajuste dinámico de plan','Reportes de progreso visual'], related:[0,1] },
+  { icon:'users', label:'Comunidad', title:'Red de Apoyo KAIZEN', desc:'Únete a una comunidad de personas comprometidas con su transformación. El entorno lo es todo.', features:['Grupo privado de miembros','Retos mensuales de equipo','Celebración de logros','Acceso a recursos exclusivos'], related:[2,3] }
+];
+let SERVICES = DEFAULT_SERVICES;
+
+class OrbitalTimeline {
+  constructor(container, items) {
+    this.container = container;
+    this.items = items;
+    this.angle = 0;
+    this.speed = 0.25;
+    this.activeIdx = null;
+    this.paused = false;
+    this.raf = null;
+    this.nodes = [];
+    this.radius = Math.min(container.offsetWidth, container.offsetHeight) * 0.42;
+    this._build();
+    this._animate();
+  }
+
+  _build() {
+    this.items.forEach((item, i) => {
+      const node = document.createElement('div');
+      node.className = 'orb-node';
+      node.innerHTML = `
+        <div class="orb-node-btn">${resolveIcon(item.icon)}</div>
+        <span class="orb-lbl" style="top:84px;left:50%;transform:translateX(-50%)">${item.label}</span>
+      `;
+      node.addEventListener('click', (e) => { e.stopPropagation(); this._toggle(i); });
+      this.container.appendChild(node);
+      this.nodes.push(node);
+    });
+
+    this.container.addEventListener('click', () => {
+      if (this.activeIdx !== null) {
+        this._deactivate();
+      }
+    });
+  }
+
+  _pos(i) {
+    const total = this.items.length;
+    const theta = ((i / total) * 360 + this.angle) % 360;
+    const rad = (theta * Math.PI) / 180;
+    const x = this.radius * Math.cos(rad);
+    const y = this.radius * Math.sin(rad);
+    const depth = (Math.cos(rad) + 1) / 2; // 0–1
+    const opacity = 0.4 + 0.6 * depth;
+    const scale = 0.72 + 0.28 * depth;
+    const zIndex = Math.round(10 + 90 * depth);
+    return { x, y, opacity, scale, zIndex };
+  }
+
+  _updatePositions() {
+    this.nodes.forEach((node, i) => {
+      if (this.activeIdx === i) return;
+      const { x, y, opacity, scale, zIndex } = this._pos(i);
+      node.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale})`;
+      node.style.opacity = opacity;
+      node.style.zIndex = zIndex;
+    });
+  }
+
+  _animate() {
+    if (!this.paused) {
+      this.angle = (this.angle + this.speed) % 360;
+      this._updatePositions();
+    }
+    this.raf = requestAnimationFrame(() => this._animate());
+  }
+
+  _toggle(i) {
+    if (this.activeIdx === i) { this._deactivate(); return; }
+    if (this.activeIdx !== null) { this.nodes[this.activeIdx].classList.remove('active'); }
+    this.activeIdx = i;
+    this.paused = true;
+    this.nodes.forEach((n, idx) => {
+      n.classList.toggle('active', idx === i);
+      if (idx !== i) n.classList.toggle('pulse', this.items[i].related.includes(idx));
+    });
+    // Animate active node to a nice front position
+    const { x: cx, y: cy } = this._pos(i);
+    this.nodes[i].style.transform = `translate(calc(-50% + ${cx}px), calc(-50% + ${cy}px)) scale(1.4)`;
+    this.nodes[i].style.opacity = '1';
+    this.nodes[i].style.zIndex = '200';
+    this._showDetail(i);
+  }
+
+  _deactivate() {
+    if (this.activeIdx !== null) this.nodes[this.activeIdx].classList.remove('active');
+    this.nodes.forEach(n => n.classList.remove('pulse'));
+    this.activeIdx = null;
+    this.paused = false;
+    this._hideDetail();
+  }
+
+  _showDetail(i) {
+    const item = this.items[i];
+    const info = document.getElementById('service-info');
+    info.innerHTML = `
+      <div class="svc-card show">
+        <div class="svc-card-top">
+          <div class="svc-card-icon">${resolveIcon(item.icon)}</div>
+          <div class="svc-card-title">${item.title}</div>
+        </div>
+        <div class="svc-card-desc">${item.desc}</div>
+        <div class="svc-feats">
+          ${item.features.map(f => `<div class="svc-feat">${f}</div>`).join('')}
+        </div>
+      </div>`;
+  }
+
+  _hideDetail() {
+    document.getElementById('service-info').innerHTML = `<div class="svc-hint">← Haz clic en cualquier nodo del sistema</div>`;
+  }
+}
+
+// Cargar orbital editable desde Supabase (con fallback a DEFAULT_SERVICES)
+(async function loadOrbital(){
+  try {
+    const [{ data: nodes }, { data: settings }] = await Promise.all([
+      db.from('kaizen_orbital').select('*').order('sort',{ascending:true}),
+      db.from('kaizen_settings').select('*')
+    ]);
+    if (nodes && nodes.length) {
+      SERVICES = nodes.map((n,i)=>({
+        icon: n.icon || 'dumbbell', label: n.label||'', title: n.title||n.label||'',
+        desc: n.descr||'', features: (n.feats||'').split('\n').map(s=>s.trim()).filter(Boolean),
+        related: [(i+1)%nodes.length, (i+2)%nodes.length]
+      }));
+    }
+    if (settings && settings.length) {
+      const s = Object.fromEntries(settings.map(r=>[r.key,r.value]));
+      if (s.orbital_tag) document.getElementById('orb-tag').textContent = s.orbital_tag;
+      if (s.orbital_title) document.getElementById('orb-title').innerHTML = _esc(s.orbital_title).replace(/\\n|\n/g,'<br>');
+      if (s.orbital_sub) document.getElementById('orb-sub').textContent = s.orbital_sub;
+    }
+  } catch(e){}
+})();
+
+// Init orbital when in view
+ScrollTrigger.create({
+  trigger: '#services',
+  start: 'top 80%',
+  once: true,
+  onEnter: () => {
+    const el = document.getElementById('orbital');
+    gsap.from(el, { opacity: 0, scale: .8, duration: 1, ease: 'back.out(1.5)' });
+    window._orbital = new OrbitalTimeline(el, SERVICES);
+  }
+});
+
+// ══════════════════════════════════════════════
+// TESTIMONIOS — screenshots desde Supabase (carrusel automático)
+// ══════════════════════════════════════════════
+(async function loadTestimonios() {
+  const wrap = document.getElementById('testi-wrapper');
+  const empty = document.getElementById('testi-empty');
+  if (!wrap) return;
+  let rows = [];
+  try {
+    const { data } = await db.from('kaizen_testimonios').select('*').order('created_at', { ascending: false });
+    rows = data || [];
+  } catch (e) { /* tabla aún no creada */ }
+
+  if (!rows.length) {
+    // Sin testimonios → ocultar toda la sección (Kaizen los activa subiéndolos desde el BO)
+    const section = document.getElementById('testimonios');
+    if (section) section.style.display = 'none';
+    return;
+  }
+
+  const isVid = (u) => /\.(mp4|webm|mov|m4v)(\?|$)/i.test(u || '');
+  const hasVideo = rows.some(r => isVid(r.image_url));
+  wrap.innerHTML = rows.map(r => {
+    const media = isVid(r.image_url)
+      ? `<video class="testi-vid" src="${_esc(r.image_url)}" muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture></video>`
+      : `<img src="${_esc(r.image_url)}" alt="Testimonio KAIZEN Coaching" loading="lazy">`;
+    return `<div class="swiper-slide"><div class="testi-card">${media}</div></div>`;
+  }).join('');
+
+  // Autoplay robusto de los videos (iOS/Android/web, sin botón): muted + inline.
+  // iOS solo reproduce 1 video a la vez → tocamos solo el del slide activo.
+  const allVids = () => Array.from(wrap.querySelectorAll('video.testi-vid'));
+  allVids().forEach(v => { v.muted = true; v.defaultMuted = true; v.setAttribute('muted',''); v.playsInline = true; });
+  const playActive = () => {
+    const slides = wrap.querySelectorAll('.swiper-slide');
+    slides.forEach(s => {
+      const v = s.querySelector('video.testi-vid'); if (!v) return;
+      if (s.classList.contains('swiper-slide-active')) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+      else { try { v.pause(); } catch (_) {} }
+    });
+  };
+
+  const sw = new Swiper('.swiper-testi', {
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    spaceBetween: 20,
+    loop: rows.length > 2,
+    // con video damos más tiempo por slide (un video necesita verse); solo fotos = rápido
+    autoplay: { delay: hasVideo ? 6500 : 2800, disableOnInteraction: false },
+    pagination: { el: '.testi-pag', clickable: true },
+    on: { init: playActive, slideChange: playActive, slideChangeTransitionEnd: playActive }
+  });
+  playActive();
+  // Kickstart por si iOS bloquea el autoplay (modo bajo consumo): primer gesto/scroll
+  const kick = () => playActive();
+  ['touchstart', 'pointerdown', 'scroll'].forEach(ev => window.addEventListener(ev, kick, { passive: true, once: false }));
+})();
+
+function _esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function _ytId(u){ if(!u) return ''; const m=u.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/); return m?m[1]:''; }
+
+// ══════════════════════════════════════════════
+// EN ACCIÓN — videos desde Supabase (carrusel + lightbox)
+// ══════════════════════════════════════════════
+(async function loadVideos(){
+  const wrap = document.getElementById('vids-wrapper');
+  const empty = document.getElementById('vids-empty');
+  if (!wrap) return;
+  let rows = [];
+  try { const { data } = await db.from('kaizen_videos').select('*').order('sort',{ascending:true}).order('created_at',{ascending:false}); rows = data || []; } catch(e){}
+  if (!rows.length) { document.querySelector('.swiper-vids').style.display='none'; empty.style.display='block'; return; }
+
+  wrap.innerHTML = rows.map((v, i) => {
+    const yt = (v.type==='youtube') ? _ytId(v.youtube_url) : '';
+    const ext = (v.type==='youtube') && !yt && v.youtube_url;   // link externo (ej. Skool)
+    let thumb;
+    if (yt) thumb = `<img class="vthumb" src="${v.thumb_url||('https://img.youtube.com/vi/'+yt+'/hqdefault.jpg')}" alt="${_esc(v.title)}" loading="lazy">`;
+    else if (ext) thumb = v.thumb_url ? `<img class="vthumb" src="${_esc(v.thumb_url)}" alt="${_esc(v.title)}" loading="lazy">` : `<div class="vthumb vthumb-link"><span>↗</span></div>`;
+    else thumb = `<video class="vthumb" muted playsinline preload="metadata"><source src="${_esc(v.video_url)}#t=0.4"></video>`;
+    return `<div class="swiper-slide"><div class="vcard" data-i="${i}">
+      ${thumb}
+      <div class="vcard-overlay"><div class="vlabel">${_esc(v.title)||''}</div></div>
+      <div class="vplay">${ext ? '↗' : '▶'}</div>
+    </div></div>`;
+  }).join('');
+
+  // lightbox open (o abrir link externo en pestaña nueva)
+  const lb = document.getElementById('vlightbox'), lbi = document.getElementById('vlightbox-inner');
+  wrap.querySelectorAll('.vcard').forEach(card => card.addEventListener('click', () => {
+    const v = rows[+card.dataset.i]; const yt = (v.type==='youtube') ? _ytId(v.youtube_url) : '';
+    const ext = (v.type==='youtube') && !yt && v.youtube_url;
+    if (ext) { window.open(v.youtube_url, '_blank', 'noopener'); return; }
+    lbi.innerHTML = yt
+      ? `<iframe src="https://www.youtube.com/embed/${yt}?autoplay=1&rel=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`
+      : `<video src="${_esc(v.video_url)}" controls autoplay playsinline></video>`;
+    lb.classList.add('open');
+  }));
+  const closeLb = () => { lb.classList.remove('open'); lbi.innerHTML=''; };
+  document.getElementById('vlightbox-x').addEventListener('click', closeLb);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+
+  new Swiper('.swiper-vids', {
+    grabCursor: true, centeredSlides: true, slidesPerView: 'auto', spaceBetween: 18,
+    loop: rows.length > 2, autoplay: { delay: 3200, disableOnInteraction: true },
+    pagination: { el: '.vids-pag', clickable: true }
+  });
+})();
+
+// ══════════════════════════════════════════════
+// CONTENIDO DINÁMICO (Blog + Transformaciones desde Supabase, con fallback)
+// ══════════════════════════════════════════════
+
+(async function loadBlog(){
+  const grid = document.getElementById('news-grid');
+  const section = document.getElementById('news');
+  if (!grid) return;
+  let rows = [];
+  try { const { data } = await db.from('kaizen_blog').select('*').order('sort',{ascending:true}).order('created_at',{ascending:false}); rows = data || []; } catch(e){ if(section) section.style.display='none'; return; }
+  if (!rows.length) { if(section) section.style.display='none'; return; } // sin blogs → ocultar la sección (Kaizen los sube desde el admin)
+  // Hook = primera oración del cuerpo (el resto se lee en el modal)
+  const hookOf = (txt) => {
+    if (!txt) return '';
+    const m = String(txt).match(/^[\s\S]*?[.!?](\s|$)/);
+    let s = (m ? m[0] : String(txt)).trim();
+    if (s.length > 180) s = s.slice(0, 180).trim() + '…';
+    return s;
+  };
+  window.__BLOG = rows;
+  grid.innerHTML = rows.map((p, i) => {
+    return `<div class="ncard" onclick="openBlog(${i})" role="button" tabindex="0" aria-label="Leer: ${_esc(p.title)}">
+      ${p.image_url ? `<div class="ncard-img"><img src="${_esc(p.image_url)}" alt="${_esc(p.title)}" loading="lazy"></div>` : ''}
+      <div class="ncard-body">
+        ${p.category ? `<div class="ncat">${_esc(p.category)}</div>` : ''}
+        <div class="ntitle">${_esc(p.title)}</div>
+        ${p.excerpt ? `<div class="nexcerpt">${_esc(hookOf(p.excerpt))}</div>` : ''}
+        <div class="nmeta"><span>${_esc(p.date||'')}${p.read_time?(' · '+_esc(p.read_time)):''}</span><span class="nread">Leer →</span></div>
+      </div>
+    </div>`;
+  }).join('');
+  // Inyectadas después de GSAP → garantizamos visibilidad explícita (sin fade-up)
+  grid.querySelectorAll('.ncard').forEach(c => {
+    c.style.opacity = '1'; c.style.transform = 'none';
+    c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); c.click(); } });
+  });
+
+  // Modal: artículo completo (click en la tarjeta)
+  window.openBlog = (i) => {
+    const p = (window.__BLOG || [])[i]; if (!p) return;
+    const vid = p.video_url ? `<p style="margin-top:22px"><a href="${_esc(p.video_url)}" target="_blank" rel="noopener" class="nread">Ver video →</a></p>` : '';
+    document.getElementById('blogmodal-card').innerHTML =
+      (p.image_url ? `<img class="blogmodal-img" src="${_esc(p.image_url)}" alt="${_esc(p.title)}">` : '') +
+      `<div class="blogmodal-body">
+        ${p.category ? `<div class="blogmodal-cat">${_esc(p.category)}</div>` : ''}
+        <h2 class="blogmodal-title">${_esc(p.title)}</h2>
+        <div class="blogmodal-meta">${_esc(p.date||'')}${p.read_time?(' · '+_esc(p.read_time)):''}</div>
+        <div class="blogmodal-text">${_esc(p.excerpt||'')}</div>
+        ${vid}
+      </div>`;
+    const m = document.getElementById('blogmodal');
+    m.classList.add('open'); m.scrollTop = 0; document.body.style.overflow = 'hidden';
+  };
+  const closeBlog = () => { document.getElementById('blogmodal').classList.remove('open'); document.body.style.overflow = ''; };
+  document.getElementById('blogmodal-x').addEventListener('click', closeBlog);
+  document.getElementById('blogmodal').addEventListener('click', e => { if (e.target.id === 'blogmodal') closeBlog(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBlog(); });
+})();
+
+// ══════════════════════════════════════════════
+// SWIPER CAROUSEL (Transformaciones)
+// ══════════════════════════════════════════════
+(async function initResults(){
+  const section = document.getElementById('results');
+  const wrap = document.getElementById('results-wrapper');
+  let rows = [];
+  try {
+    const { data } = await db.from('kaizen_transformaciones').select('*').order('sort',{ascending:true}).order('created_at',{ascending:false});
+    rows = data || [];
+  } catch(e){}
+  if (!rows.length) { if(section) section.style.display='none'; return; }
+  wrap.innerHTML = rows.map(t => {
+    const main = t.after_url || t.before_url || '';
+    const before = (t.before_url && t.after_url) ? `<img class="res-before" src="${_esc(t.before_url)}" alt="Antes" loading="lazy">` : '';
+    const baTag = (t.before_url && t.after_url) ? `<div class="res-ba-tag"></div>` : '';
+    const stat = t.badge ? `<div class="res-stat"><div class="res-stat-num">${_esc(t.badge)}</div><div class="res-stat-lbl">${_esc(t.badge_sub||'')}</div></div>` : '';
+    const tag = t.tag ? `<div class="res-badge">${_esc(t.tag)}</div>` : '';
+    return `<div class="swiper-slide"><div class="res-card">
+      <div class="res-img">
+        <img src="${_esc(main)}" alt="${_esc(t.name)}" loading="lazy">
+        ${before}${baTag}${tag}${stat}
+      </div>
+      <div class="res-body">
+        <div class="res-name">${_esc(t.name)}</div>
+        ${t.category ? `<div class="res-detail">${_esc(t.category)}</div>` : ''}
+        ${t.quote ? `<div class="res-quote">${_esc(t.quote)}</div>` : ''}
+      </div>
+    </div></div>`;
+  }).join('');
+  new Swiper('.swiper-results', {
+    slidesPerView: 'auto',
+    spaceBetween: 24,
+    grabCursor: true,
+    loop: rows.length > 2,
+    autoplay: { delay: 2600, disableOnInteraction: false },
+    pagination: { el: '.swiper-results .swiper-pagination', clickable: true },
+    breakpoints: { 768: { spaceBetween: 28 } }
+  });
+
+  // Click en una transformación → ver la imagen completa en el lightbox
+  const lb = document.getElementById('vlightbox'), lbi = document.getElementById('vlightbox-inner');
+  if (lb && lbi) {
+    const closeLb = () => { lb.classList.remove('open','wide'); lbi.innerHTML=''; };
+    // delegación: cubre también los slides clonados por el loop de Swiper
+    wrap.addEventListener('click', e => {
+      const img = e.target.closest('.res-img img');
+      if (!img) return;
+      lbi.innerHTML = `<img src="${img.getAttribute('src')}" alt="${img.getAttribute('alt')||'Transformación'}">`;
+      lb.classList.add('open','wide');
+    });
+    document.getElementById('vlightbox-x').addEventListener('click', closeLb);
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) closeLb(); });
+  }
+})();
+
+// Coach showcase — coverflow 3D
+{
+  const coachSlides = document.querySelectorAll('.swiper-coach .swiper-slide').length;
+  new Swiper('.swiper-coach', {
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    loop: coachSlides > 4,
+    coverflowEffect: { rotate: 7, stretch: 0, depth: 240, modifier: 1.4, slideShadows: false },
+    autoplay: { delay: 3000, disableOnInteraction: false },
+    pagination: { el: '.coach-pag', clickable: true }
+  });
+}
+
+// ══════════════════════════════════════════════
+// VIDEO GALLERY — Lightbox
+// ══════════════════════════════════════════════
+const lightbox = document.getElementById('lightbox');
+const lboxVideo = document.getElementById('lbox-video');
+const lboxClose = document.getElementById('lbox-close');
+
+document.querySelectorAll('.vcard').forEach(card => {
+  card.addEventListener('click', () => {
+    const yt = card.dataset.yt;
+    if (yt) window.open(yt, '_blank', 'noopener');
+  });
+});
+
+lboxClose.addEventListener('click', () => {
+  lightbox.classList.remove('open');
+  lboxVideo.pause();
+  lboxVideo.querySelector('source').src = '';
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    lightbox.classList.remove('open');
+    lboxVideo.pause();
+  }
+});
+
+
+// News cards
+gsap.from('.ncard', {
+  opacity: 0, y: 40,
+  duration: .7, stagger: .12,
+  ease: 'power3.out',
+  scrollTrigger: {
+    trigger: '.news-grid',
+    start: 'top 85%',
+    once: true
+  }
+});
+
+// ══════════════════════════════════════════════
+// NEWSLETTER → Supabase
+// ══════════════════════════════════════════════
+// ══════════════════════════════════════════════
+// LEAD CAPTURE → Supabase
+// ══════════════════════════════════════════════
+const LEAD_EMAIL = 'coachkaizen@gmail.com';
+// Web3Forms — los correos llegan SIEMPRE al buzón con el que se REGISTRÓ la key.
+// La key anterior (a6562dba-...) estaba registrada a contactoavalverde@gmail.com, por eso
+// las notificaciones llegaban a ese correo. Se desactivó.
+// 👉 Para activar notificaciones SOLO a coachkaizen@gmail.com: crear una key gratis en
+//    https://web3forms.com usando coachkaizen@gmail.com y pegarla aquí abajo.
+// Mientras esté vacía, los leads igual se guardan en el backoffice (no se pierde ninguno).
+const WEB3FORMS_KEY = '';
+
+async function handleLead(e) {
+  e.preventDefault();
+  // Honeypot: si un bot llenó el campo oculto, descartamos el envío en silencio
+  if ((document.getElementById('lead-hp') || {}).value) { return; }
+  console.log('%c[KAIZEN] Enviando lead… build 2026.06.15c', 'color:#2f6bff;font-weight:bold');
+  const programa = (document.querySelector('input[name="programa"]:checked') || {}).value || '';
+  const metas    = document.getElementById('lead-metas').value.trim();
+  const name     = document.getElementById('lead-name').value.trim();
+  const pais     = document.getElementById('lead-pais').value.trim();
+  const edad     = document.getElementById('lead-edad').value.trim();
+  const phone    = document.getElementById('lead-phone').value.trim();
+  const email    = (document.getElementById('lead-email') || {}).value ? document.getElementById('lead-email').value.trim() : '';
+  const listo    = (document.querySelector('input[name="listo"]:checked') || {}).value || '';
+  const capital  = (document.querySelector('input[name="capital"]:checked') || {}).value || '';
+  const btn      = document.getElementById('lead-btn');
+  const form     = document.getElementById('lead-form');
+  const succ     = document.getElementById('lead-success');
+  const orig     = btn.innerHTML;
+
+  btn.innerHTML = '⏳ Enviando...';
+  btn.disabled  = true;
+
+  const lead = {
+    name,
+    email: email || null,
+    phone,
+    programa,
+    metas,
+    pais,
+    edad: edad ? parseInt(edad, 10) : null,
+    listo_invertir: listo,
+    rango_capital: capital,
+    goal: metas,          // back-compat con columna existente
+    source: 'website'
+  };
+
+  const showSuccess = () => {
+    // Cambio de estado DIRECTO (no depende de gsap) para que nunca quede a medias
+    form.style.display = 'none';
+    succ.style.display = 'block';
+    try { gsap.fromTo(succ, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .6, ease: 'power3.out' }); } catch(_) {}
+  };
+  const showError = (detail) => {
+    btn.disabled  = false;
+    btn.style.background = '#991b1b';
+    btn.textContent = '⚠ Error — intenta de nuevo';
+    setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; }, 5000);
+    console.error('Lead submit error:', detail);
+    let note = document.getElementById('lead-err-note');
+    if (!note) {
+      note = document.createElement('div');
+      note.id = 'lead-err-note';
+      note.style.cssText = 'margin-top:12px;padding:10px 14px;border-radius:10px;background:rgba(153,27,27,.18);border:1px solid rgba(239,68,68,.4);color:#b6cdff;font-size:.78rem;text-align:center';
+      form.appendChild(note);
+    }
+    note.textContent = 'No se pudo enviar (' + detail + '). Reintenta o escríbenos por WhatsApp al 6109 9877.';
+  };
+
+  // Notificación por correo a Kaizen (coachkaizen@gmail.com). Best-effort con TIMEOUT
+  // para que NUNCA cuelgue el formulario aunque el servicio o un bloqueador la trabe.
+  const sendMail = () => {
+    if (!WEB3FORMS_KEY) return Promise.reject(new Error('sin correo'));
+    const ctrl = new AbortController();
+    const to = setTimeout(() => ctrl.abort(), 7000);
+    return fetch('https://api.web3forms.com/submit', {
+      method: 'POST', signal: ctrl.signal,
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        from_name: 'KAIZEN Coaching · Web',
+        subject: '🔥 Nueva aplicación KAIZEN Coaching — ' + name,
+        email: 'coachkaizen@gmail.com',
+        'Programa': programa, 'Nombre completo': name, 'Edad': edad, 'País': pais,
+        'Teléfono': phone, 'Correo': email, 'Metas': metas, '¿Listo para invertir?': listo, 'Rango de capital': capital
+      })
+    }).then(async r => {
+      clearTimeout(to);
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || j.success === false) throw new Error(j.message || ('HTTP ' + r.status));
+      return 'mail';
+    }).catch(e => { clearTimeout(to); throw e; });
+  };
+
+  // Guardar el lead en Supabase vía REST DIRECTO (fetch), SIN depender de la librería
+  // supabase-js (que puede no cargar si el CDN está bloqueado). Así el lead llega al
+  // backoffice aunque la librería falle. Con timeout para no colgar.
+  const saveLeadDirect = async () => {
+    const ctrl = new AbortController();
+    const to = setTimeout(() => ctrl.abort(), 8000);
+    try {
+      const r = await fetch(SUPA_URL + '/rest/v1/kaizen_leads', {
+        method: 'POST', signal: ctrl.signal,
+        headers: {
+          'apikey': SUPA_KEY,
+          'Authorization': 'Bearer ' + SUPA_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(lead)
+      });
+      clearTimeout(to);
+      if (!r.ok) { const t = await r.text().catch(()=> ''); throw new Error('HTTP ' + r.status + (t ? ' · ' + t.slice(0,120) : '')); }
+      return 'supabase';
+    } catch(e) { clearTimeout(to); throw e; }
+  };
+
+  // Backup local por si todo lo demás falla — recuperable después
+  try {
+    const pend = JSON.parse(localStorage.getItem('kaizen_pending_leads') || '[]');
+    pend.push({ ...lead, ts: new Date().toISOString() });
+    localStorage.setItem('kaizen_pending_leads', JSON.stringify(pend));
+  } catch(_) {}
+
+  // Disparamos AMBOS en paralelo: guardado en backoffice + correo a Kaizen.
+  const [supaRes, mailRes] = await Promise.allSettled([ saveLeadDirect(), sendMail() ]);
+
+  if (supaRes.status === 'rejected') {
+    console.error('Lead → Supabase FALLÓ:', supaRes.reason && (supaRes.reason.message || supaRes.reason));
+  }
+  if (mailRes.status === 'rejected') {
+    console.warn('Lead → correo falló:', mailRes.reason && (mailRes.reason.message || mailRes.reason));
+  }
+
+  if (supaRes.status === 'fulfilled') {
+    console.log('%c[KAIZEN] ✅ Lead GUARDADO en el backoffice', 'color:#16a34a;font-weight:bold');
+  }
+  if (supaRes.status === 'fulfilled' || mailRes.status === 'fulfilled') {
+    // Al menos una vía funcionó → éxito
+    showSuccess();
+  } else {
+    const reason = (supaRes.reason && (supaRes.reason.message || supaRes.reason.code)) || 'error de conexión';
+    showError(reason);
+  }
+}
+
+// ══════════════════════════════════════════════
+// BOOKING SECTION PARALLAX GRID
+// ══════════════════════════════════════════════
+gsap.to('.booking-grid', {
+  backgroundPosition: '60px 60px',
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '#booking',
+    start: 'top bottom',
+    end: 'bottom top',
+    scrub: 2
+  }
+});
+
+// ══════════════════════════════════════════════
+// SMOOTH ANCHOR SCROLLING
+// ══════════════════════════════════════════════
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const id = a.getAttribute('href');
+    if (id === '#') return;
+    const target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>

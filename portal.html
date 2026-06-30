@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>KAIZEN Coaching — Mi Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#2f6bff;--black:#081c36;--card:#0e2a4d;--border:rgba(255,255,255,.08);--gray:#8a8a8f;--green:#4ade80}
+body{font-family:'Inter',sans-serif;background:var(--black);color:#fff;min-height:100vh}
+::selection{background:var(--red);color:#fff}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:#1c4470;border-radius:4px}
+a{color:inherit}
+
+/* AUTH */
+#auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.auth-box{width:100%;max-width:400px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:38px 32px}
+.auth-logo{font-family:'Oswald',sans-serif;font-size:1.9rem;font-weight:700;margin-bottom:4px}
+.auth-logo .r{color:var(--red)}
+.auth-sub{color:var(--gray);font-size:.85rem;margin-bottom:26px}
+.authtabs{display:flex;gap:6px;margin-bottom:22px;background:rgba(255,255,255,.04);border-radius:10px;padding:4px}
+.authtab{flex:1;background:none;border:none;color:var(--gray);padding:10px;font-size:.82rem;font-weight:600;cursor:pointer;border-radius:7px;transition:all .2s}
+.authtab.active{background:var(--red);color:#fff}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.76rem;color:var(--gray);margin-bottom:6px;font-weight:500}
+.field input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:#fff;font-size:.9rem;outline:none;transition:border-color .2s}
+.field input:focus{border-color:var(--red)}
+.btn{width:100%;background:var(--red);color:#fff;border:none;border-radius:10px;padding:14px;font-size:.85rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:4px}
+.btn:hover{background:#1d4fd6}.btn:disabled{opacity:.6;cursor:not-allowed}
+.msg{font-size:.82rem;margin-top:12px;min-height:18px;line-height:1.5}
+.msg.err{color:#7aa5ff}.msg.ok{color:var(--green)}
+
+/* APP */
+#portal{display:none;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(10,10,11,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+.topbar .logo{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700}
+.topbar .logo .r{color:var(--red)}
+.topbar .logo span.bo{color:var(--gray);font-size:.68rem;font-weight:500;letter-spacing:.2em;margin-left:8px;text-transform:uppercase}
+.logout{background:transparent;border:1px solid var(--border);color:#fff;padding:8px 15px;border-radius:8px;font-size:.76rem;cursor:pointer}
+.logout:hover{border-color:var(--red);color:var(--red)}
+.wrap{max-width:880px;margin:0 auto;padding:28px 24px 60px}
+.hello{font-family:'Oswald',sans-serif;font-size:1.8rem;font-weight:700;margin-bottom:4px}
+.hello .r{color:var(--red)}
+.hello-sub{color:var(--gray);font-size:.9rem;margin-bottom:26px}
+.cardbox{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:18px}
+.cardbox h3{font-family:'Oswald',sans-serif;font-size:1.05rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.cardbox h3 .ico{color:var(--red)}
+.row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.88rem}
+.row:last-child{border-bottom:none}.row .k{color:var(--gray)}.row .v{font-weight:600;text-align:right}
+.pill{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.72rem;font-weight:700}
+.pill-active{background:rgba(74,222,128,.16);color:var(--green)}
+.pill-paused{background:rgba(250,204,21,.16);color:#fde047}
+.pill-cancelled,.pill-expired{background:rgba(255,107,107,.16);color:#9bbcff}
+.sub-hero{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:18px}
+.sub-plan{font-family:'Oswald',sans-serif;font-size:1.7rem;font-weight:700}
+.daysleft{text-align:center;background:rgba(47, 107, 255,.1);border:1px solid rgba(47, 107, 255,.25);border-radius:14px;padding:14px 22px}
+.daysleft .n{font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:var(--red);line-height:1}
+.daysleft .l{font-size:.68rem;color:var(--gray);text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+.appbtn{display:block;width:100%;text-align:center;background:linear-gradient(135deg,#2f6bff,#3b76ff);color:#fff;text-decoration:none;padding:16px;border-radius:12px;font-weight:700;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase;margin-top:16px;box-shadow:0 8px 26px rgba(47, 107, 255,.35)}
+.appbtn:hover{filter:brightness(1.1)}
+.appbtn.disabled{background:#123058;color:var(--gray);box-shadow:none;cursor:not-allowed;pointer-events:none}
+table{width:100%;border-collapse:collapse;font-size:.84rem}
+th{text-align:left;padding:9px 8px;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gray);border-bottom:1px solid var(--border)}
+td{padding:11px 8px;border-bottom:1px solid rgba(255,255,255,.04)}
+tr:last-child td{border-bottom:none}
+.msg-item{padding:16px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;margin-bottom:12px}
+.msg-item.unread{border-color:rgba(47, 107, 255,.4)}
+.msg-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.msg-subj{font-weight:700;font-size:.92rem}
+.msg-date{font-size:.72rem;color:var(--gray)}
+.msg-body{font-size:.86rem;color:rgba(255,255,255,.8);line-height:1.6;white-space:pre-wrap}
+.dot{display:inline-block;width:7px;height:7px;background:var(--red);border-radius:50%;margin-right:6px}
+.empty{color:var(--gray);font-size:.86rem;text-align:center;padding:24px 0}
+.edit-link{background:none;border:none;color:var(--red);font-size:.78rem;cursor:pointer;font-weight:600}
+.savebar{display:none;gap:10px;margin-top:14px}
+.savebar.show{display:flex}
+.savebar input{flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:10px;color:#fff;font-size:.85rem;outline:none}
+.savebar button{background:var(--red);border:none;color:#fff;padding:10px 16px;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer}
+@media(max-width:560px){.wrap{padding:18px 14px 50px}}
+</style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="auth">
+  <div class="auth-box">
+    <div class="auth-logo"><span class="r">KAIZEN</span> Coaching</div>
+    <div class="auth-sub">Portal de miembros</div>
+    <div class="authtabs">
+      <button class="authtab active" id="t-login">Iniciar sesión</button>
+      <button class="authtab" id="t-signup">Crear cuenta</button>
+    </div>
+
+    <form id="form-login">
+      <div class="field"><label>Correo</label><input type="email" id="li-email" autocomplete="username" required></div>
+      <div class="field"><label>Contraseña</label><input type="password" id="li-pass" autocomplete="current-password" required></div>
+      <button type="submit" class="btn" id="li-btn">Entrar</button>
+      <div class="msg" id="li-msg"></div>
+    </form>
+
+    <form id="form-signup" style="display:none">
+      <div class="field"><label>Nombre completo</label><input type="text" id="su-name" autocomplete="name" required></div>
+      <div class="field"><label>Correo</label><input type="email" id="su-email" autocomplete="email" required></div>
+      <div class="field"><label>WhatsApp / Teléfono</label><input type="tel" id="su-phone" autocomplete="tel"></div>
+      <div class="field"><label>Contraseña (mín. 8 · mayúscula, minúscula y número)</label><input type="password" id="su-pass" autocomplete="new-password" minlength="8" required></div>
+      <button type="submit" class="btn" id="su-btn">Crear mi cuenta</button>
+      <div class="msg" id="su-msg"></div>
+    </form>
+  </div>
+</div>
+
+<!-- PORTAL -->
+<div id="portal">
+  <div class="topbar">
+    <div class="logo"><span class="r">KAIZEN</span> Coaching<span class="bo">Mi Portal</span></div>
+    <button class="logout" id="logout">Salir</button>
+  </div>
+  <div class="wrap">
+    <div class="hello">Hola, <span class="r" id="p-name">—</span> 💪</div>
+    <div class="hello-sub" id="p-email"></div>
+
+    <!-- SUSCRIPCIÓN -->
+    <div class="cardbox" id="sub-card">
+      <h3><span class="ico">●</span> Mi Suscripción</h3>
+      <div id="sub-content"><div class="empty">Cargando…</div></div>
+    </div>
+
+    <!-- PAGOS -->
+    <div class="cardbox">
+      <h3><span class="ico">●</span> Historial de Pagos</h3>
+      <div id="pay-content"><div class="empty">Cargando…</div></div>
+    </div>
+
+    <!-- MENSAJES -->
+    <div class="cardbox">
+      <h3><span class="ico">●</span> Mensajes de Kaizen</h3>
+      <div id="msg-content"><div class="empty">Cargando…</div></div>
+    </div>
+
+    <!-- DOCUMENTOS -->
+    <div class="cardbox">
+      <h3><span class="ico">●</span> Mis Documentos</h3>
+      <div id="doc-content"><div class="empty">Cargando…</div></div>
+    </div>
+
+    <!-- PERFIL -->
+    <div class="cardbox">
+      <h3><span class="ico">●</span> Mis Datos <button class="edit-link" id="edit-toggle" style="margin-left:auto">Editar</button></h3>
+      <div class="row"><span class="k">Nombre</span><span class="v" id="pf-name">—</span></div>
+      <div class="row"><span class="k">Correo</span><span class="v" id="pf-email">—</span></div>
+      <div class="row"><span class="k">Teléfono</span><span class="v" id="pf-phone">—</span></div>
+      <div class="savebar" id="editbar">
+        <input type="text" id="ed-name" placeholder="Nombre">
+        <input type="email" id="ed-email" placeholder="Correo" autocomplete="email">
+        <input type="tel" id="ed-phone" placeholder="Teléfono">
+        <button id="ed-save">Guardar</button>
+        <div id="ed-msg" style="flex-basis:100%;font-size:.8rem;margin-top:6px"></div>
+      </div>
+    </div>
+
+    <!-- CONTRASEÑA -->
+    <div class="cardbox">
+      <h3><span class="ico">●</span> Contraseña <button class="edit-link" id="pw-toggle" style="margin-left:auto">Cambiar</button></h3>
+      <div class="savebar" id="pwbar">
+        <input type="password" id="pw-cur" placeholder="Contraseña actual" autocomplete="current-password">
+        <input type="password" id="pw-new" placeholder="Nueva (mín. 8 · Aa1)" autocomplete="new-password">
+        <input type="password" id="pw-conf" placeholder="Repetir nueva contraseña" autocomplete="new-password">
+        <button id="pw-save">Cambiar contraseña</button>
+        <div id="pw-msg" style="flex-basis:100%;font-size:.8rem;margin-top:6px"></div>
+        <div style="flex-basis:100%;margin-top:4px"><a href="#" id="pw-reset" style="font-size:.78rem;opacity:.8">¿Olvidaste tu contraseña o entraste con link mágico? Enviarme un link para crearla</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const SUPA_URL='https://YOUR_PROJECT_REF.supabase.co';
+const SUPA_KEY='YOUR_SUPABASE_ANON_KEY';
+const db=supabase.createClient(SUPA_URL,SUPA_KEY);
+const $=id=>document.getElementById(id);
+const WA='https://wa.me/50600000000';
+
+// tabs
+$('t-login').onclick=()=>{$('t-login').classList.add('active');$('t-signup').classList.remove('active');$('form-login').style.display='';$('form-signup').style.display='none';};
+$('t-signup').onclick=()=>{$('t-signup').classList.add('active');$('t-login').classList.remove('active');$('form-signup').style.display='';$('form-login').style.display='none';};
+
+// signup
+$('form-signup').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const b=$('su-btn');b.disabled=true;b.textContent='Creando…';$('su-msg').textContent='';$('su-msg').className='msg';
+  const { data, error } = await db.auth.signUp({
+    email:$('su-email').value.trim(), password:$('su-pass').value,
+    options:{ data:{ name:$('su-name').value.trim(), phone:$('su-phone').value.trim() }, emailRedirectTo:'https://kaizencoaching.com/portal' }
+  });
+  if(error){ $('su-msg').className='msg err'; $('su-msg').textContent=error.message; b.disabled=false; b.textContent='Crear mi cuenta'; return; }
+  if(data.session){ await ensureProfile(); showPortal(); return; }   // autoconfirm on
+  $('su-msg').className='msg ok';
+  $('su-msg').textContent='¡Cuenta creada! Te enviamos un correo para confirmar. Ábrelo y luego inicia sesión.';
+  b.disabled=false; b.textContent='Crear mi cuenta';
+});
+
+// login
+$('form-login').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const b=$('li-btn');b.disabled=true;b.textContent='Entrando…';$('li-msg').textContent='';$('li-msg').className='msg';
+  const { error } = await db.auth.signInWithPassword({ email:$('li-email').value.trim(), password:$('li-pass').value });
+  if(error){ $('li-msg').className='msg err'; $('li-msg').textContent = /confirm/i.test(error.message)?'Confirma tu correo antes de entrar (revisa tu bandeja).':'Correo o contraseña incorrectos.'; b.disabled=false; b.textContent='Entrar'; return; }
+  await ensureProfile(); showPortal();
+});
+
+$('logout').onclick=async()=>{ await db.auth.signOut(); location.reload(); };
+
+const ADMIN_EMAILS=['coachkaizen@gmail.com','contactoavalverde@gmail.com'];
+const isAdmin=e=>ADMIN_EMAILS.includes((e||'').toLowerCase());
+async function ensureProfile(){
+  const { data:{ user } } = await db.auth.getUser();
+  if(!user) return;
+  if(isAdmin(user.email)) return;
+  const { data } = await db.from('kaizen_clients').select('id').eq('user_id',user.id).maybeSingle();
+  if(!data){
+    const m=user.user_metadata||{};
+    await db.from('kaizen_clients').insert({ user_id:user.id, name:m.name||'', email:user.email, phone:m.phone||'' });
+  }
+  // Marcar invitación como aceptada si existe
+  await db.from('kaizen_invitations')
+    .update({ status:'accepted', accepted_at:new Date().toISOString() })
+    .eq('email', user.email)
+    .eq('status','pending');
+}
+
+function fmtDate(d){ if(!d) return '—'; const x=new Date(d+'T00:00:00'); return x.toLocaleDateString('es-CR',{day:'2-digit',month:'long',year:'numeric'}); }
+// Montos en USD (canónico, igual que ONVO); mostramos también el equivalente en colones.
+const USD_CRC = 450; // tasa Banco Central CR (ajustable; mantener igual que en admin.html)
+function fmtMoney(n){ if(n==null) return '—'; const u='$'+Number(n).toLocaleString('en-US',{maximumFractionDigits:2}); const c='₡'+Math.round(Number(n)*USD_CRC).toLocaleString('es-CR'); return u+' · '+c; }
+function esc(s){return (s==null?'':String(s)).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+async function showPortal(){
+  const { data:{ session } } = await db.auth.getSession();
+  if(!session) return;
+  // Si es admin, lo mandamos al panel de administración
+  if(isAdmin(session.user.email)){ window.location.href='/admin'; return; }
+  $('auth').style.display='none'; $('portal').style.display='block';
+  const u=session.user;
+  const { data:prof } = await db.from('kaizen_clients').select('*').eq('user_id',u.id).maybeSingle();
+  const name=(prof&&prof.name)||u.user_metadata?.name||u.email.split('@')[0];
+  $('p-name').textContent=name; $('p-email').textContent=u.email;
+  $('pf-name').textContent=name; $('pf-email').textContent=u.email; $('pf-phone').textContent=(prof&&prof.phone)||'—';
+  loadSub(u.id); loadPayments(u.id); loadMessages(u.id); loadDocuments(u.id);
+}
+
+async function loadDocuments(uid){
+  const { data } = await db.from('kaizen_documents').select('*').eq('user_id',uid).order('created_at',{ascending:false});
+  if(!data||!data.length){ $('doc-content').innerHTML='<div class="empty">Kaizen todavía no te compartió documentos.</div>'; return; }
+  $('doc-content').innerHTML = data.map(d=>`<div class="row"><span class="k">📎 ${esc(d.name)}</span><span class="v"><a href="#" class="edit-link" onclick="downloadDoc('${esc(d.path)}');return false">Descargar</a></span></div>`).join('');
+}
+async function downloadDoc(path){
+  const { data, error } = await db.storage.from('client-docs').createSignedUrl(path, 120);
+  if(error||!data){ alert('No se pudo abrir el documento'); return; }
+  window.open(data.signedUrl, '_blank', 'noopener');
+}
+
+async function loadSub(uid){
+  const { data } = await db.from('kaizen_subscriptions').select('*').eq('user_id',uid).order('created_at',{ascending:false}).limit(1);
+  const s=data&&data[0];
+  if(!s){
+    $('sub-content').innerHTML=`<div class="empty">Aún no tenés una suscripción activa.<br>Kaizen la activará cuando confirmes tu plan.<br><br><a class="appbtn" href="${WA}?text=Hola%20Coach%2C%20quiero%20activar%20mi%20plan" target="_blank" rel="noopener" style="display:inline-block;width:auto;padding:12px 24px">Hablar con Kaizen</a></div>`;
+    return;
+  }
+  const today=new Date(); const end=s.end_date?new Date(s.end_date+'T00:00:00'):null;
+  const days=end?Math.max(0,Math.ceil((end-today)/864e5)):null;
+  const st=s.status||'active';
+  const stClass={active:'pill-active',paused:'pill-paused',past_due:'pill-paused',cancelled:'pill-cancelled',expired:'pill-cancelled'}[st]||'pill-active';
+  const stLabel={active:'Activa',paused:'Pausada',past_due:'Pago pendiente',cancelled:'Cancelada',expired:'Vencida'}[st]||st;
+
+  // Acceso al app: activa y past_due (gracia) lo mantienen; expired/cancelled lo pierden.
+  let accessBlock;
+  if(st==='active' || st==='past_due'){
+    accessBlock = s.app_url
+      ? `<a class="appbtn" href="${esc(s.app_url)}" target="_blank" rel="noopener">🚀 Acceder al App de KAIZEN Coaching</a>`
+      : `<a class="appbtn disabled">App próximamente disponible</a>`;
+  } else if(st==='expired'){
+    accessBlock = `<a class="appbtn" href="${WA}?text=Hola%20Coach%2C%20quiero%20reactivar%20mi%20suscripci%C3%B3n" target="_blank" rel="noopener">Reactivar mi suscripción</a>`;
+  } else { // cancelled
+    accessBlock = `<a class="appbtn" href="/#programas">Volver a suscribirme</a>`;
+  }
+
+  const pastDueBanner = st==='past_due'
+    ? `<div class="row" style="background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.3);border-radius:10px;padding:11px 13px;display:block;color:#e8d9a0;font-size:.85rem;line-height:1.5">⚠️ Tu último pago no se procesó. Regularizalo antes del ${fmtDate(s.grace_until)} para no perder el acceso. <a class="edit-link" href="${WA}?text=Hola%20Coach%2C%20tuve%20un%20problema%20con%20mi%20pago" target="_blank" rel="noopener">Hablar con Kaizen</a></div>`
+    : '';
+
+  const cancelBlock = (st==='active' || st==='past_due')
+    ? `<div style="text-align:center;margin-top:14px"><a href="#" class="edit-link" style="color:rgba(255,255,255,.4);font-size:.8rem" onclick="cancelSub();return false">Cancelar suscripción</a></div>`
+    : '';
+
+  $('sub-content').innerHTML=`
+    <div class="sub-hero">
+      <div>
+        <div class="sub-plan">${esc(s.plan)||'—'}</div>
+        <div style="margin-top:8px"><span class="pill ${stClass}">${stLabel}</span></div>
+      </div>
+      ${days!==null&&(st==='active'||st==='past_due')?`<div class="daysleft"><div class="n">${days}</div><div class="l">días restantes</div></div>`:''}
+    </div>
+    ${pastDueBanner}
+    <div class="row"><span class="k">Inicio</span><span class="v">${fmtDate(s.start_date)}</span></div>
+    <div class="row"><span class="k">Vence</span><span class="v">${fmtDate(s.end_date)}</span></div>
+    <div class="row"><span class="k">Mensualidad</span><span class="v">${fmtMoney(s.monthly_price)}</span></div>
+    ${accessBlock}
+    ${cancelBlock}
+  `;
+}
+
+async function cancelSub(){
+  if(!confirm('¿Seguro que querés cancelar tu suscripción? Perderás el acceso al final del período actual.')) return;
+  const { data:{ session } } = await db.auth.getSession();
+  if(!session){ alert('Sesión expirada, volvé a entrar.'); return; }
+  try{
+    const r = await fetch(SUPA_URL + '/functions/v1/cancel-subscription', {
+      method:'POST',
+      headers:{ 'Authorization':'Bearer '+session.access_token, 'Content-Type':'application/json' },
+      body:'{}'
+    });
+    const d = await r.json();
+    if(!r.ok || !d.ok){ throw new Error(d.error || ('HTTP '+r.status)); }
+    alert('Tu suscripción fue cancelada. Lamentamos verte ir 💪');
+    loadSub(session.user.id);
+  }catch(e){ alert('No se pudo cancelar: '+(e.message||e)); }
+}
+
+async function loadPayments(uid){
+  const { data } = await db.from('kaizen_payments').select('*').eq('user_id',uid).order('paid_on',{ascending:false});
+  if(!data||!data.length){ $('pay-content').innerHTML='<div class="empty">Aún no hay pagos registrados.</div>'; return; }
+  $('pay-content').innerHTML=`<table><thead><tr><th>Periodo</th><th>Monto</th><th>Método</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>${
+    data.map(p=>`<tr><td>${esc(p.period)||'—'}</td><td>${fmtMoney(p.amount)}</td><td>${esc(p.method)||'—'}</td><td>${fmtDate(p.paid_on)}</td><td><span class="pill ${p.status==='paid'?'pill-active':'pill-paused'}">${p.status==='paid'?'Pagado':esc(p.status||'')}</span></td></tr>`).join('')
+  }</tbody></table>`;
+}
+
+async function loadMessages(uid){
+  const { data } = await db.from('kaizen_messages').select('*').eq('user_id',uid).order('created_at',{ascending:false});
+  if(!data||!data.length){ $('msg-content').innerHTML='<div class="empty">No tenés mensajes todavía.</div>'; return; }
+  $('msg-content').innerHTML=data.map(m=>`
+    <div class="msg-item ${m.is_read?'':'unread'}">
+      <div class="msg-head"><div class="msg-subj">${m.is_read?'':'<span class="dot"></span>'}${esc(m.subject)||'(sin asunto)'}</div><div class="msg-date">${new Date(m.created_at).toLocaleDateString('es-CR',{day:'2-digit',month:'short'})}</div></div>
+      <div class="msg-body">${esc(m.body)||''}</div>
+    </div>`).join('');
+  // marcar como leídos
+  const unread=data.filter(m=>!m.is_read).map(m=>m.id);
+  if(unread.length) db.from('kaizen_messages').update({is_read:true}).in('id',unread);
+}
+
+// editar perfil
+$('edit-toggle').onclick=()=>{
+  const bar=$('editbar'); const open=bar.classList.toggle('show');
+  $('edit-toggle').textContent=open?'Cancelar':'Editar';
+  $('ed-msg').textContent='';
+  if(open){
+    $('ed-name').value=$('pf-name').textContent==='—'?'':$('pf-name').textContent;
+    $('ed-phone').value=$('pf-phone').textContent==='—'?'':$('pf-phone').textContent;
+    $('ed-email').value=$('pf-email').textContent==='—'?'':$('pf-email').textContent;
+  }
+};
+$('ed-save').onclick=async()=>{
+  const btn=$('ed-save'), msg=$('ed-msg');
+  const { data:{ user } } = await db.auth.getUser();
+  if(!user){ msg.style.color='#2f6bff'; msg.textContent='Tu sesión expiró. Recargá la página.'; return; }
+  const name=$('ed-name').value.trim(), phone=$('ed-phone').value.trim(), email=$('ed-email').value.trim().toLowerCase();
+  if(!name){ msg.style.color='#2f6bff'; msg.textContent='El nombre no puede quedar vacío.'; return; }
+  if(email && !email.includes('@')){ msg.style.color='#2f6bff'; msg.textContent='Correo inválido.'; return; }
+  const orig=btn.textContent; btn.disabled=true; btn.textContent='Guardando…'; msg.style.color=''; msg.textContent='';
+  try{
+    // 1) Datos de contacto (RLS: solo su propia fila; tag/notes quedan protegidos por trigger)
+    const { error } = await db.from('kaizen_clients').update({ name, phone, email: email||user.email }).eq('user_id',user.id);
+    if(error) throw error;
+    // 2) Cambio de correo de acceso: requiere confirmación por link
+    let extra='';
+    if(email && email !== (user.email||'').toLowerCase()){
+      const { error:e2 } = await db.auth.updateUser({ email });
+      if(e2) throw e2;
+      extra='\n\nPara el cambio de correo, confirmá el link que te enviamos a '+email+'.';
+    }
+    $('pf-name').textContent=name||'—'; $('pf-phone').textContent=phone||'—'; $('pf-email').textContent=email||user.email||'—';
+    $('p-name').textContent=name||'—';
+    $('editbar').classList.remove('show'); $('edit-toggle').textContent='Editar';
+    alert('Datos actualizados ✓'+extra);
+  }catch(e){
+    msg.style.color='#2f6bff'; msg.textContent='No se pudo guardar: '+(e.message||e);
+  }finally{ btn.disabled=false; btn.textContent=orig; }
+};
+
+// ── Cambio de contraseña (seguro: re-valida la contraseña actual)
+let PW_RECOVERY = false; // true cuando se entra por link de restablecimiento (no pide actual)
+$('pw-toggle').onclick=()=>{
+  const bar=$('pwbar'); const open=bar.classList.toggle('show');
+  $('pw-toggle').textContent=open?'Cancelar':'Cambiar';
+  $('pw-msg').textContent=''; $('pw-cur').value=''; $('pw-new').value=''; $('pw-conf').value='';
+  $('pw-cur').style.display = PW_RECOVERY ? 'none' : '';
+};
+$('pw-save').onclick=async()=>{
+  const btn=$('pw-save'), msg=$('pw-msg');
+  const cur=$('pw-cur').value, np=$('pw-new').value, cf=$('pw-conf').value;
+  const { data:{ user } } = await db.auth.getUser();
+  if(!user){ msg.style.color='#2f6bff'; msg.textContent='Tu sesión expiró. Recargá la página.'; return; }
+  if(np.length < 8 || !/[a-z]/.test(np) || !/[A-Z]/.test(np) || !/[0-9]/.test(np)){ msg.style.color='#2f6bff'; msg.textContent='Mínimo 8 caracteres, con mayúscula, minúscula y número.'; return; }
+  if(np !== cf){ msg.style.color='#2f6bff'; msg.textContent='Las contraseñas nuevas no coinciden.'; return; }
+  const orig=btn.textContent; btn.disabled=true; btn.textContent='Cambiando…'; msg.style.color=''; msg.textContent='';
+  try{
+    // Re-autenticación: confirmamos la contraseña ACTUAL antes de permitir el cambio.
+    // (Se omite solo en modo recuperación, donde el link mágico ya es la prueba de identidad.)
+    if(!PW_RECOVERY){
+      if(!cur){ throw new Error('Ingresá tu contraseña actual.'); }
+      const { error:authErr } = await db.auth.signInWithPassword({ email:user.email, password:cur });
+      if(authErr){ throw new Error('La contraseña actual es incorrecta.'); }
+    }
+    if(np === cur){ throw new Error('La nueva contraseña debe ser distinta a la actual.'); }
+    const { error } = await db.auth.updateUser({ password: np });
+    if(error){ throw error; }
+    PW_RECOVERY=false;
+    $('pwbar').classList.remove('show'); $('pw-toggle').textContent='Cambiar';
+    $('pw-cur').value=''; $('pw-new').value=''; $('pw-conf').value=''; $('pw-cur').style.display='';
+    alert('Contraseña actualizada ✓');
+  }catch(e){ msg.style.color='#2f6bff'; msg.textContent='No se pudo cambiar: '+(e.message||e); }
+  finally{ btn.disabled=false; btn.textContent=orig; }
+};
+$('pw-reset').onclick=async(e)=>{
+  e.preventDefault();
+  const { data:{ user } } = await db.auth.getUser();
+  const email = (user&&user.email) || prompt('Tu correo:');
+  if(!email) return;
+  const { error } = await db.auth.resetPasswordForEmail(email.trim().toLowerCase(), { redirectTo:'https://kaizencoaching.com/portal' });
+  if(error){ alert('No se pudo enviar el link: '+error.message); return; }
+  alert('Te enviamos un link a '+email+' para crear/restablecer tu contraseña.');
+};
+// Si el usuario llega por link de restablecimiento, abrimos el cambio sin pedir la actual.
+db.auth.onAuthStateChange((event)=>{
+  if(event === 'PASSWORD_RECOVERY'){
+    PW_RECOVERY = true;
+    const bar=$('pwbar'); if(bar && !bar.classList.contains('show')){ $('pw-toggle').click(); }
+    $('pw-cur').style.display='none';
+    $('pw-msg').style.color=''; $('pw-msg').textContent='Definí tu nueva contraseña.';
+    try{ document.getElementById('pw-new').scrollIntoView({behavior:'smooth',block:'center'}); }catch(_){}
+  }
+});
+
+// auto-login
+(async()=>{ const { data:{ session } } = await db.auth.getSession(); if(session){ await ensureProfile(); showPortal(); } })();
+</script>
+</body>
+</html>

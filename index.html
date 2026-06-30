@@ -261,26 +261,6 @@ body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);o
 .sec-p{font-size:.98rem;color:rgba(255,255,255,.55);line-height:1.8;max-width:520px}
 .fade-up{opacity:0;transform:translateY(48px)}
 
-/* ─── APP DE ENTRENAMIENTO ─── */
-.app-hd{text-align:center;max-width:640px;margin:0 auto}
-.app-hd .sec-h{margin:0 auto 18px}
-.app-hd .sec-p{margin:0 auto}
-.app-wrap{display:grid;grid-template-columns:auto 1fr;gap:72px;align-items:center;max-width:1000px;margin:56px auto 0;padding:0 6%}
-.app-phone{position:relative;justify-self:center}
-.app-phone-frame{position:relative;width:296px;height:600px;background:#0a2342;border:2px solid rgba(255,255,255,.12);border-radius:46px;padding:12px;box-shadow:0 34px 90px rgba(0,0,0,.65)}
-.app-phone-frame::before{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:#0a2342;border-radius:0 0 16px 16px;z-index:3}
-.app-phone-screen{width:100%;height:100%;border-radius:36px;overflow:hidden;background:#000}
-.app-phone-screen video{width:100%;height:100%;object-fit:cover;display:block}
-.app-glow{position:absolute;inset:-50px;background:radial-gradient(circle at 50% 42%,var(--redglow),transparent 66%);filter:blur(34px);z-index:-1}
-.app-feats{display:flex;flex-direction:column;gap:24px}
-.app-feat{display:flex;gap:16px;align-items:flex-start}
-.app-feat-ic{flex-shrink:0;width:46px;height:46px;border-radius:13px;background:rgba(47, 107, 255,.12);border:1px solid rgba(47, 107, 255,.28);display:flex;align-items:center;justify-content:center;color:var(--red2)}
-.app-feat-tx h4{font-family:'Oswald',sans-serif;font-size:1.08rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;margin:0 0 5px;color:#fff}
-.app-feat-tx p{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.6;margin:0}
-.app-integrations{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
-.app-int{font-size:.72rem;font-weight:600;color:rgba(255,255,255,.7);background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:20px;padding:5px 12px}
-@media(max-width:860px){.app-wrap{grid-template-columns:1fr;gap:48px;max-width:420px}.app-feats{gap:20px}}
-
 /* ─── ORBITAL SERVICES ─── */
 #services{background:var(--black);overflow:hidden}
 .services-layout{

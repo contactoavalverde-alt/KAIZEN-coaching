@@ -1915,7 +1915,7 @@ _g('pay-submit').addEventListener('click', async () => {
 // ── Hero: montaje en loop con crossfade. Por defecto rota clips de fisicoculturismo
 //    (assets/hero-*.mp4). Si el admin sube videos en el backoffice (kaizen_videos),
 //    esos tienen prioridad y reemplazan el hero.
-const HERO_DEFAULT = ['assets/hero-1.mp4', 'assets/hero-2.mp4'];
+const HERO_DEFAULT = ['assets/hero-1.mp4', 'assets/hero-2.mp4', 'assets/hero-3.mp4'];
 (async () => {
   const layers = [document.getElementById('hero-vid-1'), document.getElementById('hero-vid-2')];
   if (layers.some(l => !l)) return;

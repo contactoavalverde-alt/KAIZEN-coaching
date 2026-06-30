@@ -62,10 +62,15 @@ Todos son idempotentes (`IF NOT EXISTS`, `DROP POLICY IF EXISTS`), así que re-c
 | 10 | `onvo.sql` | Columnas/constraints ONVO, `grace_until`, dedup de pagos, `expire_overdue_subscriptions()` + `pg_cron` |
 | 11 | `security.sql` | Rate limiting (`rate_limits` + `rl_hit`), límites de Storage, validación de leads (trigger) |
 
-> `kaizen_orbital`, `kaizen_settings` y `kaizen_videos` se crearon en migraciones puntuales del CMS;
-> si faltan, ver sus columnas en `docs/DATABASE.md` y crearlas con el mismo patrón (lectura
-> pública, escritura admin). El paso 9 **debe ir al final**: agrega `tag/notes` a `kaizen_clients`
-> (creada en el paso 3) y el trigger que las usa.
+| 12 | `site_content.sql` | `kaizen_settings` (key/value · orbital + **Textos del Sitio**), `kaizen_orbital`, `kaizen_videos` + RLS (lectura pública, escritura admin) |
+
+> `site_content.sql` crea las 3 tablas de contenido editable (antes "migraciones puntuales").
+> El paso 9 (`protect_client_fields.sql`) **debe ir antes** de onvo/security pero después de portal:
+> agrega `tag/notes` a `kaizen_clients` (creada en el paso 3) y el trigger que las usa.
+>
+> **Textos del Sitio (CMS):** todo nodo de la landing con `data-cms="key"` se sobreescribe desde
+> `kaizen_settings`. El backoffice → pestaña **"Textos del Sitio"** edita esas keys. En títulos,
+> `*palabra*` se pinta con el acento y un salto de línea divide en dos renglones.
 
 **Opción A — SQL Editor (recomendado):**
 Supabase Dashboard → SQL Editor → pegar el contenido de cada archivo (en el orden de arriba) → Run.

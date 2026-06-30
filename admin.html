@@ -304,6 +304,7 @@ tbody tr:last-child td{border-bottom:none}
         <button class="tab" data-tab="trans">Transformaciones <span class="cnt" id="c-trans">0</span></button>
         <button class="tab" data-tab="vids">En Acción <span class="cnt" id="c-vids">0</span></button>
         <button class="tab" data-tab="orbital">Orbital (Sistema)</button>
+        <button class="tab" data-tab="sitio">Textos del Sitio</button>
         <div class="side-title" style="margin-top:16px">Automatización</div>
         <button class="tab" data-tab="templates">Plantillas de correo</button>
         <div class="side-title" style="margin-top:16px">Sistema</div>
@@ -541,6 +542,24 @@ tbody tr:last-child td{border-bottom:none}
         <thead><tr><th>Ícono</th><th>Nodo</th><th>Título</th><th></th></tr></thead>
         <tbody id="orbital-body"><tr><td colspan="4" class="loading">Cargando…</td></tr></tbody>
       </table></div>
+    </div>
+
+    <!-- TEXTOS DEL SITIO -->
+    <div id="tab-sitio" class="hidden">
+      <div class="comm-card" style="margin-bottom:16px">
+        <h4>📝 Textos del sitio</h4>
+        <p style="font-size:.82rem;color:var(--gray);line-height:1.6;margin:0">
+          Editá cualquier texto de la landing. Dejá un campo <b>vacío</b> para mantener el texto por defecto.
+          En títulos: encerrá una palabra entre <b>*asteriscos*</b> para pintarla con el acento azul, y usá un salto de línea para dividir en dos renglones.
+        </p>
+        <button class="btn" id="site-save" style="width:auto;padding:11px 28px;margin-top:14px">Guardar todos los textos</button>
+        <span class="testi-status" id="site-status" style="display:inline-block;margin-left:10px"></span>
+      </div>
+      <div id="site-fields"><div class="loading" style="padding:20px">Cargando…</div></div>
+      <div class="comm-card" style="margin-top:8px">
+        <button class="btn" id="site-save2" style="width:auto;padding:11px 28px">Guardar todos los textos</button>
+        <span class="testi-status" id="site-status2" style="display:inline-block;margin-left:10px"></span>
+      </div>
     </div>
 
     <!-- CALENDARIO -->
@@ -1685,8 +1704,99 @@ $('ob-add').onclick=async()=>{
 async function delOrbital(id){ if(!confirm('¿Borrar este nodo?'))return; const{error}=await db.from('kaizen_orbital').delete().eq('id',id); if(error){alert(error.message);return;} loadOrbital(); }
 $('ob-refresh').addEventListener('click',loadOrbital);
 
+// ---------- TEXTOS DEL SITIO (CMS genérico vía kaizen_settings) ----------
+// Cada key se sobreescribe en la landing en los nodos con data-cms="key".
+// 'title:true' habilita textarea (acepta *acento* y saltos de línea).
+const SITE_FIELDS=[
+  {g:'🔥 Hero', f:[
+    ['hero_pill','Píldora superior'],
+    ['hero_title','Título principal',{title:true}],
+    ['hero_cta1','Botón primario'],
+    ['hero_cta2','Botón secundario'],
+  ]},
+  {g:'📊 Estadísticas', f:[
+    ['stat1_label','Etiqueta 1'],['stat2_label','Etiqueta 2'],
+    ['stat3_label','Etiqueta 3'],['stat4_label','Etiqueta 4'],
+  ]},
+  {g:'🏋 Programas', f:[
+    ['programs_tag','Etiqueta'],['programs_title','Título',{title:true}],['programs_subtitle','Subtítulo',{ta:true}],
+    ['programs_group1','Etiqueta grupo 1',{title:true}],['programs_group2','Etiqueta grupo 2',{title:true}],
+    ['plan1_name','Plan 1 · Nombre'],['plan1_tagline','Plan 1 · Tagline'],['plan1_desc','Plan 1 · Descripción',{ta:true}],['plan1_cta','Plan 1 · Botón'],
+    ['plan2_name','Plan 2 · Nombre'],['plan2_tagline','Plan 2 · Tagline'],['plan2_desc','Plan 2 · Descripción',{ta:true}],['plan2_cta','Plan 2 · Botón'],
+    ['plan3_name','Plan 3 · Nombre'],['plan3_tagline','Plan 3 · Tagline'],['plan3_desc','Plan 3 · Descripción',{ta:true}],['plan3_cta','Plan 3 · Botón'],
+    ['plan4_name','Plan 4 · Nombre'],['plan4_tagline','Plan 4 · Tagline'],['plan4_desc','Plan 4 · Descripción',{ta:true}],['plan4_cta','Plan 4 · Botón'],
+  ]},
+  {g:'💬 Testimonios', f:[
+    ['testi_tag','Etiqueta'],['testi_title','Título',{title:true}],['testi_subtitle','Subtítulo',{ta:true}],
+  ]},
+  {g:'🏆 Transformaciones', f:[
+    ['trans_tag','Etiqueta'],['trans_title','Título',{title:true}],
+  ]},
+  {g:'🎬 En Acción', f:[
+    ['action_tag','Etiqueta'],['action_title','Título',{title:true}],
+  ]},
+  {g:'📰 Blog', f:[
+    ['blog_tag','Etiqueta'],['blog_title','Título',{title:true}],
+  ]},
+  {g:'🧑 Coach', f:[
+    ['coach_tag','Etiqueta'],['coach_title','Título',{title:true}],['coach_subtitle','Subtítulo',{ta:true}],
+  ]},
+  {g:'📝 Aplicación', f:[
+    ['apply_role','Rol (ej. Head Coach)'],['apply_tag','Etiqueta'],['apply_title','Título',{title:true}],
+    ['apply_intro1','Intro 1',{ta:true}],['apply_intro2','Intro 2',{ta:true}],['apply_cta','Botón enviar'],['apply_note','Nota inferior'],
+  ]},
+  {g:'🤝 Comunidad', f:[
+    ['community_tag','Etiqueta'],['community_title','Título',{title:true}],['community_subtitle','Subtítulo',{ta:true}],
+  ]},
+  {g:'🔻 Footer', f:[
+    ['footer_tagline','Tagline'],
+  ]},
+];
+function renderSiteFields(){
+  const host=$('site-fields'); if(!host) return;
+  host.innerHTML = SITE_FIELDS.map(grp=>`
+    <div class="comm-card" style="margin-bottom:16px">
+      <h4>${grp.g}</h4>
+      <div class="mgrid">
+        ${grp.f.map(([key,label,opt])=>{
+          const o=opt||{}; const multiline=o.title||o.ta;
+          const full=(o.title||o.ta)?'style="grid-column:1/-1"':'';
+          const ctrl = multiline
+            ? `<textarea id="site-f-${key}" class="mtext" style="min-height:54px"></textarea>`
+            : `<input type="text" id="site-f-${key}">`;
+          return `<label ${full}>${esc(label)}${o.title?' <span style="color:var(--gray);font-weight:400">(*acento* · salto = 2 líneas)</span>':''}${ctrl}</label>`;
+        }).join('')}
+      </div>
+    </div>`).join('');
+}
+async function loadSiteContent(){
+  renderSiteFields();
+  try{
+    const { data } = await db.from('kaizen_settings').select('key,value');
+    const s = Object.fromEntries((data||[]).map(r=>[r.key,r.value]));
+    SITE_FIELDS.forEach(grp=>grp.f.forEach(([key])=>{
+      const el=$('site-f-'+key); if(el) el.value = (s[key]||'').replace(/\\n/g,'\n'); // des-escapa legacy
+    }));
+  }catch(e){ $('site-status').textContent='Error al cargar: '+e.message; }
+}
+async function saveSiteContent(){
+  const st=$('site-status'), st2=$('site-status2');
+  st.textContent=st2.textContent='Guardando…';
+  const rows=[];
+  SITE_FIELDS.forEach(grp=>grp.f.forEach(([key])=>{
+    const el=$('site-f-'+key); if(!el) return;
+    rows.push({ key, value: el.value.trim() });
+  }));
+  const { error } = await db.from('kaizen_settings').upsert(rows,{onConflict:'key'});
+  const msg = error ? ('Error: '+error.message) : '✓ Guardado — recargá la landing para verlo';
+  st.textContent=st2.textContent=msg;
+  setTimeout(()=>{ st.textContent=st2.textContent=''; },4000);
+}
+$('site-save').addEventListener('click', saveSiteContent);
+$('site-save2').addEventListener('click', saveSiteContent);
+
 // ---------- UI ----------
-const TABS=['dash','leads','accesos','clients','memb','pays','comm','testi','blog','trans','vids','orbital','templates','cal','events'];
+const TABS=['dash','leads','accesos','clients','memb','pays','comm','testi','blog','trans','vids','orbital','sitio','templates','cal','events'];
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   t.classList.add('active');
@@ -1698,6 +1808,7 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   if(t.dataset.tab==='trans') loadTrans();
   if(t.dataset.tab==='vids') loadVids();
   if(t.dataset.tab==='orbital') loadOrbital();
+  if(t.dataset.tab==='sitio') loadSiteContent();
   if(t.dataset.tab==='accesos') renderAccesos();
   if(t.dataset.tab==='templates') loadTemplates();
 }));

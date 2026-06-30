@@ -14,7 +14,7 @@ ALTER TABLE kaizen_clients ADD COLUMN IF NOT EXISTS notes text;   -- notas inter
 CREATE OR REPLACE FUNCTION protect_client_admin_fields() RETURNS trigger AS $$
 BEGIN
   -- Si quien escribe NO es admin, los campos internos quedan fuera de su control.
-  IF COALESCE(auth.jwt()->>'email','') NOT IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com') THEN
+  IF COALESCE(auth.jwt()->>'email','') NOT IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com') THEN
     IF TG_OP = 'INSERT' THEN
       NEW.tag   := NULL;   -- un cliente NO puede sembrar tag/notes al crear su perfil
       NEW.notes := NULL;

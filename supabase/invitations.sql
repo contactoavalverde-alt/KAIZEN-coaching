@@ -18,8 +18,8 @@ ALTER TABLE kaizen_invitations ENABLE ROW LEVEL SECURITY;
 -- Solo admins pueden leer y escribir invitaciones
 DROP POLICY IF EXISTS "inv admin all" ON kaizen_invitations;
 CREATE POLICY "inv admin all" ON kaizen_invitations FOR ALL TO authenticated
-  USING ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'))
-  WITH CHECK ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'))
+  WITH CHECK ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 
 -- El propio cliente puede actualizar su invitación a "accepted" al hacer login
 DROP POLICY IF EXISTS "inv self update" ON kaizen_invitations;

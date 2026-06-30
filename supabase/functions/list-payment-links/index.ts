@@ -12,7 +12,7 @@ const ONVO_SECRET = Deno.env.get("ONVO_SECRET_KEY")!;
 const SUPA_URL = Deno.env.get("SUPABASE_URL")!;
 const ANON = Deno.env.get("SUPABASE_ANON_KEY")!;
 const SERVICE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-const ADMIN_EMAILS = ["coachkaizen@gmail.com", "contactoavalverde@gmail.com"];
+const ADMIN_EMAILS = ["contactoavalverde@gmail.com", "luismariano@vegabarca.com"];
 
 const cors = {
   "Access-Control-Allow-Origin": "*",

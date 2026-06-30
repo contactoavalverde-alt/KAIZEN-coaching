@@ -18,7 +18,7 @@ const RESEND_FROM = Deno.env.get("RESEND_FROM") || "KAIZEN Coaching <onboarding@
 // Las respuestas del cliente van al buzón real de Kaizen (hola@kaizencoaching.com no recibe).
 const RESEND_REPLY_TO = Deno.env.get("RESEND_REPLY_TO") || "coachkaizen@gmail.com";
 const APP_URL = "https://kaizencoaching.com/portal";
-const ADMIN_EMAILS = ["coachkaizen@gmail.com", "contactoavalverde@gmail.com"];
+const ADMIN_EMAILS = ["contactoavalverde@gmail.com", "luismariano@vegabarca.com"];
 
 const admin = createClient(SUPA_URL, SERVICE);
 const cors = {

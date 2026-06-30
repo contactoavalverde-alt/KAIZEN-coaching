@@ -821,7 +821,7 @@ $('login-form').addEventListener('submit', async e => {
 $('logout').addEventListener('click', async () => { await db.auth.signOut(); location.reload(); });
 
 // Solo estos correos pueden ver el panel. Cualquier otro va a su portal de cliente.
-const ADMIN_EMAILS = ['coachkaizen@gmail.com','contactoavalverde@gmail.com'];
+const ADMIN_EMAILS = ['contactoavalverde@gmail.com','luismariano@vegabarca.com'];
 const isAdmin = e => ADMIN_EMAILS.includes((e||'').trim().toLowerCase());
 
 async function showApp() {

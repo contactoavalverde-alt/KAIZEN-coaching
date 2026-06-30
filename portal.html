@@ -213,7 +213,7 @@ $('form-login').addEventListener('submit',async e=>{
 
 $('logout').onclick=async()=>{ await db.auth.signOut(); location.reload(); };
 
-const ADMIN_EMAILS=['coachkaizen@gmail.com','contactoavalverde@gmail.com'];
+const ADMIN_EMAILS=['contactoavalverde@gmail.com','luismariano@vegabarca.com'];
 const isAdmin=e=>ADMIN_EMAILS.includes((e||'').toLowerCase());
 async function ensureProfile(){
   const { data:{ user } } = await db.auth.getUser();

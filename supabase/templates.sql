@@ -18,8 +18,8 @@ ALTER TABLE kaizen_templates ENABLE ROW LEVEL SECURITY;
 -- Solo admins editan plantillas. (La Edge Function de envío usa service_role y omite RLS.)
 DROP POLICY IF EXISTS "tpl admin all" ON kaizen_templates;
 CREATE POLICY "tpl admin all" ON kaizen_templates FOR ALL TO authenticated
-  USING ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'))
-  WITH CHECK ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'))
+  WITH CHECK ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 
 -- Seed de las 3 plantillas base (no pisa las existentes)
 INSERT INTO kaizen_templates (key, name, subject, body_html) VALUES

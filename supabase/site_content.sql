@@ -17,8 +17,8 @@ DROP POLICY IF EXISTS "settings public read" ON kaizen_settings;
 CREATE POLICY "settings public read" ON kaizen_settings FOR SELECT TO anon, authenticated USING (true);
 DROP POLICY IF EXISTS "settings admin write" ON kaizen_settings;
 CREATE POLICY "settings admin write" ON kaizen_settings FOR ALL TO authenticated
-  USING ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'))
-  WITH CHECK ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'))
+  WITH CHECK ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 
 -- ───────── kaizen_orbital (nodos del sistema "Metodología") ─────────
 CREATE TABLE IF NOT EXISTS kaizen_orbital (
@@ -36,8 +36,8 @@ DROP POLICY IF EXISTS "orbital public read" ON kaizen_orbital;
 CREATE POLICY "orbital public read" ON kaizen_orbital FOR SELECT TO anon, authenticated USING (true);
 DROP POLICY IF EXISTS "orbital admin write" ON kaizen_orbital;
 CREATE POLICY "orbital admin write" ON kaizen_orbital FOR ALL TO authenticated
-  USING ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'))
-  WITH CHECK ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'))
+  WITH CHECK ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 
 -- ───────── kaizen_videos (sección "En Acción") ─────────
 CREATE TABLE IF NOT EXISTS kaizen_videos (
@@ -56,5 +56,5 @@ DROP POLICY IF EXISTS "videos public read" ON kaizen_videos;
 CREATE POLICY "videos public read" ON kaizen_videos FOR SELECT TO anon, authenticated USING (true);
 DROP POLICY IF EXISTS "videos admin write" ON kaizen_videos;
 CREATE POLICY "videos admin write" ON kaizen_videos FOR ALL TO authenticated
-  USING ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'))
-  WITH CHECK ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'))
+  WITH CHECK ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));

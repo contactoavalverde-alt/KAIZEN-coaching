@@ -1,7 +1,7 @@
 -- ═══════════════════════════════════════════════
 -- KAIZEN COACHING — Portal de Clientes
 -- Tablas: clients, subscriptions, payments, messages
--- Seguridad: cada cliente ve solo lo suyo; admin (coachkaizen@gmail.com) ve todo
+-- Seguridad: cada cliente ve solo lo suyo; admin ve todo
 -- ═══════════════════════════════════════════════
 
 -- 1) Perfil del cliente (1:1 con auth.users)

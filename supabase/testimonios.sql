@@ -20,8 +20,8 @@ CREATE POLICY "testi public read" ON kaizen_testimonios
 DROP POLICY IF EXISTS "testi admin write" ON kaizen_testimonios;
 CREATE POLICY "testi admin write" ON kaizen_testimonios
   FOR ALL TO authenticated
-  USING ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'))
-  WITH CHECK ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'))
+  WITH CHECK ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 
 -- 2) Bucket de Storage (público)
 INSERT INTO storage.buckets (id, name, public)
@@ -36,9 +36,9 @@ CREATE POLICY "testi obj public read" ON storage.objects
 DROP POLICY IF EXISTS "testi obj admin insert" ON storage.objects;
 CREATE POLICY "testi obj admin insert" ON storage.objects
   FOR INSERT TO authenticated
-  WITH CHECK (bucket_id = 'testimonios' AND (auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  WITH CHECK (bucket_id = 'testimonios' AND (auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 
 DROP POLICY IF EXISTS "testi obj admin delete" ON storage.objects;
 CREATE POLICY "testi obj admin delete" ON storage.objects
   FOR DELETE TO authenticated
-  USING (bucket_id = 'testimonios' AND (auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING (bucket_id = 'testimonios' AND (auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));

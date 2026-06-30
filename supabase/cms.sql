@@ -17,8 +17,8 @@ DROP POLICY IF EXISTS "testi public read" ON kaizen_testimonios;
 CREATE POLICY "testi public read" ON kaizen_testimonios FOR SELECT TO anon, authenticated USING (true);
 DROP POLICY IF EXISTS "testi admin write" ON kaizen_testimonios;
 CREATE POLICY "testi admin write" ON kaizen_testimonios FOR ALL TO authenticated
-  USING ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'))
-  WITH CHECK ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'))
+  WITH CHECK ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 
 -- 2) BLOG
 CREATE TABLE IF NOT EXISTS kaizen_blog (
@@ -33,8 +33,8 @@ DROP POLICY IF EXISTS "blog public read" ON kaizen_blog;
 CREATE POLICY "blog public read" ON kaizen_blog FOR SELECT TO anon, authenticated USING (true);
 DROP POLICY IF EXISTS "blog admin write" ON kaizen_blog;
 CREATE POLICY "blog admin write" ON kaizen_blog FOR ALL TO authenticated
-  USING ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'))
-  WITH CHECK ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'))
+  WITH CHECK ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 
 -- 3) TRANSFORMACIONES
 CREATE TABLE IF NOT EXISTS kaizen_transformaciones (
@@ -49,8 +49,8 @@ DROP POLICY IF EXISTS "trans public read" ON kaizen_transformaciones;
 CREATE POLICY "trans public read" ON kaizen_transformaciones FOR SELECT TO anon, authenticated USING (true);
 DROP POLICY IF EXISTS "trans admin write" ON kaizen_transformaciones;
 CREATE POLICY "trans admin write" ON kaizen_transformaciones FOR ALL TO authenticated
-  USING ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'))
-  WITH CHECK ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'))
+  WITH CHECK ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 
 -- 4) STORAGE BUCKETS (públicos)
 INSERT INTO storage.buckets (id, name, public) VALUES ('testimonios','testimonios',true)
@@ -64,7 +64,7 @@ CREATE POLICY "media public read" ON storage.objects FOR SELECT TO public
   USING (bucket_id IN ('testimonios','content'));
 DROP POLICY IF EXISTS "media admin insert" ON storage.objects;
 CREATE POLICY "media admin insert" ON storage.objects FOR INSERT TO authenticated
-  WITH CHECK (bucket_id IN ('testimonios','content') AND (auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  WITH CHECK (bucket_id IN ('testimonios','content') AND (auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 DROP POLICY IF EXISTS "media admin delete" ON storage.objects;
 CREATE POLICY "media admin delete" ON storage.objects FOR DELETE TO authenticated
-  USING (bucket_id IN ('testimonios','content') AND (auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING (bucket_id IN ('testimonios','content') AND (auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));

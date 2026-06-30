@@ -19,13 +19,13 @@ ALTER TABLE kaizen_documents ENABLE ROW LEVEL SECURITY;
 -- El cliente ve los suyos; el admin ve todos
 DROP POLICY IF EXISTS "docs select" ON kaizen_documents;
 CREATE POLICY "docs select" ON kaizen_documents FOR SELECT TO authenticated
-  USING (user_id = auth.uid() OR (auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING (user_id = auth.uid() OR (auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 
 -- Solo el admin sube/borra registros
 DROP POLICY IF EXISTS "docs admin write" ON kaizen_documents;
 CREATE POLICY "docs admin write" ON kaizen_documents FOR ALL TO authenticated
-  USING ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'))
-  WITH CHECK ((auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'))
+  WITH CHECK ((auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 
 -- 2) Bucket PRIVADO
 INSERT INTO storage.buckets (id, name, public) VALUES ('client-docs','client-docs',false)
@@ -35,12 +35,12 @@ INSERT INTO storage.buckets (id, name, public) VALUES ('client-docs','client-doc
 DROP POLICY IF EXISTS "client-docs read" ON storage.objects;
 CREATE POLICY "client-docs read" ON storage.objects FOR SELECT TO authenticated
   USING (bucket_id='client-docs' AND ((storage.foldername(name))[1] = auth.uid()::text
-         OR (auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com')));
+         OR (auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com')));
 
 DROP POLICY IF EXISTS "client-docs admin insert" ON storage.objects;
 CREATE POLICY "client-docs admin insert" ON storage.objects FOR INSERT TO authenticated
-  WITH CHECK (bucket_id='client-docs' AND (auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  WITH CHECK (bucket_id='client-docs' AND (auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));
 
 DROP POLICY IF EXISTS "client-docs admin delete" ON storage.objects;
 CREATE POLICY "client-docs admin delete" ON storage.objects FOR DELETE TO authenticated
-  USING (bucket_id='client-docs' AND (auth.jwt()->>'email') IN ('coachkaizen@gmail.com','contactoavalverde@gmail.com'));
+  USING (bucket_id='client-docs' AND (auth.jwt()->>'email') IN ('contactoavalverde@gmail.com','luismariano@vegabarca.com'));

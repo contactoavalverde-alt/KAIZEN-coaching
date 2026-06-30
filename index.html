@@ -2400,7 +2400,7 @@ function _ytId(u){ if(!u) return ''; const m=u.match(/(?:youtu\.be\/|v=|\/embed\
 
   wrap.innerHTML = rows.map((v, i) => {
     const yt = (v.type==='youtube') ? _ytId(v.youtube_url) : '';
-    const ext = (v.type==='youtube') && !yt && v.youtube_url;   // link externo (ej. Skool)
+    const ext = (v.type==='youtube') && !yt && v.youtube_url;   // link externo
     let thumb;
     if (yt) thumb = `<img class="vthumb" src="${v.thumb_url||('https://img.youtube.com/vi/'+yt+'/hqdefault.jpg')}" alt="${_esc(v.title)}" loading="lazy">`;
     else if (ext) thumb = v.thumb_url ? `<img class="vthumb" src="${_esc(v.thumb_url)}" alt="${_esc(v.title)}" loading="lazy">` : `<div class="vthumb vthumb-link"><span>↗</span></div>`;

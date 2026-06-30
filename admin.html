@@ -659,10 +659,10 @@ tbody tr:last-child td{border-bottom:none}
             <input id="inv-name" type="text" placeholder="Nombre (opcional)">
             <select id="inv-plan">
               <option value="">Sin plan específico</option>
-              <option>KalosBody</option>
-              <option>Iron Legion</option>
-              <option>Bellator Temenos</option>
-              <option>Natus Vincere</option>
+              <option>Lorem Ipsum</option>
+              <option>Dolor Sit</option>
+              <option>Amet Consectetur</option>
+              <option>Adipiscing Elit</option>
             </select>
             <input id="inv-notes" placeholder="Notas internas (opcional)">
           </div>
@@ -733,7 +733,7 @@ tbody tr:last-child td{border-bottom:none}
       <div class="msec">
         <div class="msec-h">Suscripción</div>
         <div class="mgrid">
-          <label>Plan<select id="m-plan"><option value="">—</option><option>KalosBody</option><option>Iron Legion</option><option>Bellator Temenos</option><option>Natus Vincere</option></select></label>
+          <label>Plan<select id="m-plan"><option value="">—</option><option>Lorem Ipsum</option><option>Dolor Sit</option><option>Amet Consectetur</option><option>Adipiscing Elit</option></select></label>
           <label>Estado<select id="m-status"><option value="active">Activa</option><option value="paused">Pausada</option><option value="cancelled">Cancelada</option><option value="expired">Vencida</option></select></label>
           <label>Inicio<input type="date" id="m-start"></label>
           <label>Vence<input type="date" id="m-end"></label>
@@ -912,8 +912,8 @@ function renderLeads(){
 // Mapea el programa elegido al plan de $50 correspondiente
 function planForPrograma(p){
   p = (p||'').toLowerCase();
-  if(p.includes('fatloss') || p.includes('fat loss') || p.includes('grasa')) return 'KalosBody';
-  if(p.includes('training') || p.includes('músculo') || p.includes('musculo') || p.includes('fuerza')) return 'Iron Legion';
+  if(p.includes('fatloss') || p.includes('fat loss') || p.includes('grasa')) return 'Lorem Ipsum';
+  if(p.includes('training') || p.includes('músculo') || p.includes('musculo') || p.includes('fuerza')) return 'Dolor Sit';
   return '';
 }
 function renderAccesos(){
@@ -1359,7 +1359,7 @@ function bindCalSave(){ const b=$('cal-save'); if(b) b.onclick=()=>{ const v=($(
 
 // ---------- PLANTILLAS DE CORREO ----------
 let TEMPLATES=[], TPL_CUR=null;
-const TPL_SAMPLE={ nombre:'Pedro', plan:'KalosBody', app_url:'https://app.kaizencoaching.com', monto:'$50', fecha_pago:'15 jun 2026' };
+const TPL_SAMPLE={ nombre:'Pedro', plan:'Lorem Ipsum', app_url:'https://app.kaizencoaching.com', monto:'$50', fecha_pago:'15 jun 2026' };
 function fillVars(s){ return (s||'').replace(/\{\{(\w+)\}\}/g,(m,k)=> TPL_SAMPLE[k]!=null?TPL_SAMPLE[k]:m); }
 async function loadTemplates(){
   const { data, error } = await db.from('kaizen_templates').select('*').order('key');

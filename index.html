@@ -1959,6 +1959,15 @@ _g('pay-submit').addEventListener('click', async () => {
   if(cvv.length < 3){ err.textContent = 'CVV inválido.'; return; }
   const orig = btn.textContent; btn.disabled = true; btn.textContent = 'Procesando…';
   try {
+    // MOCK MODE: sin ONVO_PUBLIC_KEY configurado, simula éxito para demo
+    if (!ONVO_PUBLIC_KEY) {
+      await new Promise(r => setTimeout(r, 1400));
+      _g('pay-summary').style.display = 'none';
+      _g('pay-step-card').style.display = 'none';
+      _g('pay-step-done').style.display = 'block';
+      try { db.from('kaizen_events').insert({ event: 'checkout_success', data: { plan: _payPlan, mode: 'demo' } }); } catch(_){}
+      return;
+    }
     // 1) Tokenizar la tarjeta DIRECTO a ONVO (la tarjeta no toca nuestro servidor)
     const tok = await fetch('https://api.onvopay.com/v1/payment-methods', {
       method: 'POST',

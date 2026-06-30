@@ -1912,8 +1912,10 @@ _g('pay-submit').addEventListener('click', async () => {
   }
 });
 
-// ── Hero: montaje en loop con crossfade de los videos de Kaizen (kaizen_videos).
-//    Rotamos por sus clips reales; si agrega/cambia videos en el backoffice, el hero se actualiza.
+// ── Hero: montaje en loop con crossfade. Por defecto rota clips de fisicoculturismo
+//    (assets/hero-*.mp4). Si el admin sube videos en el backoffice (kaizen_videos),
+//    esos tienen prioridad y reemplazan el hero.
+const HERO_DEFAULT = ['assets/hero-1.mp4', 'assets/hero-2.mp4'];
 (async () => {
   const layers = [document.getElementById('hero-vid-1'), document.getElementById('hero-vid-2')];
   if (layers.some(l => !l)) return;
@@ -1922,7 +1924,7 @@ _g('pay-submit').addEventListener('click', async () => {
     const { data } = await db.from('kaizen_videos').select('video_url, sort').eq('type', 'upload').order('sort', { ascending: true });
     clips = (data || []).map(v => v.video_url).filter(u => u && /\.mp4(\?|$)/i.test(u));
   } catch (e) {}
-  if (!clips.length) return; // sin videos → queda el fondo oscuro + overlay (sin demo)
+  if (!clips.length) clips = HERO_DEFAULT; // sin uploads → culturismo por defecto
 
   const PEAK = '0.6'; // misma opacidad que tenía el hero (legibilidad del texto)
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

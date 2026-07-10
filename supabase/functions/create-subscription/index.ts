@@ -10,8 +10,34 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const ONVO_API = "https://api.onvopay.com/v1";
 const ONVO_SECRET = Deno.env.get("ONVO_SECRET_KEY")!;
-const ONVO_PRICE_ID = Deno.env.get("ONVO_PRICE_ID")!;
+const ONVO_PRICE_ID = Deno.env.get("ONVO_PRICE_ID")!;      // fallback si no hay precio configurado
+const ONVO_PRODUCT_ID = Deno.env.get("ONVO_PRODUCT_ID") || ""; // producto base para precios dinámicos
 const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+
+// Resuelve el priceId según el precio configurado en el backoffice (kaizen_settings:
+// price_amount + price_currency). Crea el precio recurrente en ONVO la 1ª vez y lo
+// cachea por monto+moneda. Si no hay producto/config, cae al ONVO_PRICE_ID fijo.
+async function resolvePriceId(): Promise<string> {
+  if (!ONVO_PRODUCT_ID) return ONVO_PRICE_ID;
+  try {
+    const { data } = await sb.from("kaizen_settings").select("key,value").in("key", ["price_amount", "price_currency"]);
+    const cfg = Object.fromEntries((data || []).map((r: any) => [r.key, r.value]));
+    const currency = String(cfg.price_currency || "USD").toUpperCase().slice(0, 3);
+    const amount = Math.round((parseFloat(cfg.price_amount) || 50) * 100); // unidad menor
+    if (!(amount > 0)) return ONVO_PRICE_ID;
+    const cacheKey = `onvo_price_${currency}_${amount}`;
+    const { data: hit } = await sb.from("kaizen_settings").select("value").eq("key", cacheKey).maybeSingle();
+    if (hit?.value) return hit.value;
+    const r = await onvo("/prices", "POST", {
+      productId: ONVO_PRODUCT_ID, currency, unitAmount: amount,
+      type: "recurring", recurring: { interval: "month", intervalCount: 1 },
+    });
+    const price = await r.json();
+    if (!r.ok || !price?.id) return ONVO_PRICE_ID;
+    await sb.from("kaizen_settings").upsert({ key: cacheKey, value: price.id }, { onConflict: "key" });
+    return price.id;
+  } catch { return ONVO_PRICE_ID; }
+}
 
 const cors = {
   "Access-Control-Allow-Origin": "*",
@@ -65,9 +91,10 @@ Deno.serve(async (req) => {
   try {
     // Crear la suscripción $50/mes con el PM tokenizado. El contacto va en metadata
     // (ONVO no permite editar el customer auto-creado) → el webhook lo usa para provisionar.
+    const priceId = await resolvePriceId();
     const r = await onvo("/subscriptions", "POST", {
       customerId, paymentMethodId,
-      items: [{ priceId: ONVO_PRICE_ID, quantity: 1 }],
+      items: [{ priceId, quantity: 1 }],
       metadata: { email, name, phone, plan },
     });
     const sub = await r.json();

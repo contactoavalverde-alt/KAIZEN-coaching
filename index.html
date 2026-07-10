@@ -1808,12 +1808,28 @@ const db = supabase.createClient(SUPA_URL, SUPA_KEY);
 // 2) widget onvo.pay() recolecta la tarjeta (iframe ONVO) y confirma
 // 3) webhook firmado provisiona la cuenta + invitación
 // ══════════════════════════════════════════════
-const ONVO_PUBLIC_KEY = '';
+const ONVO_PUBLIC_KEY = 'onvo_live_publishable_key_WQxeAtM-qOFp8bFrIvs2zy_qTJHTz3Da4R_RzvW7r-VrCbf8Rz-kPZ2Mt3LA8qL33JY2aOtSDiLEnPysS-QCPQ';
 let _payPlan = '', _payContact = {};
+// Precio configurable desde el backoffice (kaizen_settings). Default $50/mes.
+let PRICE = { amount: 50, currency: 'USD' };
+const fmtPrice = (a, c) => (c === 'CRC' ? '₡' + Number(a).toLocaleString('es-CR') : '$' + a);
+(async () => {
+  try {
+    const { data } = await db.from('kaizen_settings').select('key,value').in('key', ['price_amount', 'price_currency']);
+    const s = Object.fromEntries((data || []).map(r => [r.key, r.value]));
+    if (s.price_amount) PRICE.amount = parseFloat(s.price_amount) || 50;
+    if (s.price_currency) PRICE.currency = (s.price_currency || 'USD').toUpperCase();
+  } catch (e) {}
+})();
 function _g(id){ return document.getElementById(id); }
 function openCheckout(plan){
   _payPlan = plan; _payContact = {};
   _g('pay-plan-name').textContent = plan;
+  // Refleja el precio configurado en el modal
+  const disp = fmtPrice(PRICE.amount, PRICE.currency);
+  const op = document.querySelector('.pay-order-price'); if (op) op.innerHTML = disp + '<span>/mes</span>';
+  const sub = _g('pay-submit'); if (sub) sub.textContent = 'Pagar ' + disp + ' / mes';
+  const rec = document.querySelector('.pay-recurring'); if (rec) rec.innerHTML = '🔄 <b>Cargo automático mensual.</b> Se te cobrará <b>' + disp + ' cada mes</b> automáticamente hasta que canceles. Podés cancelar cuando quieras desde tu portal.';
   _g('pay-summary').style.display = 'block';
   _g('pay-step-form').style.display = 'block';
   _g('pay-step-card').style.display = 'none';

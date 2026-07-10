@@ -555,6 +555,21 @@ tbody tr:last-child td{border-bottom:none}
         <button class="btn" id="site-save" style="width:auto;padding:11px 28px;margin-top:14px">Guardar todos los textos</button>
         <span class="testi-status" id="site-status" style="display:inline-block;margin-left:10px"></span>
       </div>
+      <div class="comm-card" style="margin-bottom:16px">
+        <h4>💳 Precio de la suscripción (ONVO)</h4>
+        <p style="font-size:.82rem;color:var(--gray);line-height:1.6;margin:0 0 12px">
+          El monto que se cobra cada mes. ONVO crea el cobro recurrente con este precio. El checkout de la web se actualiza solo.
+        </p>
+        <div class="mgrid">
+          <label>Monto mensual<input type="number" id="price-amount" min="1" step="1" placeholder="50"></label>
+          <label>Moneda<select id="price-currency">
+            <option value="USD">USD ($)</option>
+            <option value="CRC">CRC (₡)</option>
+          </select></label>
+        </div>
+        <button class="btn" id="price-save" style="width:auto;padding:11px 28px;margin-top:4px">Guardar precio</button>
+        <span class="testi-status" id="price-status" style="display:inline-block;margin-left:10px"></span>
+      </div>
       <div id="site-fields"><div class="loading" style="padding:20px">Cargando…</div></div>
       <div class="comm-card" style="margin-top:8px">
         <button class="btn" id="site-save2" style="width:auto;padding:11px 28px">Guardar todos los textos</button>
@@ -1776,7 +1791,21 @@ async function loadSiteContent(){
     SITE_FIELDS.forEach(grp=>grp.f.forEach(([key])=>{
       const el=$('site-f-'+key); if(el) el.value = (s[key]||'').replace(/\\n/g,'\n'); // des-escapa legacy
     }));
+    if($('price-amount')) $('price-amount').value = s.price_amount || '';
+    if($('price-currency')) $('price-currency').value = (s.price_currency || 'USD').toUpperCase();
   }catch(e){ $('site-status').textContent='Error al cargar: '+e.message; }
+}
+async function savePrice(){
+  const st=$('price-status'); st.textContent='Guardando…';
+  const amount=parseFloat($('price-amount').value);
+  if(!(amount>0)){ st.textContent='Ingresá un monto válido'; return; }
+  const rows=[
+    { key:'price_amount', value:String(amount) },
+    { key:'price_currency', value:$('price-currency').value },
+  ];
+  const { error }=await db.from('kaizen_settings').upsert(rows,{onConflict:'key'});
+  st.textContent = error ? ('Error: '+error.message) : '✓ Precio guardado';
+  setTimeout(()=>st.textContent='',3500);
 }
 async function saveSiteContent(){
   const st=$('site-status'), st2=$('site-status2');
@@ -1793,6 +1822,7 @@ async function saveSiteContent(){
 }
 $('site-save').addEventListener('click', saveSiteContent);
 $('site-save2').addEventListener('click', saveSiteContent);
+$('price-save').addEventListener('click', savePrice);
 
 // ---------- UI ----------
 const TABS=['dash','leads','accesos','clients','memb','pays','comm','testi','blog','trans','vids','orbital','sitio','templates','cal','events'];
